@@ -51,19 +51,6 @@ public class Player{
 	public void sety(int posy) {
 		y = posy;
 	}
-	public void kill() {
-		x = 400;
-		y = 900;
-	}
-	public boolean win() {
-		boolean win = false;
-		if(y < 15) {
-			win = true;
-			
-		}
-		return win;
-		
-	}
 	
 	
 

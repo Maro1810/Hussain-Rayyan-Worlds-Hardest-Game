@@ -1,0 +1,115 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener {
+	
+	Player p = new Player();
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Frame frame = new Frame();
+		
+	}
+	
+	public Frame() {
+		JFrame menu = new JFrame("Main Menu");
+		menu.add(this);
+		menu.setSize(1000, 1000);
+		menu.addKeyListener(this);
+		menu.addMouseListener(this);
+		
+		menu.setVisible(true);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.RED);
+		p.paint(g);
+	}
+	
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == 87) {
+			System.out.println("kys up");
+			p.setVy(-3);
+		}
+		if(e.getKeyCode() == 83) {
+			System.out.println("kys down");
+			p.setVy(3);
+		}
+		if(e.getKeyCode() == 65) {
+			System.out.println("kys left");
+			p.setVx(-3);
+		}
+		if(e.getKeyCode() == 68) {
+			System.out.println("kys right");
+			p.setVx(3);
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+//		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
+//			System.out.println("kys");
+//			p.setVy(0);
+//		}
+//		
+//		if (e.getKeyCode() == 68 || e.getKeyCode() == 65) {
+//			p.setVx(0);
+//			System.out.println("Kys part 32==2");
+//		}
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		System.out.println("JOSEPH LOVE CHILDREN");
+		repaint();
+	}
+	
+
+}

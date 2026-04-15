@@ -41,19 +41,15 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {
-			System.out.println("kys up");
 			p.setVy(-3);
 		}
 		if(e.getKeyCode() == 83) {
-			System.out.println("kys down");
 			p.setVy(3);
 		}
 		if(e.getKeyCode() == 65) {
-			System.out.println("kys left");
 			p.setVx(-3);
 		}
 		if(e.getKeyCode() == 68) {
-			System.out.println("kys right");
 			p.setVx(3);
 		}
 	}
@@ -107,7 +103,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("JOSEPH LOVE CHILDREN");
 		repaint();
 	}
 	

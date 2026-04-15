@@ -34,25 +34,6 @@ public class Player {
 		this.y = y;
 		init(x,y);
 	}
-	
-	public void setVx(int v) {
-		vx = v;
-	}
-	
-	public void setVy(int w) {
-		vy = w;
-	}
-	
-	public void setX(int posx) {
-		x = posx;
-	}
-	
-	public void setY(int posy) {
-		y = posy;
-	}
-	
-	
-
 
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
@@ -69,6 +50,22 @@ public class Player {
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(scaleWidth, scaleHeight);
+	}
+
+	public void setVx(int vx) {
+		this.vx = vx;
+	}
+	
+	public void setVy(int vy) {
+		this.vy = vy;
+	}
+	
+	public void setX(int posx) {
+		this.x = posx;
+	}
+	
+	public void setY(int posy) {
+		this.y = posy;
 	}
 
 	private Image getImage(String path) {

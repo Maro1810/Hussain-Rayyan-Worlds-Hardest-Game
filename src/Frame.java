@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,6 +31,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		menu.addKeyListener(this);
 		
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		Timer t = new Timer(16, this);
+		t.start();
 		
 		menu.setVisible(true);
 	}
@@ -60,15 +64,13 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-/*		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
-	
+		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
 			p.setVy(0);
 		}
 	
 		if (e.getKeyCode() == 68 || e.getKeyCode() == 65) {
 			p.setVx(0);
 		}
-	*/
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {

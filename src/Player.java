@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Player{
+public class Player {
 	private Image square;	
 	private AffineTransform tx;
 	

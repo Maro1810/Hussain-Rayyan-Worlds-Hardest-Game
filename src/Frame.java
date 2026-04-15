@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,10 +23,13 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	
 	public Frame() {
 		JFrame menu = new JFrame("Main Menu");
+		menu.setSize(new Dimension(1000, 1000));
+		menu.setBackground(Color.white);
 		menu.add(this);
-		menu.setSize(1000, 1000);
-		menu.addKeyListener(this);
 		menu.addMouseListener(this);
+		menu.addKeyListener(this);
+		
+		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		menu.setVisible(true);
 	}
@@ -41,33 +45,33 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {
-			System.out.println("kys up");
+
 			p.setVy(-3);
 		}
 		if(e.getKeyCode() == 83) {
-			System.out.println("kys down");
+
 			p.setVy(3);
 		}
 		if(e.getKeyCode() == 65) {
-			System.out.println("kys left");
+
 			p.setVx(-3);
 		}
 		if(e.getKeyCode() == 68) {
-			System.out.println("kys right");
+
 			p.setVx(3);
 		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-//		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
-//			System.out.println("kys");
-//			p.setVy(0);
-//		}
-//		
-//		if (e.getKeyCode() == 68 || e.getKeyCode() == 65) {
-//			p.setVx(0);
-//			System.out.println("Kys part 32==2");
-//		}
+/*		if(e.getKeyCode() == 87 || e.getKeyCode() == 83) {
+	
+			p.setVy(0);
+		}
+	
+		if (e.getKeyCode() == 68 || e.getKeyCode() == 65) {
+			p.setVx(0);
+		}
+	*/
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -107,7 +111,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("JOSEPH LOVE CHILDREN");
 		repaint();
 	}
 	

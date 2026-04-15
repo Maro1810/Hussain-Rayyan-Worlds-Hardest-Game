@@ -45,7 +45,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {
-
 			p.setVy(-3);
 		}
 		if(e.getKeyCode() == 83) {
@@ -53,11 +52,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVy(3);
 		}
 		if(e.getKeyCode() == 65) {
-
 			p.setVx(-3);
 		}
 		if(e.getKeyCode() == 68) {
-
 			p.setVx(3);
 		}
 	}

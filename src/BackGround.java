@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class BackGround{
-	private Image forward, backward, left, right; 	
+	private Image bg; 	
 	private AffineTransform tx;
 					//0-forward, 1-backward, 2-left, 3-right
 	int width, height;
@@ -15,7 +15,7 @@ public class BackGround{
 	double scaleHeight = 10; 		//change to scale image
 
 	public BackGround() {
-		forward 	= getImage("/imgs/"+"BG.png"); //load the image for Tree
+		bg 	= getImage("/imgs/"+"BG.png"); //load the image for Tree
 		//alter these
 		width = 1000;
 		height = 1000;
@@ -24,7 +24,7 @@ public class BackGround{
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
-		init(x, y); 				//initialize the location of the image
+		init(x, y); 	//initialize the location of the image
 									//use your variables
 		
 	}
@@ -35,7 +35,7 @@ public class BackGround{
 		Graphics2D g2 = (Graphics2D) g;
 		init(x,y);
 		
-		
+		g2.drawImage(bg, tx, null);
 
 	}
 	

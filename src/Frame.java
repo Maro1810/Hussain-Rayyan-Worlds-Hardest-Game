@@ -51,6 +51,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		bg.paint(g);
 		b.paint(g);
 		p.paint(g);
+
+		g.drawRect(b.getHitbox().x, b.getHitbox().y, b.getHitbox().width, b.getHitbox().height);
+
+		b.collision(p);
 	}
 	
 	

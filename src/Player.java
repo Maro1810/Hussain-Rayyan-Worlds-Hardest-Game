@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
@@ -14,6 +16,8 @@ public class Player {
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
 
+	private Rectangle hitbox;
+
 	//change to scale image
 	public Player() {
 		square 	= getImage("/imgs/"+"Player.png"); //load the image for Tree
@@ -24,6 +28,7 @@ public class Player {
 		vy = 0;
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
+		hitbox = new Rectangle(x, y, (int) (32 * scaleWidth), (int) (32 * scaleHeight));
 		
 		init(x, y); 				//initialize the location of the image
 									//use your variables	
@@ -41,11 +46,23 @@ public class Player {
 		Graphics2D g2 = (Graphics2D) g;
 		x+=vx;
 		y+=vy;	
+
+		hitbox.setBounds(x, y, (int) (32 * scaleWidth), (int) (32 * scaleHeight));	
 		
 		init(x,y);
 		
 		g2.drawImage(square, tx, null);
 
+	}
+
+	public void reset(Point location) {
+		this.x = location.x;
+		this.y = location.y;
+		init(x,y);
+	}
+
+	public Rectangle getHitbox() {
+		return hitbox;
 	}
 	
 	private void init(double a, double b) {

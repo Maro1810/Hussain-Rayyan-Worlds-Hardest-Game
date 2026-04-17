@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 public class Ball extends Obstacle {
     
@@ -12,6 +14,8 @@ public class Ball extends Obstacle {
 
     private Image ball;	
 	private AffineTransform tx;
+
+    private Rectangle hitbox;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
         super(true);
@@ -25,6 +29,8 @@ public class Ball extends Obstacle {
         scaleWidth = (2 * radius) / 32.0; 
         scaleHeight = (2 * radius) / 32.0;
 
+        hitbox = new Rectangle(x, y, 5, 5);
+
         ball = getImage("/imgs/" + "Ball.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
 
@@ -33,23 +39,33 @@ public class Ball extends Obstacle {
 
     @Override
     public void paint(Graphics g) {
+
         Graphics2D g2 = (Graphics2D) g;
 		
         this.move();
+
+        hitbox.setBounds(x, y, 5, 5);
 		
 		init(x,y);
-		
+
 		g2.drawImage(ball, tx, null);
     }
 
     @Override
     public void collision(Player p) {
-
+        if (hitbox.intersects(p.getHitbox())) {
+            p.reset(new Point(100, 100));
+        }
     }
 
     @Override
     public void collision(Obstacle o) {
 
+    }
+
+    @Override
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 
     @Override

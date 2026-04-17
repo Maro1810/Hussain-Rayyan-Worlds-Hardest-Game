@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.net.URL;
 
@@ -32,6 +33,10 @@ public abstract class Obstacle {
     public void setX(int x) {}
 
     public void setY(int y) {}
+
+    public Rectangle getHitbox() {
+        return null;
+    }
 
     protected Image getImage(String path) {
         Image tempImage = null;

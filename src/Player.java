@@ -9,10 +9,11 @@ public class Player {
 	private Image square;	
 	private AffineTransform tx;
 	
-	int x, y;						//position of the object
-	int vx, vy;						//movement variables
-	double scaleWidth = 4.5;		//change to scale image
-	double scaleHeight = 4.5; 
+	private int x, y;						//position of the object
+	private int vx, vy;						//movement variables
+	private double scaleWidth = 4.5;		//change to scale image
+	private double scaleHeight = 4.5; 
+
 	//change to scale image
 	public Player() {
 		square 	= getImage("/imgs/"+"Player.png"); //load the image for Tree
@@ -66,6 +67,22 @@ public class Player {
 	
 	public void setY(int posy) {
 		this.y = posy;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getVx() {
+		return vx;
+	}
+
+	public int getVy() {
+		return vy;
 	}
 
 	private Image getImage(String path) {

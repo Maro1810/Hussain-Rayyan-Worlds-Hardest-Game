@@ -17,7 +17,13 @@ public abstract class Obstacle {
 
     public abstract void collision(Player p);
 
+    public abstract void collision(Obstacle o);
+
     protected abstract void init(double a, double b);
+
+    public abstract int getX();
+
+    public abstract int getY();
 
     public void setVx(int vx) {}
 

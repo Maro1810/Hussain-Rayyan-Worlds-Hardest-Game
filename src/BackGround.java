@@ -8,7 +8,7 @@ import java.net.URL;
 public class BackGround{
 	private Image bg; 	
 	private AffineTransform tx;
-					//0-forward, 1-backward, 2-left, 3-right
+
 	int width, height;
 	int x, y;						//position of the object				//movement variables
 	double scaleWidth = 28;		//change to scale image

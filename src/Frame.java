@@ -15,7 +15,11 @@ import javax.swing.JPanel;
 public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener {
 	
 	Player p = new Player();
+
 	BackGround bg = new BackGround();
+
+	Ball b = new Ball(200, 200, 0, 0, 70);
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Frame frame = new Frame();
@@ -43,7 +47,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.RED);
+
 		bg.paint(g);
+		b.paint(g);
 		p.paint(g);
 	}
 	

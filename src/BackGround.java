@@ -11,8 +11,8 @@ public class BackGround{
 					//0-forward, 1-backward, 2-left, 3-right
 	int width, height;
 	int x, y;						//position of the object				//movement variables
-	double scaleWidth = 10;		//change to scale image
-	double scaleHeight = 10; 		//change to scale image
+	double scaleWidth = 28;		//change to scale image
+	double scaleHeight = 27; 		//change to scale image
 
 	public BackGround() {
 		bg 	= getImage("/imgs/"+"BG.png"); //load the image for Tree

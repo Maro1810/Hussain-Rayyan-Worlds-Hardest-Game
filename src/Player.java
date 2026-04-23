@@ -28,7 +28,7 @@ public class Player {
 		vy = 0;
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
-		hitbox = new Rectangle(x, y, (int) (32 * scaleWidth), (int) (32 * scaleHeight));
+		hitbox = new Rectangle(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));
 		
 		init(x, y); 				//initialize the location of the image
 									//use your variables	
@@ -47,7 +47,7 @@ public class Player {
 		x+=vx;
 		y+=vy;	
 
-		hitbox.setBounds(x, y, (int) (32 * scaleWidth), (int) (32 * scaleHeight));	
+		hitbox.setBounds(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));	
 		
 		init(x,y);
 		

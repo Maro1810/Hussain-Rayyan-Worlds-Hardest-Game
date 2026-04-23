@@ -25,11 +25,11 @@ public class Ball extends Obstacle {
         this.vy = vy;
         this.radius = radius;
 
-        //since original image is 32x32, we scale to fit the radius
-        scaleWidth = (2 * radius) / 32.0; 
-        scaleHeight = (2 * radius) / 32.0;
+        //since original image is 9x9, we scale to fit the radius
+        scaleWidth = (2 * radius) / 9.0; 
+        scaleHeight = (2 * radius) / 9.0;
 
-        hitbox = new Rectangle(x, y, 5, 5);
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 
         ball = getImage("/imgs/" + "Ball.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
@@ -44,7 +44,7 @@ public class Ball extends Obstacle {
 		
         this.move();
 
-        hitbox.setBounds(x, y, 5, 5);
+        hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		
 		init(x,y);
 
@@ -60,7 +60,10 @@ public class Ball extends Obstacle {
 
     @Override
     public void collision(Obstacle o) {
-
+        if (hitbox.intersects(o.getHitbox())) {
+            vx = -vx;
+            vy = -vy;
+        }
     }
 
     @Override

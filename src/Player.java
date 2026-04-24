@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
-import java.net.URL;
 
-public class Player extends Entity{
-	private Image square;	
+public class Player extends Entity {
+
+	//Must declare this transient since Image is not Serializable
+	private transient Image square;	
 	private AffineTransform tx;
 	
 	private int x, y;						//position of the object
@@ -98,6 +98,11 @@ public class Player extends Entity{
         tx.setToTranslation(a, b);
 		tx.scale(scaleWidth, scaleHeight);
     }
+
+	//TODO remove this since it was only used for testing
+	public String toString() {
+		return "this is the player at " + x + ", " + y;
+	}
 
 	@Override
 	public void setVx(int vx) {

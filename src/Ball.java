@@ -13,7 +13,8 @@ public class Ball extends Entity {
 
     private double scaleWidth, scaleHeight;
 
-    private Image ball;	
+    //Must declare this as transient since Image is not Serializable
+    private transient Image ball;	
 	private AffineTransform tx;
 
     private Rectangle hitbox;
@@ -68,7 +69,7 @@ public class Ball extends Entity {
         if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {
             vx = -vx;
             vy = -vy;
-            
+
             e.setVx(-e.getVx());
             e.setVy(-e.getVy());
         }
@@ -81,6 +82,11 @@ public class Ball extends Entity {
     @Override
     public Rectangle getHitbox() {
         return hitbox;
+    }
+
+    //TODO remove this since it was only used for testing
+    public String toString() {
+        return "Ball at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
     }
 
     @Override

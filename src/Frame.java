@@ -18,8 +18,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	BackGround bg = new BackGround();
 
-	Ball b = new Ball(200, 200, 5, 0, 20);
-	Ball b2 = new Ball(400, 200, -5, 0, 20);
+	Ball b = new Ball(200, 200, 1, 0, 20);
+	Ball b2 = new Ball(400, 200, -1, 0, 20);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -55,6 +55,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		p.paint(g);
 
 		b.collision(p);
+		b.collision(b2);
 	}
 	
 	

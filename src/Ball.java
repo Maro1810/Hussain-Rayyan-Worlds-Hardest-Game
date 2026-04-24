@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -5,7 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Ball extends Obstacle {
+public class Ball extends Entity {
     
     private int x, y, vx, vy;
     private int radius;
@@ -18,7 +19,7 @@ public class Ball extends Obstacle {
     private Rectangle hitbox;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
-        super(true);
+        super(true, false, false);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -49,20 +50,31 @@ public class Ball extends Obstacle {
 		init(x,y);
 
 		g2.drawImage(ball, tx, null);
+
+        
+		g.setColor(Color.RED);
+		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
     }
 
-    @Override
-    public void collision(Player p) {
-        if (hitbox.intersects(p.getHitbox())) {
-            p.reset(new Point(100, 100));
-        }
-    }
+    // @Override
+    // public void collision(Player p) {
+    //     if (hitbox.intersects(p.getHitbox())) {
+    //         p.reset(new Point(100, 100));
+    //     }
+    // }
 
     @Override
-    public void collision(Obstacle o) {
-        if (hitbox.intersects(o.getHitbox())) {
+    public void collision(Entity e) {
+        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {
             vx = -vx;
             vy = -vy;
+            
+            e.setVx(-e.getVx());
+            e.setVy(-e.getVy());
+        }
+
+        if (hitbox.intersects(e.getHitbox()) && e.player) {
+            e.collision(this);
         }
     }
 
@@ -104,13 +116,19 @@ public class Ball extends Obstacle {
     }
 
     @Override
-    public void setX(int x) {
+    public void setPosition(int x, int y) {
         this.x = x;
+        this.y = y;
     }
 
     @Override
-    public void setY(int y) {
-        this.y = y;
+    public int getVx() {
+        return vx;
     }
-    
+
+    @Override
+    public int getVy() {
+        return vy;
+    }
+
 }

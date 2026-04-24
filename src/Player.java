@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,7 +8,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Player {
+public class Player extends Entity{
 	private Image square;	
 	private AffineTransform tx;
 	
@@ -20,7 +21,8 @@ public class Player {
 
 	//change to scale image
 	public Player() {
-		square 	= getImage("/imgs/"+"Player.png"); //load the image for Tree
+		super(false, false, true);
+		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;
 		y = 100;
@@ -44,14 +46,18 @@ public class Player {
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		x+=vx;
-		y+=vy;	
+		
+		this.move();
 
 		hitbox.setBounds(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));	
 		
 		init(x,y);
 		
 		g2.drawImage(square, tx, null);
+
+		
+		g.setColor(Color.green);
+		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
 
 	}
 
@@ -61,56 +67,72 @@ public class Player {
 		init(x,y);
 	}
 
+	@Override
 	public Rectangle getHitbox() {
 		return hitbox;
 	}
-	
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(scaleWidth, scaleHeight);
+
+	@Override
+	public void move() {
+		x += vx;
+		y += vy;
 	}
 
+	@Override
+	public void collision(Entity e) {
+		if (hitbox.intersects(e.getHitbox()) && e.kills) {
+			this.reset(new Point(100, 100));
+		}
+
+		else if (hitbox.intersects(e.getHitbox()) && e.collectable) {
+
+		}
+
+		else if (hitbox.intersects(e.getHitbox()) && !e.collectable) {
+			//handle collisions with walls
+		}
+	}
+
+	@Override
+    protected void init(double a, double b) {
+        tx.setToTranslation(a, b);
+		tx.scale(scaleWidth, scaleHeight);
+    }
+
+	@Override
 	public void setVx(int vx) {
 		this.vx = vx;
 	}
 	
+	@Override
 	public void setVy(int vy) {
 		this.vy = vy;
 	}
 	
-	public void setX(int posx) {
-		this.x = posx;
-	}
-	
-	public void setY(int posy) {
-		this.y = posy;
+	@Override
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
+	@Override
 	public int getX() {
 		return x;
 	}
 
+	@Override
 	public int getY() {
 		return y;
 	}
 
+	@Override
 	public int getVx() {
 		return vx;
 	}
 
+	@Override
 	public int getVy() {
 		return vy;
-	}
-
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Player.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
 	}
 
 

@@ -4,21 +4,23 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.net.URL;
 
-public abstract class Obstacle {
+public abstract class Entity {
 
     protected boolean kills;
+    protected boolean collectable;
+    protected boolean player;
 
-    public Obstacle(boolean kills) {
+    public Entity(boolean kills, boolean collectable, boolean player) {
         this.kills = kills;
+        this.collectable = collectable;
+        this.player = player;
     }
 
     public abstract void paint(Graphics g);
 
     public void move() {}
 
-    public abstract void collision(Player p);
-
-    public abstract void collision(Obstacle o);
+    public abstract void collision(Entity e);
 
     protected abstract void init(double a, double b);
 
@@ -30,9 +32,15 @@ public abstract class Obstacle {
 
     public void setVy(int vy) {}
 
-    public void setX(int x) {}
+    public int getVx() {
+        return 0;
+    }
 
-    public void setY(int y) {}
+    public int getVy() {
+        return 0;
+    }
+
+    public void setPosition(int x, int y) {}
 
     public Rectangle getHitbox() {
         return null;
@@ -41,7 +49,7 @@ public abstract class Obstacle {
     protected Image getImage(String path) {
         Image tempImage = null;
         try {
-            URL imageURL = Obstacle.class.getResource(path);
+            URL imageURL = Entity.class.getResource(path);
             tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
         } catch (Exception e) {
             e.printStackTrace();

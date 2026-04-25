@@ -60,5 +60,5 @@ public abstract class Entity implements Serializable{
         return tempImage;
     }
 
-    public void fetchImage() {}
+    public abstract void fetchImage();
 }

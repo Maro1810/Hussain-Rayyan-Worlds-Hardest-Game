@@ -7,6 +7,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 import javax.swing.Timer;
 
 import javax.swing.JFrame;
@@ -18,17 +27,21 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	BackGround bg = new BackGround();
 
+	ArrayList<Entity> entities = new ArrayList<>();
+
+	ArrayList<Entity> deserializedEntities = new ArrayList<>();
+
 	Ball b = new Ball(200, 200, 1, 0, 20);
 	Ball b2 = new Ball(400, 200, -1, 0, 20);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Frame frame = new Frame();
 		
 		
 	}
 	
-	public Frame() {
+	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException {
 		JFrame menu = new JFrame("Main Menu");
 		menu.setSize(new Dimension(1000, 1000));
 		menu.setBackground(Color.white);
@@ -42,6 +55,35 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		t.start();
 		
 		menu.setVisible(true);
+
+
+        Ball ball1 = new Ball(1, 1, 1, 10, 5);
+        Ball ball2 = new Ball(20, 20, 10, 20, 5);
+        Player player = new Player();
+
+        entities.add(ball1);
+        entities.add(ball2);
+        entities.add(player);
+
+        FileOutputStream fileOut = new FileOutputStream(new File("C:\\Users\\rayya\\Downloads\\Hussain-Rayyan-Worlds-Hardest-Game\\src\\example.txt"));
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(entities);
+        out.close();
+
+        FileInputStream fileIn = new FileInputStream(new File("C:\\Users\\rayya\\Downloads\\Hussain-Rayyan-Worlds-Hardest-Game\\src\\example.txt"));
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+
+		deserializedEntities = (ArrayList<Entity>) in.readObject();
+
+        in.close();
+
+		for (int i = 0; i < deserializedEntities.size(); i++) {
+			if (deserializedEntities.get(i) instanceof Player) {
+				p = (Player) deserializedEntities.get(i);
+				deserializedEntities.set(i, p);
+			}
+			deserializedEntities.get(i).fetchImage();
+		}
 	}
 	
 	@Override
@@ -50,12 +92,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		g.setColor(Color.RED);
 
 		bg.paint(g);
-		b.paint(g);
-		b2.paint(g);
-		p.paint(g);
 
-		b.collision(p);
-		b.collision(b2);
+		for (Entity e : deserializedEntities) {
+			e.paint(g);
+		}
 	}
 	
 	

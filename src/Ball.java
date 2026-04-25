@@ -137,4 +137,9 @@ public class Ball extends Entity {
         return vy;
     }
 
+    @Override
+    public void fetchImage() {
+        ball = getImage("/imgs/" + "Ball.png");
+    }
+
 }

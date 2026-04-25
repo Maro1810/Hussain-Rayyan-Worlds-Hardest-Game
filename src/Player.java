@@ -140,5 +140,10 @@ public class Player extends Entity {
 		return vy;
 	}
 
+	@Override
+	public void fetchImage() {
+		square = getImage("/imgs/" + "Player.png");
+	}
+
 
 }

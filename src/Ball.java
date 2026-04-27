@@ -68,8 +68,8 @@ public class Ball extends Entity {
             vx = -vx;
             vy = -vy;
 
-            e.setVx(-e.getVx());
-            e.setVy(-e.getVy());
+            // e.setVx(-e.getVx());
+            // e.setVy(-e.getVy());
         }
 
         if (hitbox.intersects(e.getHitbox()) && e.player) {

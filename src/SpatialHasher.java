@@ -4,12 +4,12 @@ import java.util.List;
 public class SpatialHasher {
 
     private List<Entity> entities;
-    private int cellSize;
+    private double cellSize;
     private int numCells;
 
     private List<Entity>[] hashTable;
     
-    public SpatialHasher(List<Entity> entities, int cellSize) {
+    public SpatialHasher(List<Entity> entities, double cellSize) {
         this.entities = entities;
         this.cellSize = cellSize;
 
@@ -47,7 +47,7 @@ public class SpatialHasher {
         handleCollisions();
     }
 
-    public void handleCollisions() {
+    private void handleCollisions() {
         for (int i = 0; i < numCells; i++) {
             List<Entity> cellEntities = hashTable[i];
 
@@ -69,6 +69,6 @@ public class SpatialHasher {
     //Hash function from matthias-research.github.io/pages/tenMinutePhysics/11-hashing.pdf
     public int hash(int x, int y) {
         int hash = (x*92837111) ^ (y*689287499);  
-        return hash % numCells;
+        return Math.abs(hash) % numCells;
     }
 }

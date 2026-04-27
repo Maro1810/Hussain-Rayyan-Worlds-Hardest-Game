@@ -31,6 +31,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
+	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 62.5);
+
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Frame frame = new Frame();
@@ -52,8 +54,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		menu.setVisible(true);
 
 
-        Ball ball1 = new Ball(1, 1, 1, 10, 15);
-        Ball ball2 = new Ball(20, 20, 10, 0, 20);
+        Ball ball1 = new Ball(300, 1, 1, 0, 15);
+        Ball ball2 = new Ball(20, 1, 10, 0, 20);
         Player player = new Player();
 
         entities.add(ball1);
@@ -87,6 +89,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		g.setColor(Color.RED);
 
 		bg.paint(g);
+
+		hasher.update();
 
 		for (Entity e : deserializedEntities) {
 			e.paint(g);

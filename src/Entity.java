@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 import java.io.Serializable;
 import java.net.URL;
 
-public abstract class Entity implements Serializable{
+public abstract class Entity implements Serializable {
 
     public static final long serialVersionUID = 1L;
 

@@ -31,14 +31,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
-	Ball b = new Ball(200, 200, 1, 0, 20);
-	Ball b2 = new Ball(400, 200, -1, 0, 20);
-
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		Frame frame = new Frame();
-		
-		
 	}
 	
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -105,7 +100,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVy(-3);
 		}
 		if(e.getKeyCode() == 83) {
-
 			p.setVy(3);
 		}
 		if(e.getKeyCode() == 65) {

@@ -62,13 +62,6 @@ public class Ball extends Entity {
 		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
     }
 
-    // @Override
-    // public void collision(Player p) {
-    //     if (hitbox.intersects(p.getHitbox())) {
-    //         p.reset(new Point(100, 100));
-    //     }
-    // }
-
     @Override
     public void collision(Entity e) {
         if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {

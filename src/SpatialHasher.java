@@ -16,11 +16,15 @@ public class SpatialHasher {
         numCells = (int) (Math.pow(1000, 2)/Math.pow(cellSize, 2));
 
         hashTable = new ArrayList[numCells];
+
+        for (int i = 0; i < numCells; i++) {
+            hashTable[i] = new ArrayList<>();
+        }
     }
 
     public void update() {
         for (int i = 0; i < numCells; i++) {
-            hashTable[i] = new ArrayList<>();
+            hashTable[i].clear();
         }
 
         for (Entity e : entities) {
@@ -42,7 +46,7 @@ public class SpatialHasher {
     }
 
     public void handleCollisions() {
-        
+
     }
     
     //Hash function from matthias-research.github.io/pages/tenMinutePhysics/11-hashing.pdf

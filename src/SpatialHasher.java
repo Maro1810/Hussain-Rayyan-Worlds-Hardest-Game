@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpatialHasher {
@@ -5,6 +6,8 @@ public class SpatialHasher {
     private List<Entity> entities;
     private int cellSize;
     private int numCells;
+
+    private List<Entity>[] hashTable;
     
     public SpatialHasher(List<Entity> entities, int cellSize) {
         this.entities = entities;
@@ -12,8 +15,36 @@ public class SpatialHasher {
 
         numCells = (int) (Math.pow(1000, 2)/Math.pow(cellSize, 2));
 
+        hashTable = new ArrayList[numCells];
     }
 
+    public void update() {
+        for (int i = 0; i < numCells; i++) {
+            hashTable[i] = new ArrayList<>();
+        }
+
+        for (Entity e : entities) {
+            int minCellX = (int)Math.floor(e.getHitbox().getX() / cellSize);
+            int maxCellX = (int) Math.floor((e.getHitbox().getX() + e.getHitbox().getWidth()) / cellSize);
+
+            int minCellY = (int) Math.floor(e.getHitbox().getY() / cellSize);
+            int maxCellY = (int) Math.floor((e.getHitbox().getY() + e.getHitbox().getHeight()) / cellSize);
+
+            for (int i = minCellX; i < maxCellX; i++) {
+                for (int j = minCellY; j < maxCellY; j++) {
+                    int hashIndex = hash(i, j);
+
+                    hashTable[hashIndex].add(e);
+                }
+            }
+            
+        }
+    }
+
+    public void handleCollisions() {
+        
+    }
+    
     //Hash function from matthias-research.github.io/pages/tenMinutePhysics/11-hashing.pdf
     public int hash(int x, int y) {
         int hash = (x*92837111) ^ (y*689287499);  

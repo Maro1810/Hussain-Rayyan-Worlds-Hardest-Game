@@ -20,12 +20,12 @@ public class Example {
         entities.add(ball2);
         entities.add(player);
 
-        FileOutputStream fileOut = new FileOutputStream(new File("C:\\Users\\rayya\\Downloads\\Hussain-Rayyan-Worlds-Hardest-Game\\src\\example.txt"));
+        FileOutputStream fileOut = new FileOutputStream(new File("src/example.txt"));
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(entities);
         out.close();
 
-        FileInputStream fileIn = new FileInputStream(new File("C:\\Users\\rayya\\Downloads\\Hussain-Rayyan-Worlds-Hardest-Game\\src\\example.txt"));
+        FileInputStream fileIn = new FileInputStream(new File("src/example.txt"));
         ObjectInputStream in = new ObjectInputStream(fileIn);
 
         ArrayList<Entity> deserializedEntities = (ArrayList<Entity>) in.readObject();

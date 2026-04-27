@@ -50,7 +50,7 @@ public class Ball extends Entity {
 		
 		init(x,y);
 
-        if (x + (scaleWidth*9) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 1000 || y <= 0) {
+        if (x + (scaleWidth*9) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 980 || y <= 0) {
             vx = -vx;
             vy = -vy;
         }

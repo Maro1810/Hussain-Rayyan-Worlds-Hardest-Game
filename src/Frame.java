@@ -57,7 +57,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		menu.setVisible(true);
 
 
-        Ball ball1 = new Ball(1, 1, 1, 10, 20);
+        Ball ball1 = new Ball(1, 1, 1, 10, 15);
         Ball ball2 = new Ball(20, 20, 10, 0, 20);
         Player player = new Player();
 

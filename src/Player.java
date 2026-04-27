@@ -85,11 +85,14 @@ public class Player extends Entity {
 		}
 
 		else if (hitbox.intersects(e.getHitbox()) && e.collectable) {
+			
 
 		}
 
 		else if (hitbox.intersects(e.getHitbox()) && !e.collectable) {
 			//handle collisions with walls
+			vx = 0;
+			vy = 0;
 		}
 	}
 

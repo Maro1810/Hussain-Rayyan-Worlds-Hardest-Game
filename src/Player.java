@@ -91,6 +91,8 @@ public class Player extends Entity {
 
 		else if (hitbox.intersects(e.getHitbox()) && e.wall) {
 			//handle collisions with walls
+
+			//this isnt right since you get stuck to the wall and cant move after touching the wall
 			vx = 0;
 			vy = 0;
 		}

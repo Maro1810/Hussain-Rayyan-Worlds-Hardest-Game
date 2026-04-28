@@ -31,7 +31,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
-	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
+	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 100);
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub

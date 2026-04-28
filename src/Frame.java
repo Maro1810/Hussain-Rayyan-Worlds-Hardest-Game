@@ -56,15 +56,19 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
         Ball ball1 = new Ball(300, 1, 1, 0, 15);
         Ball ball2 = new Ball(20, 1, 10, 0, 20);
+        Ball ball3 = new Ball(100, 1, 0, 10, 20);
         Coin c1 = new Coin(400, 400, 0, 0, 20);
         Coin c2 = new Coin(50, 50, 0, 25, 20);
+        Barrier b = new Barrier(0,500,0,0,200);
         Player player = new Player();
 
         entities.add(ball1);
         entities.add(ball2);
+        entities.add(ball3);
         entities.add(player);
         entities.add(c1);
         entities.add(c2);
+        entities.add(b);
 		// for (int i = 0; i < 20; i++) {
 		// 	entities.add(new Ball(i*20, 500, 1, 1*i, 10));
 		// }

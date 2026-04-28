@@ -21,7 +21,7 @@ public class Player extends Entity {
 
 	//change to scale image
 	public Player() {
-		super(false, false, true);
+		super(false, false, true, false);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;
@@ -89,7 +89,7 @@ public class Player extends Entity {
 
 		}
 
-		else if (hitbox.intersects(e.getHitbox()) && !e.collectable) {
+		else if (hitbox.intersects(e.getHitbox()) && e.wall) {
 			//handle collisions with walls
 			vx = 0;
 			vy = 0;

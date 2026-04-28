@@ -12,11 +12,13 @@ public abstract class Entity implements Serializable {
     protected boolean kills;
     protected boolean collectable;
     protected boolean player;
+    protected boolean wall;
 
-    public Entity(boolean kills, boolean collectable, boolean player) {
+    public Entity(boolean kills, boolean collectable, boolean player, boolean wall) {
         this.kills = kills;
         this.collectable = collectable;
         this.player = player;
+        this.wall = wall;
     }
 
     public abstract void paint(Graphics g);

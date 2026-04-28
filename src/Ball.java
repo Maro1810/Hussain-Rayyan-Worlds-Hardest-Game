@@ -20,7 +20,7 @@ public class Ball extends Entity {
     private Rectangle hitbox;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
-        super(true, false, false);
+        super(true, false, false, false);
         this.x = x;
         this.y = y;
         this.vx = vx;

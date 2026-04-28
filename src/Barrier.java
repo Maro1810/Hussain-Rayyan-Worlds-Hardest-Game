@@ -6,34 +6,34 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Coin extends Entity {
+public class Barrier extends Entity {
     
     private int x, y, vx, vy;
-    private int radius;
+    private int length;
 
     private double scaleWidth, scaleHeight;
 
     //Must declare this as transient since Image is not Serializable
-    private transient Image coin;	
+    private transient Image barrier;	
 	private AffineTransform tx;
 
     private Rectangle hitbox;
 
-    public Coin(int x, int y, int vx, int vy, int radius) {
-        super(false, true, false, false);
+    public Barrier(int x, int y, int vx, int vy, int length) {
+        super(false, false, false, true);
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.radius = radius;
+        this.length = length;
 
         //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * radius * 7/9) / 7.0; 
-        scaleHeight = (2 * radius) / 9.0;
+        scaleWidth = (2 * length) / 36; 
+        scaleHeight = (10) / 9;
 
-        hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*36), (int)(scaleHeight*9));
 
-        coin = getImage("/imgs/" + "Coin.png");
+        barrier = getImage("/imgs/" + "Border.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
 
         init(x, y);
@@ -41,8 +41,7 @@ public class Coin extends Entity {
     
     @Override
     public void collect() {
-    		setPosition(10000,100000);
-    		
+    	
     }
 
     @Override
@@ -52,7 +51,7 @@ public class Coin extends Entity {
 		
         this.move();
 
-        hitbox.setBounds(x, y, (int)(scaleWidth*7), (int)(scaleHeight*9));
+        hitbox.setBounds(x, y, (int)(scaleWidth*36), (int)(scaleHeight*9));
 		
 		init(x,y);
 
@@ -61,7 +60,7 @@ public class Coin extends Entity {
             vy = -vy;
         }
 
-		g2.drawImage(coin, tx, null);
+		g2.drawImage(barrier, tx, null);
 
         
 		g.setColor(Color.RED);
@@ -70,14 +69,6 @@ public class Coin extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player && !e.kills) {
-            vx = -vx;
-            vy = -vy;
-
-            // e.setVx(-e.getVx());
-            // e.setVy(-e.getVy());
-        }
-
         if (hitbox.intersects(e.getHitbox()) && e.player) {
             e.collision(this);
         }
@@ -90,7 +81,7 @@ public class Coin extends Entity {
 
     //TODO remove this since it was only used for testing
     public String toString() {
-        return "Coin at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
+        return "Barrier at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
     }
 
     @Override
@@ -143,7 +134,7 @@ public class Coin extends Entity {
 
     @Override
     public void fetchImage() {
-        coin = getImage("/imgs/" + "Coin.png");
+        barrier = getImage("/imgs/" + "Border.png");
     }
 
 }

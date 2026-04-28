@@ -61,4 +61,6 @@ public abstract class Entity implements Serializable {
     }
 
     public abstract void fetchImage();
+
+	public abstract void collect();
 }

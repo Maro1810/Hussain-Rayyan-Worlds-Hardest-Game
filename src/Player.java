@@ -85,7 +85,7 @@ public class Player extends Entity {
 		}
 
 		else if (hitbox.intersects(e.getHitbox()) && e.collectable) {
-			
+			e.collect();
 
 		}
 
@@ -146,6 +146,12 @@ public class Player extends Entity {
 	@Override
 	public void fetchImage() {
 		square = getImage("/imgs/" + "Player.png");
+	}
+
+	@Override
+	public void collect() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

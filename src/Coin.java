@@ -6,7 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class Ball extends Entity {
+public class Coin extends Entity {
     
     private int x, y, vx, vy;
     private int radius;
@@ -14,13 +14,13 @@ public class Ball extends Entity {
     private double scaleWidth, scaleHeight;
 
     //Must declare this as transient since Image is not Serializable
-    private transient Image ball;	
+    private transient Image coin;	
 	private AffineTransform tx;
 
     private Rectangle hitbox;
 
-    public Ball(int x, int y, int vx, int vy, int radius) {
-        super(true, false, false);
+    public Coin(int x, int y, int vx, int vy, int radius) {
+        super(false, true, false);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -28,15 +28,21 @@ public class Ball extends Entity {
         this.radius = radius;
 
         //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * radius) / 9.0; 
+        scaleWidth = (2 * radius * 7/9) / 7.0; 
         scaleHeight = (2 * radius) / 9.0;
 
         hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 
-        ball = getImage("/imgs/" + "Ball.png");
+        coin = getImage("/imgs/" + "Coin.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
 
         init(x, y);
+    }
+    
+    @Override
+    public void collect() {
+    		setPosition(10000,100000);
+    		
     }
 
     @Override
@@ -46,16 +52,16 @@ public class Ball extends Entity {
 		
         this.move();
 
-        hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
+        hitbox.setBounds(x, y, (int)(scaleWidth*7), (int)(scaleHeight*9));
 		
 		init(x,y);
 
-        if (x + (scaleWidth*9) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 980 || y <= 0) {
+        if (x + (scaleWidth*7) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 980 || y <= 0) {
             vx = -vx;
             vy = -vy;
         }
 
-		g2.drawImage(ball, tx, null);
+		g2.drawImage(coin, tx, null);
 
         
 		g.setColor(Color.RED);
@@ -64,7 +70,7 @@ public class Ball extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {
+        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player && !e.kills) {
             vx = -vx;
             vy = -vy;
 
@@ -84,7 +90,7 @@ public class Ball extends Entity {
 
     //TODO remove this since it was only used for testing
     public String toString() {
-        return "Ball at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
+        return "Coin at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
     }
 
     @Override
@@ -137,13 +143,7 @@ public class Ball extends Entity {
 
     @Override
     public void fetchImage() {
-        ball = getImage("/imgs/" + "Ball.png");
+        coin = getImage("/imgs/" + "Coin.png");
     }
-
-	@Override
-	public void collect() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

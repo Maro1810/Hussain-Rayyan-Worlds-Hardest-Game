@@ -31,7 +31,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
-	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 62.5);
+	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
@@ -62,6 +62,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         entities.add(ball2);
         entities.add(player);
 
+		// for (int i = 0; i < 20; i++) {
+		// 	entities.add(new Ball(i*20, 500, 1, 1*i, 10));
+		// }
+
         FileOutputStream fileOut = new FileOutputStream(new File("src/example.txt"));
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(entities);
@@ -81,6 +85,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 			deserializedEntities.get(i).fetchImage();
 		}
+
+		hasher.setEntities(deserializedEntities);
 	}
 	
 	@Override

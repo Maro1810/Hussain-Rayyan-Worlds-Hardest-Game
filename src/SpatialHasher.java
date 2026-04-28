@@ -34,6 +34,9 @@ public class SpatialHasher {
             int minCellY = (int) Math.floor(e.getHitbox().getY() / cellSize);
             int maxCellY = (int) Math.floor((e.getHitbox().getY() + e.getHitbox().getHeight()) / cellSize);
 
+
+            // System.out.println(e);
+            
             for (int i = minCellX; i <= maxCellX; i++) {
                 for (int j = minCellY; j <= maxCellY; j++) {
                     int hashIndex = hash(i, j);
@@ -65,7 +68,11 @@ public class SpatialHasher {
             }
         }
     }
-    
+
+    public void setEntities(List<Entity> entities) {
+        this.entities = entities;
+    }
+
     //Hash function from matthias-research.github.io/pages/tenMinutePhysics/11-hashing.pdf
     public int hash(int x, int y) {
         int hash = (x*92837111) ^ (y*689287499);  

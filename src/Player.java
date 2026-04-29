@@ -93,8 +93,21 @@ public class Player extends Entity {
 			//handle collisions with walls
 
 			//this isnt right since you get stuck to the wall and cant move after touching the wall
-			vx = 0;
-			vy = 0;
+			if (y > e.getY() && vy < 0) {
+				vy = 0;
+			}
+
+			if (y < e.getY() && vy > 0) {
+				vy = 0;
+			}
+
+		 	if (x > e.getX() && vx < 0) {
+				vx = 0;
+			}
+
+			if (x < e.getX() && vx > 0) {
+				vx = 0;
+			}
 		}
 	}
 

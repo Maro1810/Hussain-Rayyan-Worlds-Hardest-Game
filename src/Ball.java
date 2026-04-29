@@ -65,11 +65,21 @@ public class Ball extends Entity {
     @Override
     public void collision(Entity e) {
         if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {
-            vx = -vx;
-            vy = -vy;
 
-            // e.setVx(-e.getVx());
-            // e.setVy(-e.getVy());
+            if (Math.signum(vx) != Math.signum(e.getVx()) || Math.signum(vy) != Math.signum(e.getVy())) {
+                vx = -vx;
+                vy = -vy;
+            }
+
+            else {
+                if (Math.hypot(vx, vy) < Math.hypot(e.getVx(), e.getVy())) {
+                    return;
+                }
+                else {
+                    vx = -vx;
+                    vy = -vy;
+                }
+            }
         }
 
         if (hitbox.intersects(e.getHitbox()) && e.player) {

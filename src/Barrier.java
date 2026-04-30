@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 public class Barrier extends Entity {
     
     private int x, y, vx, vy;
-    private int length;
+    private int xlength, ylength;
 
     private double scaleWidth, scaleHeight;
 
@@ -19,17 +19,18 @@ public class Barrier extends Entity {
 
     private Rectangle hitbox;
 
-    public Barrier(int x, int y, int vx, int vy, int length) {
+    public Barrier(int x, int y, int vx, int vy, int xlength, int ylength) {
         super(false, false, false, true);
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.length = length;
+        this.xlength = xlength;
+        this.ylength = ylength;
 
         //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * length) / 36; 
-        scaleHeight = 2;
+        scaleWidth = (2 * xlength) / 36; 
+        scaleHeight = 2 * ylength /9;
 
         hitbox = new Rectangle(x, y, (int)(scaleWidth*36), (int)(scaleHeight*9));
 

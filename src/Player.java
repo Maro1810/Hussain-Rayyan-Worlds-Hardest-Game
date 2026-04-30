@@ -84,30 +84,49 @@ public class Player extends Entity {
 			this.reset(new Point(100, 100));
 		}
 
-		else if (hitbox.intersects(e.getHitbox()) && e.collectable) {
+		if (hitbox.intersects(e.getHitbox()) && e.collectable) {
 			e.collect();
 
 		}
 
-		else if (hitbox.intersects(e.getHitbox()) && e.wall) {
+		if (hitbox.intersects(e.getHitbox()) && e.wall) {
+			if(vx > 0) {
+				x =  (int) (e.getX() - hitbox.getWidth());
+			}else if ( vx > 0) {
+				x = (int) (e.getX() + e.getHitbox().getWidth());
+			}
+			vx = 0;
+		}
+		if (hitbox.intersects(e.getHitbox()) && e.wall) {
+			if(vy > 0) {
+				y =  (int) (e.getY() - hitbox.getHeight());
+			}else if ( vy < 0) {
+				y = (int) (e.getY() + e.getHitbox().getHeight());
+			}
+			vy = 0;
 			//handle collisions with walls
 
 			//this isnt right since you get stuck to the wall and cant move after touching the wall
-			if (y > e.getY() && vy < 0) {
+			/*if (y < e.getY() + e.getHitbox().getHeight() && vy < 0) {
+				y =  (int) (e.getY() + e.getHitbox().getHeight());
 				vy = 0;
 			}
 
-			if (y < e.getY() && vy > 0) {
+			else if (y + hitbox.getHeight() > e.getY() && vy > 0) {
+				y =  (int) (e.getY() - hitbox.getHeight());
 				vy = 0;
 			}
 
-		 	if (x > e.getX() && vx < 0) {
+		 	if (x < e.getX() + e.getHitbox().getWidth() && vx < 0) {
+		 		x = (int) (e.getX() + e.getHitbox().getWidth());
 				vx = 0;
 			}
 
-			if (x < e.getX() && vx > 0) {
+		 	else if (x + hitbox.getWidth() > e.getX() && vx > 0) {
+				x = (int) (e.getX() - hitbox.getWidth());
 				vx = 0;
 			}
+			*/
 		}
 	}
 

@@ -20,7 +20,7 @@ public class SafeZone extends Entity {
     private Rectangle hitbox;
 
     public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale) {
-        super(false, false, false, false);
+        super(false, false, false, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -137,5 +137,13 @@ public class SafeZone extends Entity {
     public void fetchImage() {
     	safeZone = getImage("/imgs/" + "SafeZone.png");
     }
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		x = startX;
+		y = startY;
+		
+	}
 
 }

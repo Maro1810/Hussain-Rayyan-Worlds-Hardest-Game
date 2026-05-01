@@ -13,12 +13,16 @@ public abstract class Entity implements Serializable {
     protected boolean collectable;
     protected boolean player;
     protected boolean wall;
+    protected int startX;
+    protected int startY;
 
-    public Entity(boolean kills, boolean collectable, boolean player, boolean wall) {
+    public Entity(boolean kills, boolean collectable, boolean player, boolean wall, int x, int y) {
         this.kills = kills;
         this.collectable = collectable;
         this.player = player;
         this.wall = wall;
+        this.startX = x;
+        this.startY = y;
     }
 
     public abstract void paint(Graphics g);
@@ -26,6 +30,8 @@ public abstract class Entity implements Serializable {
     public void move() {}
 
     public abstract void collision(Entity e);
+    
+    public abstract void reset();
 
     protected abstract void init(double a, double b);
 

@@ -60,6 +60,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Coin c1 = new Coin(400, 400, 0, 0, 20);
         Coin c2 = new Coin(50, 50, 0, 2, 20);
         Barrier b = new Barrier(0,500,0,0,200, 5);
+        Barrier b2 = new Barrier(500,500,0,0, 72, 200);
         SafeZone s = new SafeZone(700,0,0,0,50,50);
         Player player = new Player();
 
@@ -69,6 +70,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         entities.add(c1);
         entities.add(c2);
         entities.add(b);
+        entities.add(b2);
         entities.add(s);
         entities.add(player);
 		
@@ -94,6 +96,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 
 		hasher.setEntities(deserializedEntities);
+		if(player.isDead()) {
+			reset(player);
+		}
 	}
 	
 	@Override
@@ -108,8 +113,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		for (Entity e : deserializedEntities) {
 			e.paint(g);
 		}
+			
 	}
-	
+	public void reset(Player p) {
+		p.reset();
+		for (Entity e : deserializedEntities) {
+			e.reset();
+		}
+		hasher.update();
+		hasher.setEntities(deserializedEntities);
+		repaint();
+	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

@@ -20,7 +20,7 @@ public class Coin extends Entity {
     private Rectangle hitbox;
 
     public Coin(int x, int y, int vx, int vy, int radius) {
-        super(false, true, false, false);
+        super(false, true, false, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -82,6 +82,12 @@ public class Coin extends Entity {
             e.collision(this);
         }
     }
+    @Override
+	public void reset() {
+		this.x = startX;
+		this.y = startY;
+		init(x,y);
+	}
 
     @Override
     public Rectangle getHitbox() {
@@ -98,7 +104,6 @@ public class Coin extends Entity {
         tx.setToTranslation(a, b);
 		tx.scale(scaleWidth, scaleHeight);
     }
-
     @Override
     public int getX() {
         return x;

@@ -20,7 +20,7 @@ public class Ball extends Entity {
     private Rectangle hitbox;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
-        super(true, false, false, false);
+        super(true, false, false, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -86,6 +86,12 @@ public class Ball extends Entity {
             e.collision(this);
         }
     }
+    @Override
+	public void reset() {
+		this.x = startX;
+		this.y = startY;
+		init(x,y);
+	}
 
     @Override
     public Rectangle getHitbox() {

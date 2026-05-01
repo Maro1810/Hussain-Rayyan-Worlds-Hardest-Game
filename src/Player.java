@@ -16,18 +16,20 @@ public class Player extends Entity {
 	private int vx, vy;						//movement variables
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
+	private boolean dead;
 
 	private Rectangle hitbox;
 
 	//change to scale image
 	public Player() {
-		super(false, false, true, false);
+		super(false, false, true, false, 100, 100);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;
 		y = 100;
 		vx = 0;
 		vy = 0;
+		dead = false;
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
 		hitbox = new Rectangle(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));
@@ -47,7 +49,8 @@ public class Player extends Entity {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		this.move();
+		this.moveX();
+		this.moveY();
 
 		hitbox.setBounds(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));	
 		
@@ -60,11 +63,13 @@ public class Player extends Entity {
 		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
 
 	}
-
-	public void reset(Point location) {
-		this.x = location.x;
-		this.y = location.y;
+	
+	@Override
+	public void reset() {
+		this.x = startX;
+		this.y = startY;
 		init(x,y);
+		dead = false;
 	}
 
 	@Override
@@ -77,26 +82,25 @@ public class Player extends Entity {
 		x += vx;
 		y += vy;
 	}
+	public void moveX() {
+		x += vx;
+	}
+	public void moveY() {
+		y += vy;
+	}
 
 	@Override
 	public void collision(Entity e) {
 		if (hitbox.intersects(e.getHitbox()) && e.kills) {
-			this.reset(new Point(100, 100));
+			dead = true;
+			System.out.println("Dead");
 		}
 
 		if (hitbox.intersects(e.getHitbox()) && e.collectable) {
 			e.collect();
 
 		}
-
-		if (hitbox.intersects(e.getHitbox()) && e.wall) {
-			if(vx > 0) {
-				x =  (int) (e.getX() - hitbox.getWidth());
-			}else if ( vx > 0) {
-				x = (int) (e.getX() + e.getHitbox().getWidth());
-			}
-			vx = 0;
-		}
+		
 		if (hitbox.intersects(e.getHitbox()) && e.wall) {
 			if(vy > 0) {
 				y =  (int) (e.getY() - hitbox.getHeight());
@@ -104,30 +108,18 @@ public class Player extends Entity {
 				y = (int) (e.getY() + e.getHitbox().getHeight());
 			}
 			vy = 0;
-			//handle collisions with walls
-
-			//this isnt right since you get stuck to the wall and cant move after touching the wall
-			/*if (y < e.getY() + e.getHitbox().getHeight() && vy < 0) {
-				y =  (int) (e.getY() + e.getHitbox().getHeight());
-				vy = 0;
-			}
-
-			else if (y + hitbox.getHeight() > e.getY() && vy > 0) {
-				y =  (int) (e.getY() - hitbox.getHeight());
-				vy = 0;
-			}
-
-		 	if (x < e.getX() + e.getHitbox().getWidth() && vx < 0) {
-		 		x = (int) (e.getX() + e.getHitbox().getWidth());
-				vx = 0;
-			}
-
-		 	else if (x + hitbox.getWidth() > e.getX() && vx > 0) {
-				x = (int) (e.getX() - hitbox.getWidth());
-				vx = 0;
-			}
-			*/
+			hitbox.setLocation(x, y);
 		}
+		if (hitbox.intersects(e.getHitbox()) && e.wall) {
+			if(vx > 0) {
+				x =  (int) (e.getX() - hitbox.getWidth());
+			}else if ( vx < 0) {
+				x = (int) (e.getX() + e.getHitbox().getWidth());
+			}
+			vx = 0;
+			hitbox.setLocation(x, y);
+		}
+		
 	}
 
 	@Override
@@ -135,6 +127,9 @@ public class Player extends Entity {
         tx.setToTranslation(a, b);
 		tx.scale(scaleWidth, scaleHeight);
     }
+	public boolean isDead() {
+		return dead;
+	}
 
 	//TODO remove this since it was only used for testing
 	public String toString() {

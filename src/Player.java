@@ -93,7 +93,6 @@ public class Player extends Entity {
 	public void collision(Entity e) {
 		if (hitbox.intersects(e.getHitbox()) && e.kills) {
 			dead = true;
-			System.out.println("Dead");
 		}
 
 		if (hitbox.intersects(e.getHitbox()) && e.collectable) {

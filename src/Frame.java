@@ -96,9 +96,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 
 		hasher.setEntities(deserializedEntities);
-		if(player.isDead()) {
-			reset(player);
-		}
 	}
 	
 	@Override
@@ -113,16 +110,23 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		for (Entity e : deserializedEntities) {
 			e.paint(g);
 		}
+		reset();
 			
 	}
-	public void reset(Player p) {
-		p.reset();
+	public void reset() {
+		Player p = null;
 		for (Entity e : deserializedEntities) {
-			e.reset();
+			if(e instanceof Player ) {
+				p = (Player) e;
+				if(p.isDead()) {
+					for (Entity g : deserializedEntities) {
+						g.reset();
+					}
+				}
+			}
+			hasher.update();
+			hasher.setEntities(deserializedEntities);
 		}
-		hasher.update();
-		hasher.setEntities(deserializedEntities);
-		repaint();
 	}
 	
 	@Override

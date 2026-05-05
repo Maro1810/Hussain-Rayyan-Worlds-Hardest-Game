@@ -10,6 +10,7 @@ public class Coin extends Entity {
     
     private int x, y, vx, vy;
     private int radius;
+    private boolean collected;
 
     private double scaleWidth, scaleHeight;
 
@@ -80,10 +81,12 @@ public class Coin extends Entity {
 
         if (hitbox.intersects(e.getHitbox()) && e.player) {
             e.collision(this);
+            collected = true;
         }
     }
     @Override
 	public void reset() {
+    		collected = false;
 		this.x = startX;
 		this.y = startY;
 		init(x,y);
@@ -149,6 +152,9 @@ public class Coin extends Entity {
     @Override
     public void fetchImage() {
         coin = getImage("/imgs/" + "Coin.png");
+    }
+    public boolean isCollected() {
+    		return collected;
     }
 
 }

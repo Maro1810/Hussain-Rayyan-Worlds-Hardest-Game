@@ -16,7 +16,7 @@ public class Player extends Entity {
 	private int vx, vy;						//movement variables
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
-	private boolean dead;
+	private boolean dead, winning;
 
 	private Rectangle hitbox;
 
@@ -30,6 +30,7 @@ public class Player extends Entity {
 		vx = 0;
 		vy = 0;
 		dead = false;
+		winning = false;
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
 		hitbox = new Rectangle(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));
@@ -61,7 +62,7 @@ public class Player extends Entity {
 		
 		g.setColor(Color.green);
 		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
-
+		winning = false;
 	}
 	
 	@Override
@@ -70,6 +71,7 @@ public class Player extends Entity {
 		this.y = startY;
 		init(x,y);
 		dead = false;
+		winning = false;
 	}
 
 	@Override
@@ -117,6 +119,13 @@ public class Player extends Entity {
 			}
 			vx = 0;
 			hitbox.setLocation(x, y);
+		}
+		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
+			SafeZone s = (SafeZone) e;
+			if(s.isEnd()) {
+				winning = true;
+				System.out.println("win");
+			}
 		}
 		
 	}
@@ -180,6 +189,9 @@ public class Player extends Entity {
 	public void collect() {
 		// TODO Auto-generated method stub
 		
+	}
+	public boolean winning() {
+		return winning;
 	}
 
 

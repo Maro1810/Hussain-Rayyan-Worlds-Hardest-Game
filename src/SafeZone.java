@@ -10,6 +10,7 @@ public class SafeZone extends Entity {
     
     private int x, y, vx, vy;
     private int xscale, yscale;
+    private boolean end;
 
     private double scaleWidth, scaleHeight;
 
@@ -19,7 +20,7 @@ public class SafeZone extends Entity {
 
     private Rectangle hitbox;
 
-    public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale) {
+    public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale, boolean end) {
         super(false, false, false, false, x, y);
         this.x = x;
         this.y = y;
@@ -27,6 +28,7 @@ public class SafeZone extends Entity {
         this.vy = vy;
         this.xscale = xscale;
         this.yscale = yscale;
+        this.end = end;
 
         //since original image is 9x9, we scale to fit the radius
         scaleWidth = (2 * xscale) / 15; 
@@ -144,6 +146,9 @@ public class SafeZone extends Entity {
 		x = startX;
 		y = startY;
 		
+	}
+	public boolean isEnd() {
+		return true;
 	}
 
 }

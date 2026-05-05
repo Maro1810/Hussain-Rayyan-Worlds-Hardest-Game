@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener {
 	
 	Player p = new Player();
-
 	BackGround bg = new BackGround();
 
 	ArrayList<Entity> entities = new ArrayList<>();
@@ -32,6 +31,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
 	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 100);
+	
+	int coins = 0;
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
@@ -61,7 +62,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Coin c2 = new Coin(50, 50, 0, 2, 20);
         Barrier b = new Barrier(0,500,0,0,200, 5);
         Barrier b2 = new Barrier(500,500,0,0, 72, 200);
-        SafeZone s = new SafeZone(700,0,0,0,50,50);
+        SafeZone s = new SafeZone(700,0,0,0,50,50, true);
         Player player = new Player();
 
         entities.add(ball1);
@@ -110,6 +111,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		for (Entity e : deserializedEntities) {
 			e.paint(g);
 		}
+		coins = 0;
+		updateCoins();
+		win();
 		reset();
 			
 	}
@@ -128,7 +132,32 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			hasher.setEntities(deserializedEntities);
 		}
 	}
-	
+	public void win() {
+		Player p = null;
+		for (Entity e : deserializedEntities) {
+			if(e instanceof Player ) {
+				p = (Player) e;
+				if(p.winning() && coins <= 0) {
+					for (Entity g : deserializedEntities) {
+						g.reset();
+					}
+					System.out.println("You win :)");
+				}
+			}
+			hasher.update();
+			hasher.setEntities(deserializedEntities);
+		}
+	}
+	public void updateCoins() {
+		for (Entity e : deserializedEntities) {
+			if(e instanceof Coin ) {
+				Coin c = (Coin) e;
+				if(!c.isCollected()) {
+					coins++;
+				}
+			}
+		}
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {

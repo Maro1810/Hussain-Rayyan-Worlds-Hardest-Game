@@ -101,7 +101,7 @@ public class Player extends Entity {
 			e.collect();
 
 		}
-		
+		hitbox.y += vy;
 		if (hitbox.intersects(e.getHitbox()) && e.wall) {
 			if(vy > 0) {
 				y =  (int) (e.getY() - hitbox.getHeight());
@@ -111,6 +111,7 @@ public class Player extends Entity {
 			vy = 0;
 			hitbox.setLocation(x, y);
 		}
+		hitbox.x += vx;
 		if (hitbox.intersects(e.getHitbox()) && e.wall) {
 			if(vx > 0) {
 				x =  (int) (e.getX() - hitbox.getWidth());
@@ -120,13 +121,13 @@ public class Player extends Entity {
 			vx = 0;
 			hitbox.setLocation(x, y);
 		}
-		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
-			SafeZone s = (SafeZone) e;
-			if(s.isEnd()) {
-				winning = true;
-				System.out.println("win");
-			}
-		}
+//		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
+//			SafeZone s = (SafeZone) e;
+//			if(s.isEnd()) {
+//				winning = true;
+//				System.out.println("win");
+//			}
+//		}
 		
 	}
 

@@ -21,27 +21,27 @@ import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener {
+public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener{
 	
 	Player p = new Player();
-	BackGround bg = new BackGround();
+	BackGround bg;
 
 	ArrayList<Entity> entities = new ArrayList<>();
 
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
-	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 100);
+	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
 	
 	int coins = 0;
 
-	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InvalidBackgroundException {
 		// TODO Auto-generated method stub
 		Frame frame = new Frame();
 	}
 	
-	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException {
+	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
 		JFrame menu = new JFrame("Main Menu");
-		menu.setSize(new Dimension(1000, 1000));
+		menu.setSize(new Dimension(1000, 750));
 		menu.setBackground(Color.white);
 		menu.add(this);
 		menu.addMouseListener(this);
@@ -52,6 +52,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		Timer t = new Timer(16, this);
 		t.start();
 		
+		bg = new BackGround();
+
 		menu.setVisible(true);
 
 
@@ -106,10 +108,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		bg.paint(g);
 
-		hasher.update();
+		if (bg.getScreen() == 1) {
+			hasher.update();
 
-		for (Entity e : deserializedEntities) {
-			e.paint(g);
+			for (Entity e : deserializedEntities) {
+				e.paint(g);
+			}
 		}
 		coins = 0;
 		updateCoins();
@@ -128,7 +132,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					}
 				}
 			}
-			hasher.update();
+			// hasher.update();
 			hasher.setEntities(deserializedEntities);
 		}
 	}
@@ -144,7 +148,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					System.out.println("You win :)");
 				}
 			}
-			hasher.update();
+			// hasher.update();
 			hasher.setEntities(deserializedEntities);
 		}
 	}
@@ -172,6 +176,37 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		if(e.getKeyCode() == 68) {
 			p.setVx(3);
 		}
+
+		if (e.getKeyCode() == 49) {
+			try {
+				bg.setBackground(1);
+			} catch (InvalidBackgroundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+		if (e.getKeyCode() == 48) {
+			try {
+				bg.setBackground(0);
+			} catch (InvalidBackgroundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+		if (e.getKeyCode() == 80) {
+			for (Entity en : deserializedEntities) {
+				en.setVx(0);
+				en.setVy(0);
+			}
+		}
+
+		if (e.getKeyCode() == 82) {
+			for (Entity en : deserializedEntities) {
+				en.reset();
+			}
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -182,6 +217,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		if (e.getKeyCode() == 68 || e.getKeyCode() == 65) {
 			p.setVx(0);
 		}
+
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -198,8 +234,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+		}
+
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			deserializedEntities.remove(deserializedEntities.size()-1);
+		}
 		
 	}
+
+	// public void remove()
 
 	@Override
 	public void mouseReleased(MouseEvent e) {

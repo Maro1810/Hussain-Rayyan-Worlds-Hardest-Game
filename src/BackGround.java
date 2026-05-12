@@ -11,11 +11,12 @@ public class BackGround{
 
 	int width, height;
 	int x, y;						//position of the object				//movement variables
-	double scaleWidth = 28;		//change to scale image
-	double scaleHeight = 27; 		//change to scale image
+	double scaleWidth = 0;		//change to scale image
+	double scaleHeight = 0; 		//change to scale image
 
-	public BackGround() {
-		bg 	= getImage("/imgs/"+"BG.png"); //load the image for Tree
+	int screen = 0;
+
+	public BackGround() throws InvalidBackgroundException {
 		//alter these
 		width = 1000;
 		height = 1000;
@@ -23,6 +24,8 @@ public class BackGround{
 		y = 0;
 		
 		tx = AffineTransform.getTranslateInstance(0, 0);
+
+		setBackground(screen);
 		
 		init(x, y); 	//initialize the location of the image
 									//use your variables
@@ -44,6 +47,30 @@ public class BackGround{
 		tx.scale(scaleWidth, scaleHeight);
 	}
 
+	public void setBackground(int screen) throws InvalidBackgroundException {
+		this.screen = screen;
+
+		if (screen == 0) {
+			bg = getImage("/imgs/" + "MainMenu.png");
+
+			scaleWidth = Constants.ScaleConstants.MAIN_MENU_SCALE[0];
+			scaleHeight = Constants.ScaleConstants.MAIN_MENU_SCALE[1];
+		}
+		else if (screen == 1) {
+			bg 	= getImage("/imgs/"+"BG.png");
+
+			scaleWidth = Constants.ScaleConstants.BG_SCALE[0];
+			scaleHeight = Constants.ScaleConstants.BG_SCALE[1];
+		} 
+		else {
+			throw new InvalidBackgroundException("Screen number is invalid!");
+		}
+	}
+
+	public int getScreen() {
+		return screen;
+	}
+
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
@@ -55,4 +82,11 @@ public class BackGround{
 		return tempImage;
 	}
 
+}
+
+
+class InvalidBackgroundException extends Exception {
+	public InvalidBackgroundException(String message) {
+		super(message);
+	}
 }

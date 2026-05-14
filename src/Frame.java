@@ -33,6 +33,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
 	
 	int coins = 0;
+	int objType = 0;
 
 	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException, InvalidBackgroundException {
 		// TODO Auto-generated method stub
@@ -207,6 +208,18 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				en.reset();
 			}
 		}
+		if(e.getKeyCode() == 97) {
+			objType = 0; // Ball
+		}
+		if(e.getKeyCode() == 98) {
+			objType = 1; // Coin
+		}
+		if(e.getKeyCode() == 99) {
+			objType = 2; // Wall
+		}
+		if(e.getKeyCode() == 100) {
+			objType = 3; // SafeZone
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -235,7 +248,18 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+			if(objType == 0) {
+				deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+			}
+			if(objType == 1) {
+				deserializedEntities.add(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
+			}
+			if(objType == 2) {
+				deserializedEntities.add(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
+			}
+			if(objType == 3) {
+				deserializedEntities.add(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
+			}
 		}
 
 		if (e.getButton() == MouseEvent.BUTTON3) {

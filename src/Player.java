@@ -12,11 +12,12 @@ public class Player extends Entity {
 	private transient Image square;	
 	private AffineTransform tx;
 	
-	private int x, y;						//position of the object
+	private int x, y;//position of the object
 	private int vx, vy;						//movement variables
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
 	private boolean dead, winning;
+	// private int prevX, prevY;
 
 	private Rectangle hitbox;
 
@@ -49,7 +50,6 @@ public class Player extends Entity {
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		
 		this.moveX();
 		this.moveY();
 
@@ -101,24 +101,28 @@ public class Player extends Entity {
 			e.collect();
 
 		}
-		hitbox.y += vy;
 		if (hitbox.intersects(e.getHitbox()) && e.wall) {
-			if(vy > 0) {
-				y =  (int) (e.getY() - hitbox.getHeight());
-			}else if ( vy < 0) {
-				y = (int) (e.getY() + e.getHitbox().getHeight());
+			Rectangle overlap = hitbox.intersection(e.getHitbox());
+			int prevY = y;
+			y -= vy;
+			hitbox.setLocation(x,y);
+			if(hitbox.intersects(e.getHitbox())) {
+				y = prevY;
+				hitbox.setLocation(x,y);
+				if(hitbox.getX()< e.getHitbox().getX()) {
+					x -= overlap.width;
+				}else {
+					x += overlap.width;
+				}
+				vx = 0;
+			}else {
+				if(hitbox.getY() < e.getHitbox().getY()) {
+					y -= overlap.height;
+				}else {
+					y += overlap.height;
+				}
+				vy = 0;
 			}
-			vy = 0;
-			hitbox.setLocation(x, y);
-		}
-		hitbox.x += vx;
-		if (hitbox.intersects(e.getHitbox()) && e.wall) {
-			if(vx > 0) {
-				x =  (int) (e.getX() - hitbox.getWidth());
-			}else if ( vx < 0) {
-				x = (int) (e.getX() + e.getHitbox().getWidth());
-			}
-			vx = 0;
 			hitbox.setLocation(x, y);
 		}
 //		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {

@@ -21,7 +21,7 @@ public class SafeZone extends Entity {
     private Rectangle hitbox;
 
     public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale, boolean end) {
-        super(false, false, false, false, x, y);
+        super(false, false, false, false, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;

@@ -22,7 +22,7 @@ public class Player extends Entity {
 
 	//change to scale image
 	public Player() {
-		super(false, false, true, false, 100, 100);
+		super(false, false, true, false, false, 100, 100);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;

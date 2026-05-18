@@ -20,7 +20,7 @@ public class Barrier extends Entity {
     private Rectangle hitbox;
 
     public Barrier(int x, int y, int vx, int vy, int xlength, int ylength) {
-        super(false, false, false, true, x, y);
+        super(false, false, false, true, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;

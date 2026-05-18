@@ -17,7 +17,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -31,6 +32,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	ArrayList<Entity> deserializedEntities = new ArrayList<>();
 
 	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
+
+	// Button play = new Button("/imgs/PlayButton.png", 400, 450);
+
+	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
+	JButton play = new JButton("Play");
 	
 	int coins = 0;
 	int objType = 0;
@@ -54,6 +60,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		t.start();
 		
 		bg = new BackGround();
+
+		
+		menu.add(play);
+		// play.setBounds(400, 450, 50, 50);
 
 		menu.setVisible(true);
 
@@ -107,7 +117,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		super.paintComponent(g);
 		g.setColor(Color.RED);
 
-		bg.paint(g);
+		// bg.paint(g);
+
+		// play.paint(g);
 
 		if (bg.getScreen() == 1) {
 			hasher.update();
@@ -247,24 +259,25 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			if(objType == 0) {
-				deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
-			}
-			if(objType == 1) {
-				deserializedEntities.add(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
-			}
-			if(objType == 2) {
-				deserializedEntities.add(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
-			}
-			if(objType == 3) {
-				deserializedEntities.add(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
-			}
-		}
+		// if (e.getButton() == MouseEvent.BUTTON1) {
+		// 	if(objType == 0) {
+		// 		deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+		// 	}
+		// 	if(objType == 1) {
+		// 		deserializedEntities.add(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
+		// 	}
+		// 	if(objType == 2) {
+		// 		deserializedEntities.add(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
+		// 	}
+		// 	if(objType == 3) {
+		// 		deserializedEntities.add(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
+		// 	}
+		// }
 
-		if (e.getButton() == MouseEvent.BUTTON3) {
-			deserializedEntities.remove(deserializedEntities.size()-1);
-		}
+		// if (e.getButton() == MouseEvent.BUTTON3) {
+		// 	deserializedEntities.remove(deserializedEntities.size()-1);
+		// }
+		if (e.getButton() == MouseEvent.BUTTON1) {}
 		
 	}
 

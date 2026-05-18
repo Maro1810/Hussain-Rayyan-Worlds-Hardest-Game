@@ -21,7 +21,7 @@ public class Coin extends Entity {
     private Rectangle hitbox;
 
     public Coin(int x, int y, int vx, int vy, int radius) {
-        super(false, true, false, false, x, y);
+        super(false, true, false, false, false, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;

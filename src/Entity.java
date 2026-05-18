@@ -13,12 +13,14 @@ public abstract class Entity implements Serializable {
     protected boolean collectable;
     protected boolean player;
     protected boolean wall;
+    protected boolean button;
     protected int startX;
     protected int startY;
 
-    public Entity(boolean kills, boolean collectable, boolean player, boolean wall, int x, int y) {
+    public Entity(boolean kills, boolean collectable, boolean player, boolean wall, boolean button, int x, int y) {
         this.kills = kills;
         this.collectable = collectable;
+        this.button = button;
         this.player = player;
         this.wall = wall;
         this.startX = x;

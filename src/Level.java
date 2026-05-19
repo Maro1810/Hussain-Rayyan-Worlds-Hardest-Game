@@ -58,11 +58,9 @@ public class Level {
 
         Level level = new Level("Hi");
 
-        level.getEntities().addAll(entities);
+        level.addEntities(entities);
 
         level.save();
-
-        // Level.load("src/levels/Hi.json");
     }
 
     public void save() {
@@ -84,6 +82,14 @@ public class Level {
 
     public List<Entity> getEntities() {
         return entities;
+    }
+
+    public void addEntity(Entity e) {
+        entities.add(e);
+    }
+
+    public void addEntities(List<Entity> e) {
+        entities.addAll(e);
     }
 
     public static Level load(String path) throws FileNotFoundException {

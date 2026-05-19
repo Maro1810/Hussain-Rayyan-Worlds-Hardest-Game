@@ -8,12 +8,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -29,9 +25,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> entities = new ArrayList<>();
 
-	ArrayList<Entity> deserializedEntities = new ArrayList<>();
-
-	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
+	SpatialHasher hasher = new SpatialHasher(entities, 1000);
 
 	Level level = Level.load("src/levels/Hi.json");
 
@@ -68,18 +62,18 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		menu.setVisible(true);
 
-		deserializedEntities = (ArrayList<Entity>) level.getEntities();
+		entities = (ArrayList<Entity>) level.getEntities();
 
-		for (int i = 0; i < deserializedEntities.size(); i++) {
-			if (deserializedEntities.get(i) instanceof Player) {
-				p = (Player) deserializedEntities.get(i);
-				deserializedEntities.set(i, p);
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities.get(i) instanceof Player) {
+				p = (Player) entities.get(i);
+				entities.set(i, p);
 			}
-			deserializedEntities.get(i).fetchImage();
-			deserializedEntities.get(i).setAffineTransform();
+			entities.get(i).fetchImage();
+			entities.get(i).setAffineTransform();
 		}
 
-		hasher.setEntities(deserializedEntities);
+		hasher.setEntities(entities);
 	}
 	
 	@Override
@@ -104,37 +98,37 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	public void reset() {
 		Player p = null;
-		for (Entity e : deserializedEntities) {
+		for (Entity e : entities) {
 			if(e instanceof Player ) {
 				p = (Player) e;
 				if(p.isDead()) {
-					for (Entity g : deserializedEntities) {
+					for (Entity g : entities) {
 						g.reset();
 					}
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(deserializedEntities);
+			hasher.setEntities(entities);
 		}
 	}
 	public void win() {
 		Player p = null;
-		for (Entity e : deserializedEntities) {
+		for (Entity e : entities) {
 			if(e instanceof Player ) {
 				p = (Player) e;
 				if(p.winning() && coins <= 0) {
-					for (Entity g : deserializedEntities) {
+					for (Entity g : entities) {
 						g.reset();
 					}
 					System.out.println("You win :)");
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(deserializedEntities);
+			hasher.setEntities(entities);
 		}
 	}
 	public void updateCoins() {
-		for (Entity e : deserializedEntities) {
+		for (Entity e : entities) {
 			if(e instanceof Coin ) {
 				Coin c = (Coin) e;
 				if(!c.isCollected()) {
@@ -158,7 +152,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVx(3);
 		}
 
-		if (e.getKeyCode() == 49) {
+		if (e.getKeyCode() == 39) {
 			try {
 				bg.setBackground(1);
 			} catch (InvalidBackgroundException e1) {
@@ -167,7 +161,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 
-		if (e.getKeyCode() == 48) {
+		if (e.getKeyCode() == 37) {
 			try {
 				bg.setBackground(0);
 			} catch (InvalidBackgroundException e1) {
@@ -176,28 +170,33 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 
-		if (e.getKeyCode() == 80) {
-			for (Entity en : deserializedEntities) {
-				en.setVx(0);
-				en.setVy(0);
-			}
-		}
+		// if (e.getKeyCode() == 80) {
+		// 	for (Entity en : entities) {
+		// 		en.setVx(0);
+		// 		en.setVy(0);
+		// 	}
+		// }
 
 		if (e.getKeyCode() == 82) {
-			for (Entity en : deserializedEntities) {
+			for (Entity en : entities) {
 				en.reset();
 			}
 		}
-		if(e.getKeyCode() == 97) {
+
+		if (e.getKeyCode() == 77) {
+			level.save();
+		}
+
+		if(e.getKeyCode() == 49) {
 			objType = 0; // Ball
 		}
-		if(e.getKeyCode() == 98) {
+		if(e.getKeyCode() == 50) {
 			objType = 1; // Coin
 		}
-		if(e.getKeyCode() == 99) {
+		if(e.getKeyCode() == 51) {
 			objType = 2; // Wall
 		}
-		if(e.getKeyCode() == 100) {
+		if(e.getKeyCode() == 52) {
 			objType = 3; // SafeZone
 		}
 	}
@@ -227,29 +226,27 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		// if (e.getButton() == MouseEvent.BUTTON1) {
-		// 	if(objType == 0) {
-		// 		deserializedEntities.add(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
-		// 	}
-		// 	if(objType == 1) {
-		// 		deserializedEntities.add(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
-		// 	}
-		// 	if(objType == 2) {
-		// 		deserializedEntities.add(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
-		// 	}
-		// 	if(objType == 3) {
-		// 		deserializedEntities.add(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
-		// 	}
-		// }
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			if (objType == 0) {
+				level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+			}
+			if (objType == 1) {
+				level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
+			}
+			if (objType == 2) {
+				level.addEntity(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
+			}
+			if (objType == 3) {
+				level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
+			}
+		}
 
 		// if (e.getButton() == MouseEvent.BUTTON3) {
-		// 	deserializedEntities.remove(deserializedEntities.size()-1);
+		// 	entities.remove(entities.size()-1);
 		// }
 		if (e.getButton() == MouseEvent.BUTTON1) {}
 		
 	}
-
-	// public void remove()
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -275,4 +272,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 
+}
+
+enum Mode {
+	EDITOR,
+	PLAYING
 }

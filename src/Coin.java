@@ -16,12 +16,12 @@ public class Coin extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image coin;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
     public Coin(int x, int y, int vx, int vy, int radius) {
-        super(false, true, false, false, x, y);
+        super(EntityType.COIN, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -42,8 +42,7 @@ public class Coin extends Entity {
     
     @Override
     public void collect() {
-    		setPosition(10000,100000);
-    		
+    	setPosition(10000,100000);		
     }
 
     @Override
@@ -71,7 +70,7 @@ public class Coin extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player && !e.kills) {
+        if (hitbox.intersects(e.getHitbox()) && (e.type == EntityType.BARRIER || e.type == EntityType.SAFE_ZONE)) {
             vx = -vx;
             vy = -vy;
 
@@ -79,7 +78,7 @@ public class Coin extends Entity {
             // e.setVy(-e.getVy());
         }
 
-        if (hitbox.intersects(e.getHitbox()) && e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
             e.collision(this);
             collected = true;
         }
@@ -154,7 +153,12 @@ public class Coin extends Entity {
         coin = getImage("/imgs/" + "Coin.png");
     }
     public boolean isCollected() {
-    		return collected;
+    	return collected;
+    }
+
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
     }
 
 }

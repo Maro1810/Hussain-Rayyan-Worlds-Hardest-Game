@@ -15,12 +15,12 @@ public class Ball extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image ball;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
-        super(true, false, false, false, x, y);
+        super(EntityType.BALL, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -64,7 +64,7 @@ public class Ball extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type != EntityType.PLAYER && e.type != EntityType.COIN) {
 
             if (Math.signum(vx) != Math.signum(e.getVx()) || Math.signum(vy) != Math.signum(e.getVy())) {
                 vx = -vx;
@@ -82,7 +82,7 @@ public class Ball extends Entity {
             }
         }
 
-        if (hitbox.intersects(e.getHitbox()) && e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
             e.collision(this);
         }
     }
@@ -156,10 +156,9 @@ public class Ball extends Entity {
         ball = getImage("/imgs/" + "Ball.png");
     }
 
-	@Override
-	public void collect() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
+    }
 
 }

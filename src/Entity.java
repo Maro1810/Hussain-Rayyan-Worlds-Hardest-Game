@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.io.Serializable;
 import java.net.URL;
 
@@ -9,18 +10,12 @@ public abstract class Entity implements Serializable {
 
     public static final long serialVersionUID = 1L;
 
-    protected boolean kills;
-    protected boolean collectable;
-    protected boolean player;
-    protected boolean wall;
+    protected EntityType type;
     protected int startX;
     protected int startY;
 
-    public Entity(boolean kills, boolean collectable, boolean player, boolean wall, int x, int y) {
-        this.kills = kills;
-        this.collectable = collectable;
-        this.player = player;
-        this.wall = wall;
+    public Entity(EntityType type, int x, int y) {
+        this.type = type;
         this.startX = x;
         this.startY = y;
     }
@@ -70,5 +65,16 @@ public abstract class Entity implements Serializable {
 
     public abstract void fetchImage();
 
-	public abstract void collect();
+    public abstract void setAffineTransform();
+
+	public void collect() {}
+}
+
+enum EntityType {
+    PLAYER, 
+    BALL, 
+    COIN, 
+    SAFE_ZONE,
+    BARRIER, 
+    BUTTON
 }

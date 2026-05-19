@@ -10,7 +10,7 @@ public class Player extends Entity {
 
 	//Must declare this transient since Image is not Serializable
 	private transient Image square;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 	
 	private int x, y;//position of the object
 	private int vx, vy;						//movement variables
@@ -23,7 +23,7 @@ public class Player extends Entity {
 
 	//change to scale image
 	public Player() {
-		super(false, false, true, false, 100, 100);
+		super(EntityType.PLAYER, 100, 100);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;
@@ -93,35 +93,30 @@ public class Player extends Entity {
 
 	@Override
 	public void collision(Entity e) {
-		if (hitbox.intersects(e.getHitbox()) && e.kills) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BALL) {
 			dead = true;
 		}
 
-		if (hitbox.intersects(e.getHitbox()) && e.collectable) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.COIN) {
 			e.collect();
 
 		}
-		if (hitbox.intersects(e.getHitbox()) && e.wall) {
-			Rectangle overlap = hitbox.intersection(e.getHitbox());
-			int prevY = y;
-			y -= vy;
-			hitbox.setLocation(x,y);
-			if(hitbox.intersects(e.getHitbox())) {
-				y = prevY;
-				hitbox.setLocation(x,y);
-				if(hitbox.getX()< e.getHitbox().getX()) {
-					x -= overlap.width;
-				}else {
-					x += overlap.width;
-				}
-				vx = 0;
-			}else {
-				if(hitbox.getY() < e.getHitbox().getY()) {
-					y -= overlap.height;
-				}else {
-					y += overlap.height;
-				}
-				vy = 0;
+		hitbox.y += vy;
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
+			if(vy > 0) {
+				y =  (int) (e.getY() - hitbox.getHeight());
+			}else if ( vy < 0) {
+				y = (int) (e.getY() + e.getHitbox().getHeight());
+			}
+			vy = 0;
+			hitbox.setLocation(x, y);
+		}
+		hitbox.x += vx;
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
+			if(vx > 0) {
+				x =  (int) (e.getX() - hitbox.getWidth());
+			}else if ( vx < 0) {
+				x = (int) (e.getX() + e.getHitbox().getWidth());
 			}
 			hitbox.setLocation(x, y);
 		}
@@ -190,14 +185,14 @@ public class Player extends Entity {
 		square = getImage("/imgs/" + "Player.png");
 	}
 
-	@Override
-	public void collect() {
-		// TODO Auto-generated method stub
-		
-	}
 	public boolean winning() {
 		return winning;
 	}
+
+	@Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
+    }
 
 
 }

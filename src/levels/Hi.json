@@ -1,22 +1,40 @@
 {
   "entities": [
     {
-      "x": 0,
-      "y": 0,
-      "vx": 10,
-      "vy": 10,
-      "radius": 10,
-      "scaleWidth": 2.2222222222222223,
-      "scaleHeight": 2.2222222222222223,
+      "x": 300,
+      "y": 1,
+      "vx": 1,
+      "vy": 0,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
       "hitbox": {
-        "x": 0,
-        "y": 0,
-        "width": 20,
-        "height": 20
+        "x": 300,
+        "y": 1,
+        "width": 30,
+        "height": 30
       },
       "type": "BALL",
-      "startX": 0,
-      "startY": 0
+      "startX": 300,
+      "startY": 1
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "vx": 10,
+      "vy": 0,
+      "radius": 20,
+      "scaleWidth": 4.444444444444445,
+      "scaleHeight": 4.444444444444445,
+      "hitbox": {
+        "x": 20,
+        "y": 1,
+        "width": 40,
+        "height": 40
+      },
+      "type": "BALL",
+      "startX": 20,
+      "startY": 1
     },
     {
       "x": 400,
@@ -93,6 +111,26 @@
       "type": "BARRIER",
       "startX": 500,
       "startY": 500
+    },
+    {
+      "x": 700,
+      "y": 0,
+      "vx": 0,
+      "vy": 0,
+      "xscale": 50,
+      "yscale": 50,
+      "end": true,
+      "scaleWidth": 6.0,
+      "scaleHeight": 6.0,
+      "hitbox": {
+        "x": 700,
+        "y": 0,
+        "width": 90,
+        "height": 90
+      },
+      "type": "SAFE_ZONE",
+      "startX": 700,
+      "startY": 0
     },
     {
       "x": 100,

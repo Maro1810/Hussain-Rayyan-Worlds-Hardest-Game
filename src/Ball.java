@@ -64,7 +64,7 @@ public class Ball extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && e.type != EntityType.PLAYER && e.type != EntityType.COIN && e.type != EntityType.SAFE_ZONE) {
+        if (hitbox.intersects(e.getHitbox()) && e.type != EntityType.PLAYER && e.type != EntityType.COIN) {
 
             if (Math.signum(vx) != Math.signum(e.getVx()) || Math.signum(vy) != Math.signum(e.getVy())) {
                 vx = -vx;

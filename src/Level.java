@@ -35,18 +35,25 @@ public class Level {
 
     public static void main(String[] args) throws IOException {
         ArrayList<Entity> entities = new ArrayList<>();
-        entities.add(new Ball(0, 0, 10, 10 ,10));
         
-        Player player = new Player();
+        Ball ball1 = new Ball(300, 1, 1, 0, 15);
+        Ball ball2 = new Ball(20, 1, 10, 0, 20);
+        Ball ball3 = new Ball(100, 1, 0, 10, 20);
         Coin c1 = new Coin(400, 400, 0, 0, 20);
         Coin c2 = new Coin(50, 50, 0, 2, 20);
         Barrier b = new Barrier(0,500,0,0,200, 5);
         Barrier b2 = new Barrier(500,500,0,0, 72, 200);
+        SafeZone s = new SafeZone(700,0,0,0,50,50, true);
+        Player player = new Player();
 
+        entities.add(ball1);
+        entities.add(ball2);
+        // entities.add(ball3);
         entities.add(c1);
         entities.add(c2);
         entities.add(b);
         entities.add(b2);
+        entities.add(s);
         entities.add(player);
 
         Level level = new Level("Hi");

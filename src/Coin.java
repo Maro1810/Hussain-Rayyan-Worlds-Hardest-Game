@@ -70,7 +70,7 @@ public class Coin extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
+        if (hitbox.intersects(e.getHitbox()) && (e.type == EntityType.BARRIER || e.type == EntityType.SAFE_ZONE)) {
             vx = -vx;
             vy = -vy;
 

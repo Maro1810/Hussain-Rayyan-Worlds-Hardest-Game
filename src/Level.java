@@ -93,7 +93,7 @@ public class Level {
         entities.addAll(e);
     }
 
-    public static String levelNameGenerator() {
+    public static String generateName() {
         String name = "myLevel_";
 
         int num = 1;

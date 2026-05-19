@@ -101,7 +101,7 @@ public class Player extends Entity {
 			e.collect();
 
 		}
-		hitbox.y += vy;
+		
 		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
 			if(vy > 0) {
 				y =  (int) (e.getY() - hitbox.getHeight());
@@ -111,7 +111,7 @@ public class Player extends Entity {
 			vy = 0;
 			hitbox.setLocation(x, y);
 		}
-		hitbox.x += vx;
+		
 		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
 			if(vx > 0) {
 				x =  (int) (e.getX() - hitbox.getWidth());

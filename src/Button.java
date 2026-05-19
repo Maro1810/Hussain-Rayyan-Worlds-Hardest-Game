@@ -6,8 +6,8 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Button extends Entity{
-    private Image button; 	
-	private AffineTransform tx;
+    private transient Image button; 	
+	private transient AffineTransform tx;
 
 	int width, height;
 	int x, y;						//position of the object				//movement variables
@@ -78,9 +78,8 @@ public class Button extends Entity{
         // TODO Auto-generated method stub
     }
 
-
     @Override
-    public void collect() {
-        // TODO Auto-generated method stub
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
     }
 }

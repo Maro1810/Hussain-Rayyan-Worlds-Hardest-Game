@@ -10,7 +10,7 @@ public class Player extends Entity {
 
 	//Must declare this transient since Image is not Serializable
 	private transient Image square;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 	
 	private int x, y;						//position of the object
 	private int vx, vy;						//movement variables
@@ -186,14 +186,14 @@ public class Player extends Entity {
 		square = getImage("/imgs/" + "Player.png");
 	}
 
-	@Override
-	public void collect() {
-		// TODO Auto-generated method stub
-		
-	}
 	public boolean winning() {
 		return winning;
 	}
+
+	@Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
+    }
 
 
 }

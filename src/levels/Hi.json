@@ -1,0 +1,118 @@
+{
+  "entities": [
+    {
+      "x": 0,
+      "y": 0,
+      "vx": 10,
+      "vy": 10,
+      "radius": 10,
+      "scaleWidth": 2.2222222222222223,
+      "scaleHeight": 2.2222222222222223,
+      "hitbox": {
+        "x": 0,
+        "y": 0,
+        "width": 20,
+        "height": 20
+      },
+      "type": "BALL",
+      "startX": 0,
+      "startY": 0
+    },
+    {
+      "x": 400,
+      "y": 400,
+      "vx": 0,
+      "vy": 0,
+      "radius": 20,
+      "collected": false,
+      "scaleWidth": 4.428571428571429,
+      "scaleHeight": 4.444444444444445,
+      "hitbox": {
+        "x": 400,
+        "y": 400,
+        "width": 39,
+        "height": 40
+      },
+      "type": "COIN",
+      "startX": 400,
+      "startY": 400
+    },
+    {
+      "x": 50,
+      "y": 50,
+      "vx": 0,
+      "vy": 2,
+      "radius": 20,
+      "collected": false,
+      "scaleWidth": 4.428571428571429,
+      "scaleHeight": 4.444444444444445,
+      "hitbox": {
+        "x": 50,
+        "y": 50,
+        "width": 39,
+        "height": 40
+      },
+      "type": "COIN",
+      "startX": 50,
+      "startY": 50
+    },
+    {
+      "x": 0,
+      "y": 500,
+      "vx": 0,
+      "vy": 0,
+      "xlength": 200,
+      "ylength": 5,
+      "scaleWidth": 11.0,
+      "scaleHeight": 1.0,
+      "hitbox": {
+        "x": 0,
+        "y": 500,
+        "width": 396,
+        "height": 9
+      },
+      "type": "BARRIER",
+      "startX": 0,
+      "startY": 500
+    },
+    {
+      "x": 500,
+      "y": 500,
+      "vx": 0,
+      "vy": 0,
+      "xlength": 72,
+      "ylength": 200,
+      "scaleWidth": 4.0,
+      "scaleHeight": 44.0,
+      "hitbox": {
+        "x": 500,
+        "y": 500,
+        "width": 144,
+        "height": 396
+      },
+      "type": "BARRIER",
+      "startX": 500,
+      "startY": 500
+    },
+    {
+      "x": 100,
+      "y": 100,
+      "vx": 0,
+      "vy": 0,
+      "scaleWidth": 4.5,
+      "scaleHeight": 4.5,
+      "dead": false,
+      "winning": false,
+      "hitbox": {
+        "x": 100,
+        "y": 100,
+        "width": 40,
+        "height": 40
+      },
+      "type": "PLAYER",
+      "startX": 100,
+      "startY": 100
+    }
+  ],
+  "name": "Hi"
+}

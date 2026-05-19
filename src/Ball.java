@@ -15,7 +15,7 @@ public class Ball extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image ball;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
@@ -156,10 +156,9 @@ public class Ball extends Entity {
         ball = getImage("/imgs/" + "Ball.png");
     }
 
-	@Override
-	public void collect() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
+    }
 
 }

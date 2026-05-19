@@ -15,7 +15,7 @@ public class Barrier extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image barrier;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
@@ -38,11 +38,6 @@ public class Barrier extends Entity {
         tx = AffineTransform.getTranslateInstance(0, 0);
 
         init(x, y);
-    }
-    
-    @Override
-    public void collect() {
-    	
     }
 
     @Override
@@ -142,6 +137,11 @@ public class Barrier extends Entity {
     @Override
     public void fetchImage() {
         barrier = getImage("/imgs/" + "Border.png");
+    }
+
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
     }
 
 }

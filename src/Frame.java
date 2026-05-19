@@ -33,6 +33,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	SpatialHasher hasher = new SpatialHasher(deserializedEntities, 1000);
 
+	Level level = Level.load("src/levels/Hi.json");
+
 	// Button play = new Button("/imgs/PlayButton.png", 400, 450);
 
 	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
@@ -87,19 +89,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         entities.add(b2);
         entities.add(s);
         entities.add(player);
-		
 
-        FileOutputStream fileOut = new FileOutputStream(new File("src/example.txt"));
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(entities);
-        out.close();
-
-        FileInputStream fileIn = new FileInputStream(new File("src/example.txt"));
-        ObjectInputStream in = new ObjectInputStream(fileIn);
-
-		deserializedEntities = (ArrayList<Entity>) in.readObject();
-
-        in.close();
+		deserializedEntities = (ArrayList<Entity>) level.getEntities();
 
 		for (int i = 0; i < deserializedEntities.size(); i++) {
 			if (deserializedEntities.get(i) instanceof Player) {
@@ -107,6 +98,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				deserializedEntities.set(i, p);
 			}
 			deserializedEntities.get(i).fetchImage();
+			deserializedEntities.get(i).setAffineTransform();
 		}
 
 		hasher.setEntities(deserializedEntities);
@@ -120,6 +112,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		bg.paint(g);
 
 		// play.paint(g);
+
+		level.paint(g);
 
 		if (bg.getScreen() == 1) {
 			hasher.update();

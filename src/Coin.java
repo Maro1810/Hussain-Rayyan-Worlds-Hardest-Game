@@ -16,7 +16,7 @@ public class Coin extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image coin;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
@@ -42,8 +42,7 @@ public class Coin extends Entity {
     
     @Override
     public void collect() {
-    		setPosition(10000,100000);
-    		
+    	setPosition(10000,100000);		
     }
 
     @Override
@@ -154,7 +153,12 @@ public class Coin extends Entity {
         coin = getImage("/imgs/" + "Coin.png");
     }
     public boolean isCollected() {
-    		return collected;
+    	return collected;
+    }
+
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
     }
 
 }

@@ -16,7 +16,7 @@ public class SafeZone extends Entity {
 
     //Must declare this as transient since Image is not Serializable
     private transient Image safeZone;	
-	private AffineTransform tx;
+	private transient AffineTransform tx;
 
     private Rectangle hitbox;
 
@@ -40,11 +40,6 @@ public class SafeZone extends Entity {
         tx = AffineTransform.getTranslateInstance(0, 0);
 
         init(x, y);
-    }
-    
-    @Override
-    public void collect() {
-    	
     }
 
     @Override
@@ -150,5 +145,10 @@ public class SafeZone extends Entity {
 	public boolean isEnd() {
 		return true;
 	}
+
+    @Override
+    public void setAffineTransform() {
+        tx = AffineTransform.getTranslateInstance(0, 0);
+    }
 
 }

@@ -22,7 +22,7 @@ public class Player extends Entity {
 
 	//change to scale image
 	public Player() {
-		super(false, false, true, false, false, 100, 100);
+		super(EntityType.PLAYER, 100, 100);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
 
 		x = 100;
@@ -93,16 +93,16 @@ public class Player extends Entity {
 
 	@Override
 	public void collision(Entity e) {
-		if (hitbox.intersects(e.getHitbox()) && e.kills) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BALL) {
 			dead = true;
 		}
 
-		if (hitbox.intersects(e.getHitbox()) && e.collectable) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.COIN) {
 			e.collect();
 
 		}
 		hitbox.y += vy;
-		if (hitbox.intersects(e.getHitbox()) && e.wall) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
 			if(vy > 0) {
 				y =  (int) (e.getY() - hitbox.getHeight());
 			}else if ( vy < 0) {
@@ -112,7 +112,7 @@ public class Player extends Entity {
 			hitbox.setLocation(x, y);
 		}
 		hitbox.x += vx;
-		if (hitbox.intersects(e.getHitbox()) && e.wall) {
+		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
 			if(vx > 0) {
 				x =  (int) (e.getX() - hitbox.getWidth());
 			}else if ( vx < 0) {

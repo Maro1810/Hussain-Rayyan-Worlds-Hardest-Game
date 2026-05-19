@@ -21,7 +21,7 @@ public class SafeZone extends Entity {
     private Rectangle hitbox;
 
     public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale, boolean end) {
-        super(false, false, false, false, false, x, y);
+        super(EntityType.SAFE_ZONE, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -72,7 +72,7 @@ public class SafeZone extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
             e.collision(this);
         }
     }

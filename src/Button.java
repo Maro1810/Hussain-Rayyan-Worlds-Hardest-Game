@@ -15,7 +15,7 @@ public class Button extends Entity{
 	double scaleHeight = 5; 		//change to scale image
 
 	public Button(String path, int x, int y) {
-		super(false, false, false, false, true, x, y);
+		super(EntityType.BUTTON, x, y);
 		width = 1000;
 		height = 1000;
 

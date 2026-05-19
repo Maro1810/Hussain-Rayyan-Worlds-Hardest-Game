@@ -21,7 +21,7 @@ public class Coin extends Entity {
     private Rectangle hitbox;
 
     public Coin(int x, int y, int vx, int vy, int radius) {
-        super(false, true, false, false, false, x, y);
+        super(EntityType.COIN, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -71,7 +71,7 @@ public class Coin extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && !e.collectable && !e.player && !e.kills) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
             vx = -vx;
             vy = -vy;
 
@@ -79,7 +79,7 @@ public class Coin extends Entity {
             // e.setVy(-e.getVy());
         }
 
-        if (hitbox.intersects(e.getHitbox()) && e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
             e.collision(this);
             collected = true;
         }

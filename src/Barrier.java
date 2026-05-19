@@ -20,7 +20,7 @@ public class Barrier extends Entity {
     private Rectangle hitbox;
 
     public Barrier(int x, int y, int vx, int vy, int xlength, int ylength) {
-        super(false, false, false, true, false, x, y);
+        super(EntityType.BARRIER, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -70,7 +70,7 @@ public class Barrier extends Entity {
 
     @Override
     public void collision(Entity e) {
-        if (hitbox.intersects(e.getHitbox()) && e.player) {
+        if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
             e.collision(this);
         }
     }

@@ -9,20 +9,12 @@ public abstract class Entity implements Serializable {
 
     public static final long serialVersionUID = 1L;
 
-    protected boolean kills;
-    protected boolean collectable;
-    protected boolean player;
-    protected boolean wall;
-    protected boolean button;
+    protected EntityType type;
     protected int startX;
     protected int startY;
 
-    public Entity(boolean kills, boolean collectable, boolean player, boolean wall, boolean button, int x, int y) {
-        this.kills = kills;
-        this.collectable = collectable;
-        this.button = button;
-        this.player = player;
-        this.wall = wall;
+    public Entity(EntityType type, int x, int y) {
+        this.type = type;
         this.startX = x;
         this.startY = y;
     }
@@ -73,4 +65,13 @@ public abstract class Entity implements Serializable {
     public abstract void fetchImage();
 
 	public abstract void collect();
+}
+
+enum EntityType {
+    PLAYER, 
+    BALL, 
+    COIN, 
+    SAFE_ZONE,
+    BARRIER, 
+    BUTTON
 }

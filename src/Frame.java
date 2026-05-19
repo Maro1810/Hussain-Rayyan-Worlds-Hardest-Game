@@ -36,7 +36,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	// Button play = new Button("/imgs/PlayButton.png", 400, 450);
 
 	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
-	JButton play = new JButton("Play");
+	// JButton play = new JButton("Play");
 	
 	int coins = 0;
 	int objType = 0;
@@ -62,7 +62,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		bg = new BackGround();
 
 		
-		menu.add(play);
+		// menu.add(play);
 		// play.setBounds(400, 450, 50, 50);
 
 		menu.setVisible(true);
@@ -117,7 +117,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		super.paintComponent(g);
 		g.setColor(Color.RED);
 
-		// bg.paint(g);
+		bg.paint(g);
 
 		// play.paint(g);
 

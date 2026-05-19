@@ -12,11 +12,12 @@ public class Player extends Entity {
 	private transient Image square;	
 	private transient AffineTransform tx;
 	
-	private int x, y;						//position of the object
+	private int x, y;//position of the object
 	private int vx, vy;						//movement variables
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
 	private boolean dead, winning;
+	// private int prevX, prevY;
 
 	private Rectangle hitbox;
 
@@ -49,7 +50,6 @@ public class Player extends Entity {
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		
 		this.moveX();
 		this.moveY();
 
@@ -118,7 +118,6 @@ public class Player extends Entity {
 			}else if ( vx < 0) {
 				x = (int) (e.getX() + e.getHitbox().getWidth());
 			}
-			vx = 0;
 			hitbox.setLocation(x, y);
 		}
 //		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {

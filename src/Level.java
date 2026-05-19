@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -90,6 +91,28 @@ public class Level {
 
     public void addEntities(List<Entity> e) {
         entities.addAll(e);
+    }
+
+    public static String levelNameGenerator() {
+        String name = "myLevel_";
+
+        int num = 1;
+
+        File file = new File("src/levels");
+
+        String[] names = file.list();
+
+        for (int i = 0; i < names.length; i++) {
+            int index = names[i].indexOf(".json");
+
+            names[i] = names[i].substring(0, index);
+        }
+
+        while (Arrays.asList(names).contains(name+num)) {
+            num++;
+        }
+
+        return name+num;
     }
 
     public static Level load(String path) throws FileNotFoundException {

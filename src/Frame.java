@@ -62,18 +62,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		menu.setVisible(true);
 
-		entities = (ArrayList<Entity>) level.getEntities();
-
-		for (int i = 0; i < entities.size(); i++) {
-			if (entities.get(i) instanceof Player) {
-				p = (Player) entities.get(i);
-				entities.set(i, p);
-			}
-			entities.get(i).fetchImage();
-			entities.get(i).setAffineTransform();
-		}
-
-		hasher.setEntities(entities);
+		load();
 	}
 	
 	@Override
@@ -108,7 +97,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(entities);
+			// hasher.setEntities(entities);
 		}
 	}
 	public void win() {
@@ -124,9 +113,25 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(entities);
+			// hasher.setEntities(entities);
 		}
 	}
+
+	public void load() {
+		entities = (ArrayList<Entity>) level.getEntities();
+
+		for (int i = 0; i < entities.size(); i++) {
+			if (entities.get(i) instanceof Player) {
+				p = (Player) entities.get(i);
+				entities.set(i, p);
+			}
+			entities.get(i).fetchImage();
+			entities.get(i).setAffineTransform();
+		}
+
+		hasher.setEntities(entities);
+	}
+
 	public void updateCoins() {
 		for (Entity e : entities) {
 			if(e instanceof Coin ) {
@@ -187,6 +192,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			level.save();
 		}
 
+		if (e.getKeyCode() == 78) {
+			level = new Level(Level.generateName());
+			load();
+		}
+
 		if(e.getKeyCode() == 49) {
 			objType = 0; // Ball
 		}
@@ -198,6 +208,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 		if(e.getKeyCode() == 52) {
 			objType = 3; // SafeZone
+		}
+
+		if (e.getKeyCode() == 53) {
+			objType = 4; //Player
 		}
 	}
 	@Override
@@ -239,6 +253,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			if (objType == 3) {
 				level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
 			}
+			if (objType == 4) {
+				if (!hasPlayer()) {
+					p = new Player(e.getX()-20, e.getY()-20);
+					level.addEntity(p);
+				}
+			}
 		}
 
 		// if (e.getButton() == MouseEvent.BUTTON3) {
@@ -246,6 +266,14 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		// }
 		if (e.getButton() == MouseEvent.BUTTON1) {}
 		
+	}
+
+	public boolean hasPlayer() {
+		for (Entity e : entities) {
+			if (e instanceof Player)
+				return true;
+		}
+		return false;
 	}
 
 	@Override

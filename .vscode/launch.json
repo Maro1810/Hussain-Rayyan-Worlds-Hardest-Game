@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LevelEditor",
+            "request": "launch",
+            "mainClass": "LevelEditor",
+            "projectName": "Hussain-Rayyan-Worlds-Hardest-Game"
+        },
+        {
+            "type": "java",
             "name": "Level",
             "request": "launch",
             "mainClass": "Level",

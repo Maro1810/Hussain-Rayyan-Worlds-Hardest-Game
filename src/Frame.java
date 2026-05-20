@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -29,7 +31,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	Level level = Level.load("src/levels/Hi.json");
 
-	// Button play = new Button("/imgs/PlayButton.png", 400, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 400, 450);
+
+	Rectangle editor_hitbox = new Rectangle(400, 450, 90, 90);
 
 	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
 	// JButton play = new JButton("Play");
@@ -55,7 +59,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		Timer t = new Timer(16, this);
 		t.start();
 		
-		bg = new BackGround();
+		bg = new BackGround(0);
 		
 		// menu.add(play);
 		// play.setBounds(400, 450, 50, 50);
@@ -72,7 +76,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		bg.paint(g);
 
-		// play.paint(g);
+		editor.paint(g);
+
+		g.drawRect(400, 450, 90, 90);
 
 		if (bg.getScreen() == 1) {
 			hasher.update();
@@ -175,13 +181,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 
-		// if (e.getKeyCode() == 80) {
-		// 	for (Entity en : entities) {
-		// 		en.setVx(0);
-		// 		en.setVy(0);
-		// 	}
-		// }
-
 		if (e.getKeyCode() == 82) {
 			for (Entity en : entities) {
 				en.reset();
@@ -234,29 +233,44 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		// if (e.getButton() == MouseEvent.BUTTON1) {
+		// 	if (objType == 0) {
+		// 		level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+		// 	}
+		// 	if (objType == 1) {
+		// 		level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
+		// 	}
+		// 	if (objType == 2) {
+		// 		level.addEntity(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
+		// 	}
+		// 	if (objType == 3) {
+		// 		level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
+		// 	}
+		// 	if (objType == 4) {
+		// 		if (!hasPlayer()) {
+		// 			p = new Player(e.getX()-20, e.getY()-20);
+		// 			level.addEntity(p);
+		// 		}
+		// 	}
+		// }
+
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			if (objType == 0) {
-				level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
-			}
-			if (objType == 1) {
-				level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
-			}
-			if (objType == 2) {
-				level.addEntity(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
-			}
-			if (objType == 3) {
-				level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
-			}
-			if (objType == 4) {
-				if (!hasPlayer()) {
-					p = new Player(e.getX()-20, e.getY()-20);
-					level.addEntity(p);
+			// LevelEditor lvlEditor = new LevelEditor();
+			Point p = e.getPoint();
+
+			if (editor_hitbox.contains(p)) {
+				try {
+					LevelEditor lvlEditor = new LevelEditor();
+				} catch (InvalidBackgroundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}

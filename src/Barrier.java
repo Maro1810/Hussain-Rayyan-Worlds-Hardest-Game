@@ -28,7 +28,7 @@ public class Barrier extends Entity {
 
         //since original image is 9x9, we scale to fit the radius
         scaleWidth = (2 * xlength) / 9; 
-        scaleHeight = 2 * ylength /9;
+        scaleHeight = (2 * ylength) /9;
 
         hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 

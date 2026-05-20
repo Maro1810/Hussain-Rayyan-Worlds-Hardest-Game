@@ -17,18 +17,20 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     
     BackGround bg;
 
-    Barrier barrier = new Barrier(50, 50, 50, 50);
+    Barrier barrier = new Barrier(0, 0, 17, 17);
 
     public LevelEditor() throws InvalidBackgroundException {
         JFrame frame = new JFrame("Level Editor");
 
         bg = new BackGround(1);
 
-        frame.setSize(new Dimension(1000, 750));
+        frame.setSize(new Dimension(1040, 739));
         frame.setBackground(Color.white);
         frame.add(this);
         frame.addMouseListener(this);
         frame.addKeyListener(this);
+
+        System.out.println(frame.getContentPane().getSize());
         
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
@@ -39,10 +41,29 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
         t.start();
     }
 
+    public static void main(String... args) throws InvalidBackgroundException {
+        LevelEditor lv = new LevelEditor();
+    }
+
     @Override
     public void paint(Graphics g) {
         bg.paint(g);
         barrier.paint(g);
+
+        g.setColor(Color.black);
+        drawGridLines(g);
+
+        // g.drawRect(0, 0, 17, 17);
+    }
+
+    public void drawGridLines(Graphics g) {
+        for (int i = 0; i < 37; i++) {
+            g.drawLine(27+i*27, 0, 27+i*27, 800);
+        }
+
+        for (int i = 0; i < 27; i++) {
+            g.drawLine(0, 27+i*27, 2000, 27+i*27);
+        }
     }
 
     @Override

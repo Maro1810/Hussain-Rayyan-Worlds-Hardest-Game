@@ -48,7 +48,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
 		JFrame menu = new JFrame("Main Menu");
-		menu.setSize(new Dimension(1000, 750));
+
+		menu.setSize(new Dimension(1040, 739));
 		menu.setBackground(Color.white);
 		menu.add(this);
 		menu.addMouseListener(this);
@@ -66,6 +67,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		menu.setVisible(true);
 
+		System.out.println(menu.getContentPane().getSize());
 		load();
 	}
 	

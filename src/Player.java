@@ -103,23 +103,42 @@ public class Player extends Entity {
 		}
 		
 		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
-			if(vy > 0) {
-				y =  (int) (e.getY() - hitbox.getHeight());
-			}else if ( vy < 0) {
-				y = (int) (e.getY() + e.getHitbox().getHeight());
+			Rectangle b = e.getHitbox();
+
+			double overlapX = 0;
+
+			if(hitbox.x < b.x) {
+    			overlapX = hitbox.x + hitbox.width - b.x; 
+			} else {
+    			overlapX = b.x + b.width - hitbox.x; 
 			}
-			vy = 0;
-			hitbox.setLocation(x, y);
-		}
-		
-		if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.BARRIER) {
-			if(vx > 0) {
-				x =  (int) (e.getX() - hitbox.getWidth());
-			}else if ( vx < 0) {
-				x = (int) (e.getX() + e.getHitbox().getWidth());
+
+			double overlapY = 0;
+			
+			if(hitbox.y < b.y) {
+    			overlapY = hitbox.y + hitbox.height - b.y; 
+			} else {
+    			overlapY = b.y + b.height - hitbox.y; 
 			}
-			hitbox.setLocation(x, y);
-		}
+
+			if(overlapX < overlapY) {
+    			if(hitbox.x < b.x) {
+        			x -= overlapX; 
+    			} else {
+        			x += overlapX; 
+    			}
+    			vx = 0;
+			} else {
+    			if(hitbox.y < b.y) {
+        			y -= overlapY; 
+    			} else {
+        			y += overlapY; 
+    			}
+    			vy = 0;
+			}
+
+		hitbox.setLocation(x, y);
+	}
 //		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
 //			SafeZone s = (SafeZone) e;
 //			if(s.isEnd()) {

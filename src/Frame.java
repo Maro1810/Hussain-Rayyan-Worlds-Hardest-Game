@@ -97,7 +97,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(entities);
+			// hasher.setEntities(entities);
 		}
 	}
 	public void win() {
@@ -113,7 +113,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 			// hasher.update();
-			hasher.setEntities(entities);
+			// hasher.setEntities(entities);
 		}
 	}
 

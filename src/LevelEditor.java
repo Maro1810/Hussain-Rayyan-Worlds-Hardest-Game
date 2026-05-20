@@ -17,6 +17,8 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     
     BackGround bg;
 
+    Barrier barrier = new Barrier(50, 50, 50, 50);
+
     public LevelEditor() throws InvalidBackgroundException {
         JFrame frame = new JFrame("Level Editor");
 
@@ -40,6 +42,7 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     @Override
     public void paint(Graphics g) {
         bg.paint(g);
+        barrier.paint(g);
     }
 
     @Override

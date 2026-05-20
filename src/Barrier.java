@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 
 public class Barrier extends Entity {
     
-    private int x, y, vx, vy;
+    private int x, y;
     private int xlength, ylength;
 
     private double scaleWidth, scaleHeight;
@@ -19,22 +19,20 @@ public class Barrier extends Entity {
 
     private Rectangle hitbox;
 
-    public Barrier(int x, int y, int vx, int vy, int xlength, int ylength) {
+    public Barrier(int x, int y, int xlength, int ylength) {
         super(EntityType.BARRIER, x, y);
         this.x = x;
         this.y = y;
-        this.vx = vx;
-        this.vy = vy;
         this.xlength = xlength;
         this.ylength = ylength;
 
         //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * xlength) / 36; 
+        scaleWidth = (2 * xlength) / 9; 
         scaleHeight = 2 * ylength /9;
 
-        hitbox = new Rectangle(x, y, (int)(scaleWidth*36), (int)(scaleHeight*9));
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 
-        barrier = getImage("/imgs/" + "Border.png");
+        barrier = getImage("/imgs/" + "Barrier.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
 
         init(x, y);
@@ -47,14 +45,9 @@ public class Barrier extends Entity {
 		
         this.move();
 
-        hitbox.setBounds(x, y, (int)(scaleWidth*36), (int)(scaleHeight*9));
+        hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		
 		init(x,y);
-
-        if (x + (scaleWidth*7) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 980 || y <= 0) {
-            vx = -vx;
-            vy = -vy;
-        }
 
 		g2.drawImage(barrier, tx, null);
 
@@ -81,11 +74,6 @@ public class Barrier extends Entity {
         return hitbox;
     }
 
-    //TODO remove this since it was only used for testing
-    public String toString() {
-        return "Barrier at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
-    }
-
     @Override
     protected void init(double a, double b) {
         tx.setToTranslation(a, b);
@@ -103,40 +91,14 @@ public class Barrier extends Entity {
     }
 
     @Override
-    public void move() {
-        x += vx;
-        y += vy;
-    }
-
-    @Override
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    @Override
-    public void setVy(int vy) {
-        this.vy = vy;
-    }
-
-    @Override
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public int getVx() {
-        return vx;
-    }
-
-    @Override
-    public int getVy() {
-        return vy;
-    }
-
-    @Override
     public void fetchImage() {
-        barrier = getImage("/imgs/" + "Border.png");
+        barrier = getImage("/imgs/" + "Barrier.png");
     }
 
     @Override

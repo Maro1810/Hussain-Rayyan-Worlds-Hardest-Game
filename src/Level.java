@@ -42,8 +42,8 @@ public class Level {
         Ball ball3 = new Ball(100, 1, 0, 10, 20);
         Coin c1 = new Coin(400, 400, 0, 0, 20);
         Coin c2 = new Coin(50, 50, 0, 2, 20);
-        Barrier b = new Barrier(0,500,0,0,200, 5);
-        Barrier b2 = new Barrier(500,500,0,0, 72, 200);
+        Barrier b = new Barrier(0,500,200, 5);
+        Barrier b2 = new Barrier(500,500, 72, 200);
         SafeZone s = new SafeZone(700,0,0,0,50,50, true);
         Player player = new Player();
 

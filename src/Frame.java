@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -29,15 +31,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	SpatialHasher hasher = new SpatialHasher(entities, 1000);
 
-	Level level = Level.load("src/levels/Hi.json");
+	Level level = Level.load("Hi.json");
 
-	Button editor = new Button("/imgs/LvlBuilderButton.png", 500, 450);
-	Button play = new Button("/imgs/PlayButton.png", 350, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450);
+	Button play = new Button("/imgs/PlayButton.png", 380, 450);
 
-	Rectangle editor_hitbox = new Rectangle(500, 450, 90, 90);
-	Rectangle play_hitbox = new Rectangle(350, 450, 90, 90);
+	Rectangle editor_hitbox = new Rectangle(530, 450, 90, 90);
+	Rectangle play_hitbox = new Rectangle(380, 450, 90, 90);
 
 	JFrame menu;
+
+	JComboBox<String> dropdown;
 
 	public static Mode mode = Mode.PLAYING;
 
@@ -55,11 +59,33 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
 		menu = new JFrame("Main Menu");
 
+		ArrayList<String> levelList = new ArrayList<>();
+
+		levelList.add("Select a level");
+
+		addOptions(levelList);
+
+		dropdown = new JComboBox<>(levelList.toArray(new String[0]));
+
+		this.setLayout(null);
+		this.setFocusable(true);
+
+		this.setSize(new Dimension(1040, 739));
+
+		dropdown.setBounds(430, 570, 150, 40);
+
 		menu.setSize(new Dimension(1040, 739));
 		menu.setBackground(Color.white);
 		menu.add(this);
 		menu.addMouseListener(this);
+
+		this.add(dropdown);
+
+		dropdown.addKeyListener(this);
+		this.addKeyListener(this);
 		menu.addKeyListener(this);
+
+		
 		
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -90,6 +116,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			hasher.update();
 
 			level.paint(g);
+			dropdown.setVisible(false);
 		}
 		coins = 0;
 		updateCoins();
@@ -108,10 +135,19 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					}
 				}
 			}
-			// hasher.update();
-			// hasher.setEntities(entities);
 		}
 	}
+
+	public void addOptions(ArrayList<String> levels) {
+		File file = new File("src/levels");
+
+        String[] names = file.list();
+
+        for (int i = 0; i < names.length; i++) {
+			levels.add(names[i]);
+		}
+	}
+
 	public void win() {
 		Player p = null;
 		for (Entity e : entities) {
@@ -124,8 +160,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					System.out.println("You win :)");
 				}
 			}
-			// hasher.update();
-			// hasher.setEntities(entities);
 		}
 	}
 
@@ -135,6 +169,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i) instanceof Player) {
 				p = (Player) entities.get(i);
+
 				entities.set(i, p);
 			}
 			entities.get(i).fetchImage();
@@ -174,15 +209,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				en.reset();
 			}
 		}
-
-		if (e.getKeyCode() == 77) {
-			level.save();
-		}
-
-		if (e.getKeyCode() == 78) {
-			level = new Level(Level.generateName());
-			load();
-		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -215,7 +241,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = e.getPoint();
 
-			if (editor_hitbox.contains(p)) {
+			if (editor_hitbox.contains(p) && bg.getScreen() == 0) {
 				try {
 					LevelEditor lvlEditor = new LevelEditor();
 
@@ -226,10 +252,22 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 
-			if (play_hitbox.contains(p)) {
+			if (play_hitbox.contains(p) && bg.getScreen() == 0) {
 				try {
+					if (dropdown.getSelectedItem().toString().equals("Select a level")) {
+						level = Level.load("Hi.json");
+					}
+					else {
+						level = Level.load(dropdown.getSelectedItem().toString());
+					}
+					load();
+					
 					bg.setBackground(1);
 				} catch (InvalidBackgroundException e1) {
+					e1.printStackTrace();
+				}
+				catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

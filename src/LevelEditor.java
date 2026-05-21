@@ -125,6 +125,14 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     System.out.println("Placed");          
                 }
 			}
+
+            if (objType == 4) {
+                level.addEntity(new Player(e.getX()-10, e.getY()-32));
+            }
+        }
+
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            level.save();
         }
 
     }

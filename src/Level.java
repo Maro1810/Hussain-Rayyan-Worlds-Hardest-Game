@@ -128,7 +128,7 @@ public class Level {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                     .registerTypeAdapter(Entity.class, new EntityDeserializer()).create();
 
-        File file = new File(path);
+        File file = new File("src/levels/" + path);
         
         FileReader reader = new FileReader(file);
 

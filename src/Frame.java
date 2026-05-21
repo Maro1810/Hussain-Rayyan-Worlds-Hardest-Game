@@ -72,15 +72,16 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	@Override
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		g.setColor(Color.RED);
 
 		bg.paint(g);
 
 		editor.paint(g);
 
-		g.drawRect(400, 450, 90, 90);
+		// g.drawRect(400, 450, 90, 90);
 
 		if (bg.getScreen() == 1) {
 			hasher.update();

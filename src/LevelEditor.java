@@ -10,17 +10,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.function.BooleanSupplier;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-public class LevelEditor extends JPanel implements MouseListener, KeyListener, ActionListener{
+public class LevelEditor extends JPanel implements MouseListener, ActionListener{
     
     BackGround bg;
-    int objType = 0;
+    public static int objType = 0;
+
+    Palette palette = new Palette();
 
     Barrier barrier = new Barrier(0, 0, 1, 1);
     Level level;
@@ -34,17 +35,10 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
 
         bg = new BackGround(1);
 
-        // palette.setSize(new Dimension(200, 739));
-        // palette.setBackground(Color.white);
-        // palette.add(this);
-        // palette.addMouseListener(this);
-        // palette.addKeyListener(this);
-
         frame.setSize(new Dimension(1040, 739));
         frame.setBackground(Color.white);
         frame.add(this);
         frame.addMouseListener(this);
-        frame.addKeyListener(this);
  
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +58,9 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
         bg.paint(g);
         barrier.paint(g);
         level.paint(g);
@@ -93,40 +89,6 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        if(e.getKeyCode() == 49) {
-			objType = 0; // Ball
-		}
-		if(e.getKeyCode() == 50) {
-			objType = 1; // Coin
-		}
-		if(e.getKeyCode() == 51) {
-			objType = 2; // Wall
-		}
-		if(e.getKeyCode() == 52) {
-			objType = 3; // SafeZone
-		}
-
-		if (e.getKeyCode() == 53) {
-			objType = 4; //Player
-		}
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
     }
@@ -151,6 +113,7 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
                     double yLength = prompt.getYLength();
 
 				    level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
+                    System.out.println("Placed");
                 }
 
 			}
@@ -164,11 +127,8 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
                     double yLength = prompt.getYLength();
 
                     level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, false));
-                    System.out.println("Placed");
-
-                    
+                    System.out.println("Placed");          
                 }
-				
 			}
         }
 

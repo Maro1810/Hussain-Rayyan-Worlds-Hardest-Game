@@ -4,6 +4,6 @@ public class Constants {
         public static final double[] MAIN_MENU_SCALE = {21.0, 15.0};
 
         public static final double SAFE_ZONE_GRID_SCALE = 13.9;
-        public static final double BARRIER_GRID_SCALE = 17;
+        public static final double BARRIER_GRID_SCALE = 14;
     }
 }

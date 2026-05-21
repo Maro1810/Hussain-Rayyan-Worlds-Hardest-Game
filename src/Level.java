@@ -85,6 +85,15 @@ public class Level {
         return entities;
     }
 
+    public boolean containsEntity(int x, int y) {
+        for (Entity e : entities) {
+            if (e.getX() == x && e.getY() == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addEntity(Entity e) {
         entities.add(e);
     }

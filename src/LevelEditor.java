@@ -25,9 +25,17 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     public LevelEditor() throws InvalidBackgroundException {
         JFrame frame = new JFrame("Level Editor");
 
+        // JFrame palette = new JFrame("Palette");
+
         level = new Level(Level.generateName());
 
         bg = new BackGround(1);
+
+        // palette.setSize(new Dimension(200, 739));
+        // palette.setBackground(Color.white);
+        // palette.add(this);
+        // palette.addMouseListener(this);
+        // palette.addKeyListener(this);
 
         frame.setSize(new Dimension(1040, 739));
         frame.setBackground(Color.white);
@@ -35,9 +43,12 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
         frame.addMouseListener(this);
         frame.addKeyListener(this);
 
-        System.out.println(frame.getContentPane().getSize());
+ 
         
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        // palette.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        // palette.setVisible(true);
 
         frame.setVisible(true);
 
@@ -131,12 +142,19 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
 			if (objType == 2) {
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
-				level.addEntity(new Barrier(coords[0], coords[1], 17, 17));
+                if (!level.containsEntity(coords[0], coords[1])) {
+				    level.addEntity(new Barrier(coords[0], coords[1], 14, 14));
+                }
+                
 			}
 			if (objType == 3) {
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
-				level.addEntity(new SafeZone(coords[0], coords[1], 13.9,13.9, false));
+                if (!level.containsEntity(coords[0], coords[1])) {
+                    level.addEntity(new SafeZone(coords[0], coords[1], 13.9,13.9, false));
+                    System.out.println("Placed");
+                }
+				
 			}
         }
 

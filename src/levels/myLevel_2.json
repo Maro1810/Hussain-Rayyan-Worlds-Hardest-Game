@@ -1,0 +1,276 @@
+{
+  "entities": [
+    {
+      "x": 293,
+      "y": 112,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 293,
+        "y": 112,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 293,
+      "startY": 112
+    },
+    {
+      "x": 664,
+      "y": 252,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 664,
+        "y": 252,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 664,
+      "startY": 252
+    },
+    {
+      "x": 521,
+      "y": 526,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 521,
+        "y": 526,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 521,
+      "startY": 526
+    },
+    {
+      "x": 147,
+      "y": 420,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 147,
+        "y": 420,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 147,
+      "startY": 420
+    },
+    {
+      "x": 451,
+      "y": 294,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 451,
+        "y": 294,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 451,
+      "startY": 294
+    },
+    {
+      "x": 675,
+      "y": 380,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 675,
+        "y": 380,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 675,
+      "startY": 380
+    },
+    {
+      "x": 388,
+      "y": 422,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 388,
+        "y": 422,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 388,
+      "startY": 422
+    },
+    {
+      "x": 252,
+      "y": 544,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 252,
+        "y": 544,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 252,
+      "startY": 544
+    },
+    {
+      "x": 737,
+      "y": 564,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 737,
+        "y": 564,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 737,
+      "startY": 564
+    },
+    {
+      "x": 902,
+      "y": 240,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 902,
+        "y": 240,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 902,
+      "startY": 240
+    },
+    {
+      "x": 545,
+      "y": 71,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 545,
+        "y": 71,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 545,
+      "startY": 71
+    },
+    {
+      "x": 488,
+      "y": 182,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 488,
+        "y": 182,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 488,
+      "startY": 182
+    },
+    {
+      "x": 223,
+      "y": 294,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 223,
+        "y": 294,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 223,
+      "startY": 294
+    },
+    {
+      "x": 252,
+      "y": 367,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 252,
+        "y": 367,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 252,
+      "startY": 367
+    },
+    {
+      "x": 69,
+      "y": 107,
+      "vx": 0,
+      "vy": 0,
+      "scaleWidth": 4.5,
+      "scaleHeight": 4.5,
+      "dead": false,
+      "winning": false,
+      "hitbox": {
+        "x": 69,
+        "y": 107,
+        "width": 40,
+        "height": 40
+      },
+      "type": "PLAYER",
+      "startX": 100,
+      "startY": 100
+    }
+  ],
+  "name": "myLevel_2"
+}

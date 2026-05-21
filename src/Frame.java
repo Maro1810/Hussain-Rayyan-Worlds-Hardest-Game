@@ -29,7 +29,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	ArrayList<Entity> entities = new ArrayList<>();
 
-	SpatialHasher hasher = new SpatialHasher(entities, 1000);
+	SpatialHasher hasher = new SpatialHasher(entities, 100);
 
 	Level level = Level.load("Hi.json");
 

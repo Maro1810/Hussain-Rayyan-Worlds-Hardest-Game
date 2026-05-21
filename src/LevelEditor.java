@@ -17,7 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class LevelEditor extends JPanel implements MouseListener, ActionListener{
-    
+
+    JFrame frame;
+
     BackGround bg;
     public static int objType = 0;
 
@@ -26,7 +28,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
     Level level;
 
     public LevelEditor() throws InvalidBackgroundException {
-        JFrame frame = new JFrame("Level Editor");
+        frame = new JFrame("Level Editor");
 
         Frame.mode = Mode.EDITOR;
 
@@ -62,6 +64,11 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
         g.setColor(Color.black);
         drawGridLines(g);
+
+        if (palette.disposed) {
+            frame.dispose();
+            Frame.mode = Mode.PLAYING;
+        }
 
         // g.drawRect(0, 0, 17, 17);
     }

@@ -1,0 +1,131 @@
+{
+  "entities": [
+    {
+      "x": 573,
+      "y": 362,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 573,
+        "y": 362,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 573,
+      "startY": 362
+    },
+    {
+      "x": 342,
+      "y": 495,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 342,
+        "y": 495,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 342,
+      "startY": 495
+    },
+    {
+      "x": 851,
+      "y": 382,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 851,
+        "y": 382,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 851,
+      "startY": 382
+    },
+    {
+      "x": 475,
+      "y": 203,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 475,
+        "y": 203,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 475,
+      "startY": 203
+    },
+    {
+      "x": 274,
+      "y": 271,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 274,
+        "y": 271,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 274,
+      "startY": 271
+    },
+    {
+      "x": 249,
+      "y": 134,
+      "vx": 0,
+      "vy": 0,
+      "scaleWidth": 4.5,
+      "scaleHeight": 4.5,
+      "dead": false,
+      "winning": false,
+      "hitbox": {
+        "x": 249,
+        "y": 134,
+        "width": 40,
+        "height": 40
+      },
+      "type": "PLAYER",
+      "startX": 100,
+      "startY": 100
+    },
+    {
+      "x": 729,
+      "y": 216,
+      "xLength": 5.0,
+      "yLength": 2.0,
+      "scaleWidth": 5.0,
+      "scaleHeight": 2.0,
+      "hitbox": {
+        "x": 729,
+        "y": 216,
+        "width": 135,
+        "height": 54
+      },
+      "type": "BARRIER",
+      "startX": 729,
+      "startY": 216
+    }
+  ],
+  "name": "myLevel_3"
+}

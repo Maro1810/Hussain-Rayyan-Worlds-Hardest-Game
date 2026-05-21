@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,17 +17,23 @@ import org.w3c.dom.css.Rect;
 
 public class Palette extends JPanel implements MouseListener, ActionListener{
 
+    JFrame palette;
+
+    boolean disposed = false;
+
     Button ball = new Button("/imgs/Ball.png", 20, 20);
     Button player = new Button("/imgs/Player.png", 100, 20);
     Button safeZone = new Button("/imgs/SafeZone.png", 20, 100);
     Button barrier = new Button("/imgs/Barrier.png", 20, 250);
     Button coin = new Button("/imgs/Coin.png", 70, 410);
+    Button home = new Button("/imgs/HomeButton.png", 50, 600);
 
     Rectangle ballHitbox = new Rectangle(20, 20, 45, 45);
     Rectangle playerHitbox = new Rectangle(100, 20, 45, 45);
     Rectangle safeZoneHitbox = new Rectangle(20, 100, 137, 137);
     Rectangle barrierHitbox = new Rectangle(20, 250, 137, 137);
     Rectangle coinHitbox = new Rectangle(70, 410, 35, 45);
+    Rectangle homeHitbox = new Rectangle(50, 600, 90, 90);
 
     Point currPoint = new Point(0, 0);
 
@@ -37,7 +44,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
                     drawCoinHitbox;
 
     public Palette() {
-        JFrame palette = new JFrame("Palette");
+        palette = new JFrame("Palette");
 
         palette.setSize(new Dimension(200, 739));
         palette.add(this);
@@ -65,6 +72,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         safeZone.paint(g);
         barrier.paint(g);
         coin.paint(g);
+        home.paint(g);
 
         g.setColor(Color.blue);
 
@@ -151,6 +159,16 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
                 drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawBarrierHitbox = false;
 
                 LevelEditor.objType = 1;
+            }
+            else if (homeHitbox.contains(p)) {
+                disposed = true;
+                palette.dispose();
+                try {
+                    Frame frame = new Frame();
+                } catch (ClassNotFoundException | IOException | InvalidBackgroundException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         }
     }

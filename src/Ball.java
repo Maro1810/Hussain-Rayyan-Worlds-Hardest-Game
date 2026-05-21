@@ -44,7 +44,9 @@ public class Ball extends Entity {
 
         Graphics2D g2 = (Graphics2D) g;
 		
-        this.move();
+        if (Frame.mode == Mode.PLAYING) {
+            this.move();
+        }
 
         hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		

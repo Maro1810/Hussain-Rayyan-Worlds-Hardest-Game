@@ -42,9 +42,9 @@ public class Level {
         Ball ball3 = new Ball(100, 1, 0, 10, 20);
         Coin c1 = new Coin(400, 400, 0, 0, 20);
         Coin c2 = new Coin(50, 50, 0, 2, 20);
-        Barrier b = new Barrier(0,500,0,0,200, 5);
-        Barrier b2 = new Barrier(500,500,0,0, 72, 200);
-        SafeZone s = new SafeZone(700,0,0,0,50,50, true);
+        Barrier b = new Barrier(0,500,200, 5);
+        Barrier b2 = new Barrier(500,500, 72, 200);
+        SafeZone s = new SafeZone(700,0,50,50, true);
         Player player = new Player();
 
         entities.add(ball1);
@@ -85,6 +85,15 @@ public class Level {
         return entities;
     }
 
+    public boolean containsEntity(int x, int y) {
+        for (Entity e : entities) {
+            if (e.getX() == x && e.getY() == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addEntity(Entity e) {
         entities.add(e);
     }
@@ -119,7 +128,7 @@ public class Level {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                     .registerTypeAdapter(Entity.class, new EntityDeserializer()).create();
 
-        File file = new File(path);
+        File file = new File("src/levels/" + path);
         
         FileReader reader = new FileReader(file);
 

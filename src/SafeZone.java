@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 
 public class SafeZone extends Entity {
     
-    private int x, y, vx, vy;
-    private int xscale, yscale;
+    private int x, y;
+    private double xLength, yLength;
     private boolean end;
 
     private double scaleWidth, scaleHeight;
@@ -20,21 +20,18 @@ public class SafeZone extends Entity {
 
     private Rectangle hitbox;
 
-    public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale, boolean end) {
+    public SafeZone(int x, int y, double xLength, double yLength, boolean end) {
         super(EntityType.SAFE_ZONE, x, y);
         this.x = x;
         this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.xscale = xscale;
-        this.yscale = yscale;
+        this.xLength = xLength;
+        this.yLength = yLength;
         this.end = end;
 
-        //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * xscale) / 15; 
-        scaleHeight = (2 * yscale) / 15;
+        scaleWidth = 1.0*xLength; 
+        scaleHeight = 1.0*yLength;
 
-        hitbox = new Rectangle(x, y, (int)(scaleWidth*15), (int)(scaleHeight*15));
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*27), (int)(scaleHeight*27));
 
         safeZone = getImage("/imgs/" + "SafeZone.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
@@ -49,14 +46,9 @@ public class SafeZone extends Entity {
 		
         this.move();
 
-        hitbox.setBounds(x, y, (int)(scaleWidth*15), (int)(scaleHeight*15));
+        hitbox.setBounds(x, y, (int)(scaleWidth*27), (int)(scaleHeight*27));
 		
 		init(x,y);
-
-        if (x + (scaleWidth*15) >= 1000 || x <= 0 || y + (scaleHeight*15) >= 980 || y <= 0) {
-            vx = -vx;
-            vy = -vy;
-        }
 
 		g2.drawImage(safeZone, tx, null);
 
@@ -77,11 +69,6 @@ public class SafeZone extends Entity {
         return hitbox;
     }
 
-    //TODO remove this since it was only used for testing
-    public String toString() {
-        return "Barrier at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
-    }
-
     @Override
     protected void init(double a, double b) {
         tx.setToTranslation(a, b);
@@ -99,35 +86,9 @@ public class SafeZone extends Entity {
     }
 
     @Override
-    public void move() {
-        x += vx;
-        y += vy;
-    }
-
-    @Override
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    @Override
-    public void setVy(int vy) {
-        this.vy = vy;
-    }
-
-    @Override
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public int getVx() {
-        return vx;
-    }
-
-    @Override
-    public int getVy() {
-        return vy;
     }
 
     @Override

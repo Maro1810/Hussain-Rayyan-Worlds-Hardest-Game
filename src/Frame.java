@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,9 +31,19 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	SpatialHasher hasher = new SpatialHasher(entities, 1000);
 
-	Level level = Level.load("src/levels/Hi.json");
+	Level level = Level.load("Hi.json");
 
-	// Button play = new Button("/imgs/PlayButton.png", 400, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450);
+	Button play = new Button("/imgs/PlayButton.png", 380, 450);
+
+	Rectangle editor_hitbox = new Rectangle(530, 450, 90, 90);
+	Rectangle play_hitbox = new Rectangle(380, 450, 90, 90);
+
+	JFrame menu;
+
+	JComboBox<String> dropdown;
+
+	public static Mode mode = Mode.PLAYING;
 
 	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
 	// JButton play = new JButton("Play");
@@ -43,22 +57,42 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
-		JFrame menu = new JFrame("Main Menu");
-		menu.setSize(new Dimension(1000, 750));
+		menu = new JFrame("Main Menu");
+
+		ArrayList<String> levelList = new ArrayList<>();
+
+		levelList.add("Select a level");
+
+		addOptions(levelList);
+
+		dropdown = new JComboBox<>(levelList.toArray(new String[0]));
+
+		this.setLayout(null);
+		this.setFocusable(true);
+
+		this.setSize(new Dimension(1040, 739));
+
+		dropdown.setBounds(430, 570, 150, 40);
+
+		menu.setSize(new Dimension(1040, 739));
 		menu.setBackground(Color.white);
 		menu.add(this);
 		menu.addMouseListener(this);
+
+		this.add(dropdown);
+
+		dropdown.addKeyListener(this);
+		this.addKeyListener(this);
 		menu.addKeyListener(this);
+
+		
 		
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Timer t = new Timer(16, this);
 		t.start();
 		
-		bg = new BackGround();
-		
-		// menu.add(play);
-		// play.setBounds(400, 450, 50, 50);
+		bg = new BackGround(0);
 
 		menu.setVisible(true);
 
@@ -66,18 +100,23 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	@Override
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		g.setColor(Color.RED);
 
 		bg.paint(g);
 
-		// play.paint(g);
+		if(bg.getScreen() == 0) {
+			editor.paint(g);
+			play.paint(g);
+		}
 
 		if (bg.getScreen() == 1) {
 			hasher.update();
 
 			level.paint(g);
+			dropdown.setVisible(false);
 		}
 		coins = 0;
 		updateCoins();
@@ -96,10 +135,19 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					}
 				}
 			}
-			// hasher.update();
-			// hasher.setEntities(entities);
 		}
 	}
+
+	public void addOptions(ArrayList<String> levels) {
+		File file = new File("src/levels");
+
+        String[] names = file.list();
+
+        for (int i = 0; i < names.length; i++) {
+			levels.add(names[i]);
+		}
+	}
+
 	public void win() {
 		Player p = null;
 		for (Entity e : entities) {
@@ -112,8 +160,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					System.out.println("You win :)");
 				}
 			}
-			// hasher.update();
-			// hasher.setEntities(entities);
 		}
 	}
 
@@ -123,6 +169,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i) instanceof Player) {
 				p = (Player) entities.get(i);
+
 				entities.set(i, p);
 			}
 			entities.get(i).fetchImage();
@@ -157,61 +204,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVx(3);
 		}
 
-		if (e.getKeyCode() == 39) {
-			try {
-				bg.setBackground(1);
-			} catch (InvalidBackgroundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
-		if (e.getKeyCode() == 37) {
-			try {
-				bg.setBackground(0);
-			} catch (InvalidBackgroundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
-		// if (e.getKeyCode() == 80) {
-		// 	for (Entity en : entities) {
-		// 		en.setVx(0);
-		// 		en.setVy(0);
-		// 	}
-		// }
-
 		if (e.getKeyCode() == 82) {
 			for (Entity en : entities) {
 				en.reset();
 			}
-		}
-
-		if (e.getKeyCode() == 77) {
-			level.save();
-		}
-
-		if (e.getKeyCode() == 78) {
-			level = new Level(Level.generateName());
-			load();
-		}
-
-		if(e.getKeyCode() == 49) {
-			objType = 0; // Ball
-		}
-		if(e.getKeyCode() == 50) {
-			objType = 1; // Coin
-		}
-		if(e.getKeyCode() == 51) {
-			objType = 2; // Wall
-		}
-		if(e.getKeyCode() == 52) {
-			objType = 3; // SafeZone
-		}
-
-		if (e.getKeyCode() == 53) {
-			objType = 4; //Player
 		}
 	}
 	@Override
@@ -234,37 +230,48 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubbed
+
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			if (objType == 0) {
-				level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+			Point p = e.getPoint();
+
+			if (editor_hitbox.contains(p) && bg.getScreen() == 0) {
+				try {
+					LevelEditor lvlEditor = new LevelEditor();
+
+					menu.dispose();
+				} catch (InvalidBackgroundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-			if (objType == 1) {
-				level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
-			}
-			if (objType == 2) {
-				level.addEntity(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
-			}
-			if (objType == 3) {
-				level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
-			}
-			if (objType == 4) {
-				if (!hasPlayer()) {
-					p = new Player(e.getX()-20, e.getY()-20);
-					level.addEntity(p);
+
+			if (play_hitbox.contains(p) && bg.getScreen() == 0) {
+				try {
+					if (dropdown.getSelectedItem().toString().equals("Select a level")) {
+						level = Level.load("Hi.json");
+					}
+					else {
+						level = Level.load(dropdown.getSelectedItem().toString());
+					}
+					load();
+					
+					bg.setBackground(1);
+				} catch (InvalidBackgroundException e1) {
+					e1.printStackTrace();
+				}
+				catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
-
-		// if (e.getButton() == MouseEvent.BUTTON3) {
-		// 	entities.remove(entities.size()-1);
-		// }
-		if (e.getButton() == MouseEvent.BUTTON1) {}
 		
 	}
 

@@ -1,0 +1,279 @@
+{
+  "entities": [
+    {
+      "x": 404,
+      "y": 217,
+      "vx": 0,
+      "vy": 0,
+      "scaleWidth": 4.5,
+      "scaleHeight": 4.5,
+      "dead": false,
+      "winning": false,
+      "hitbox": {
+        "x": 404,
+        "y": 217,
+        "width": 40,
+        "height": 40
+      },
+      "type": "PLAYER",
+      "startX": 100,
+      "startY": 100
+    },
+    {
+      "x": 680,
+      "y": 385,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 680,
+        "y": 385,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 680,
+      "startY": 385
+    },
+    {
+      "x": 467,
+      "y": 469,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 467,
+        "y": 469,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 467,
+      "startY": 469
+    },
+    {
+      "x": 272,
+      "y": 471,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 272,
+        "y": 471,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 272,
+      "startY": 471
+    },
+    {
+      "x": 213,
+      "y": 360,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 213,
+        "y": 360,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 213,
+      "startY": 360
+    },
+    {
+      "x": 86,
+      "y": 509,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 86,
+        "y": 509,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 86,
+      "startY": 509
+    },
+    {
+      "x": 374,
+      "y": 622,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 374,
+        "y": 622,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 374,
+      "startY": 622
+    },
+    {
+      "x": 873,
+      "y": 593,
+      "vx": 5,
+      "vy": 5,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 873,
+        "y": 593,
+        "width": 30,
+        "height": 30
+      },
+      "type": "BALL",
+      "startX": 873,
+      "startY": 593
+    },
+    {
+      "x": 783,
+      "y": 189,
+      "xLength": 3.0,
+      "yLength": 4.0,
+      "scaleWidth": 3.0,
+      "scaleHeight": 4.0,
+      "hitbox": {
+        "x": 783,
+        "y": 189,
+        "width": 81,
+        "height": 108
+      },
+      "type": "BARRIER",
+      "startX": 783,
+      "startY": 189
+    },
+    {
+      "x": 405,
+      "y": 351,
+      "xLength": 1.0,
+      "yLength": 2.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 2.0,
+      "hitbox": {
+        "x": 405,
+        "y": 351,
+        "width": 27,
+        "height": 54
+      },
+      "type": "BARRIER",
+      "startX": 405,
+      "startY": 351
+    },
+    {
+      "x": 669,
+      "y": 503,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 669,
+        "y": 503,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 669,
+      "startY": 503
+    },
+    {
+      "x": 603,
+      "y": 181,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 603,
+        "y": 181,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 603,
+      "startY": 181
+    },
+    {
+      "x": 548,
+      "y": 139,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 548,
+        "y": 139,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 548,
+      "startY": 139
+    },
+    {
+      "x": 128,
+      "y": 94,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 128,
+        "y": 94,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 128,
+      "startY": 94
+    },
+    {
+      "x": 139,
+      "y": 285,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 139,
+        "y": 285,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 139,
+      "startY": 285
+    }
+  ],
+  "name": "myLevel_1"
+}

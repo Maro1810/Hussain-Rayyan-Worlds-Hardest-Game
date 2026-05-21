@@ -14,18 +14,20 @@ public class BackGround{
 	double scaleWidth = 0;		//change to scale image
 	double scaleHeight = 0; 		//change to scale image
 
-	int screen = 0;
+	int screen;
 
-	public BackGround() throws InvalidBackgroundException {
+	public BackGround(int screen) throws InvalidBackgroundException {
 		//alter these
 		width = 1000;
 		height = 1000;
 		x = 0;
 		y = 0;
 		
+		this.screen = screen;
+		
 		tx = AffineTransform.getTranslateInstance(0, 0);
 
-		setBackground(screen);
+		setBackground(this.screen);
 		
 		init(x, y); 	//initialize the location of the image
 									//use your variables

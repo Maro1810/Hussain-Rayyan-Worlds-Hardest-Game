@@ -44,7 +44,7 @@ public class Level {
         Coin c2 = new Coin(50, 50, 0, 2, 20);
         Barrier b = new Barrier(0,500,200, 5);
         Barrier b2 = new Barrier(500,500, 72, 200);
-        SafeZone s = new SafeZone(700,0,0,0,50,50, true);
+        SafeZone s = new SafeZone(700,0,50,50, true);
         Player player = new Player();
 
         entities.add(ball1);

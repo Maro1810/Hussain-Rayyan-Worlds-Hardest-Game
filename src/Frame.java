@@ -197,23 +197,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			level = new Level(Level.generateName());
 			load();
 		}
-
-		if(e.getKeyCode() == 49) {
-			objType = 0; // Ball
-		}
-		if(e.getKeyCode() == 50) {
-			objType = 1; // Coin
-		}
-		if(e.getKeyCode() == 51) {
-			objType = 2; // Wall
-		}
-		if(e.getKeyCode() == 52) {
-			objType = 3; // SafeZone
-		}
-
-		if (e.getKeyCode() == 53) {
-			objType = 4; //Player
-		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -241,30 +224,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// if (e.getButton() == MouseEvent.BUTTON1) {
-		// 	if (objType == 0) {
-		// 		level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
-		// 	}
-		// 	if (objType == 1) {
-		// 		level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
-		// 	}
-		// 	if (objType == 2) {
-		// 		level.addEntity(new Barrier(e.getX()-20, e.getY()-20, 0, 0, 25, 5));
-		// 	}
-		// 	if (objType == 3) {
-		// 		level.addEntity(new SafeZone(e.getX()-20, e.getY()-20, 0, 0, 15,15, false));
-		// 	}
-		// 	if (objType == 4) {
-		// 		if (!hasPlayer()) {
-		// 			p = new Player(e.getX()-20, e.getY()-20);
-		// 			level.addEntity(p);
-		// 		}
-		// 	}
-		// }
+		// TODO Auto-generated method stubbed
 
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			// LevelEditor lvlEditor = new LevelEditor();
 			Point p = e.getPoint();
 
 			if (editor_hitbox.contains(p)) {
@@ -276,11 +238,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 		}
-
-		// if (e.getButton() == MouseEvent.BUTTON3) {
-		// 	entities.remove(entities.size()-1);
-		// }
-		if (e.getButton() == MouseEvent.BUTTON1) {}
 		
 	}
 

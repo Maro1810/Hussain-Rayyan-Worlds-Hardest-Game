@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 
 public class SafeZone extends Entity {
     
-    private int x, y, vx, vy;
-    private int xscale, yscale;
+    private int x, y;
+    private double xscale, yscale;
     private boolean end;
 
     private double scaleWidth, scaleHeight;
@@ -20,12 +20,10 @@ public class SafeZone extends Entity {
 
     private Rectangle hitbox;
 
-    public SafeZone(int x, int y, int vx, int vy, int xscale, int yscale, boolean end) {
+    public SafeZone(int x, int y, double xscale, double yscale, boolean end) {
         super(EntityType.SAFE_ZONE, x, y);
         this.x = x;
         this.y = y;
-        this.vx = vx;
-        this.vy = vy;
         this.xscale = xscale;
         this.yscale = yscale;
         this.end = end;
@@ -53,11 +51,6 @@ public class SafeZone extends Entity {
 		
 		init(x,y);
 
-        if (x + (scaleWidth*15) >= 1000 || x <= 0 || y + (scaleHeight*15) >= 980 || y <= 0) {
-            vx = -vx;
-            vy = -vy;
-        }
-
 		g2.drawImage(safeZone, tx, null);
 
         
@@ -77,11 +70,6 @@ public class SafeZone extends Entity {
         return hitbox;
     }
 
-    //TODO remove this since it was only used for testing
-    public String toString() {
-        return "Barrier at (" + x + ", " + y + ") with velocity (" + vx + ", " + vy + ")";
-    }
-
     @Override
     protected void init(double a, double b) {
         tx.setToTranslation(a, b);
@@ -99,35 +87,9 @@ public class SafeZone extends Entity {
     }
 
     @Override
-    public void move() {
-        x += vx;
-        y += vy;
-    }
-
-    @Override
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    @Override
-    public void setVy(int vy) {
-        this.vy = vy;
-    }
-
-    @Override
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public int getVx() {
-        return vx;
-    }
-
-    @Override
-    public int getVy() {
-        return vy;
     }
 
     @Override

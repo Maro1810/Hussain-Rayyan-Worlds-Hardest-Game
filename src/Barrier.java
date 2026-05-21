@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 public class Barrier extends Entity {
     
     private int x, y;
-    private int xlength, ylength;
+    private double xlength, ylength;
 
     private double scaleWidth, scaleHeight;
 
@@ -19,7 +19,7 @@ public class Barrier extends Entity {
 
     private Rectangle hitbox;
 
-    public Barrier(int x, int y, int xlength, int ylength) {
+    public Barrier(int x, int y, double xlength, double ylength) {
         super(EntityType.BARRIER, x, y);
         this.x = x;
         this.y = y;

@@ -33,8 +33,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	Level level = Level.load("Hi.json");
 
-	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450);
-	Button play = new Button("/imgs/PlayButton.png", 380, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450, 5);
+	Button play = new Button("/imgs/PlayButton.png", 380, 450, 5);
 
 	Rectangle editor_hitbox = new Rectangle(530, 450, 90, 90);
 	Rectangle play_hitbox = new Rectangle(380, 450, 90, 90);

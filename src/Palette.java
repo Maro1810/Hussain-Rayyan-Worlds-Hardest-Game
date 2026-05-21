@@ -19,21 +19,25 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
 
     JFrame palette;
 
-    boolean disposed = false;
+    boolean disposed, undo, redo = false;
 
-    Button ball = new Button("/imgs/Ball.png", 20, 20);
-    Button player = new Button("/imgs/Player.png", 100, 20);
-    Button safeZone = new Button("/imgs/SafeZone.png", 20, 100);
-    Button barrier = new Button("/imgs/Barrier.png", 20, 250);
-    Button coin = new Button("/imgs/Coin.png", 70, 410);
-    Button home = new Button("/imgs/HomeButton.png", 50, 600);
+    Button ball = new Button("/imgs/Ball.png", 140, 20, 4);
+    Button player = new Button("/imgs/Player.png", 20, 20, 4);
+    Button safeZone = new Button("/imgs/SafeZone.png", 50, 100, 3);
+    Button barrier = new Button("/imgs/Barrier.png", 50, 210, 3);
+    Button coin = new Button("/imgs/Coin.png", 85, 20, 4);
+    Button home = new Button("/imgs/HomeButton.png", 50, 600, 5);
+    Button undoButton = new Button("/imgs/UndoButton.png", 20, 340, 3);
+    Button redoButton = new Button("/imgs/RedoButton.png", 120, 340, 3);
 
-    Rectangle ballHitbox = new Rectangle(20, 20, 45, 45);
-    Rectangle playerHitbox = new Rectangle(100, 20, 45, 45);
-    Rectangle safeZoneHitbox = new Rectangle(20, 100, 137, 137);
-    Rectangle barrierHitbox = new Rectangle(20, 250, 137, 137);
-    Rectangle coinHitbox = new Rectangle(70, 410, 35, 45);
+    Rectangle ballHitbox = new Rectangle(140, 20, 36, 36);
+    Rectangle playerHitbox = new Rectangle(20, 20, 36, 36);
+    Rectangle safeZoneHitbox = new Rectangle(50, 100, 81, 81);
+    Rectangle barrierHitbox = new Rectangle(50, 210, 81, 81);
+    Rectangle coinHitbox = new Rectangle(85, 20, 28, 36);
     Rectangle homeHitbox = new Rectangle(50, 600, 90, 90);
+    Rectangle undoHitbox = new Rectangle(20, 340, 54, 54);
+    Rectangle redoHitbox = new Rectangle(120, 340, 54, 54);
 
     Point currPoint = new Point(0, 0);
 
@@ -73,6 +77,8 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         barrier.paint(g);
         coin.paint(g);
         home.paint(g);
+        undoButton.paint(g);
+        redoButton.paint(g);
 
         g.setColor(Color.blue);
 
@@ -115,10 +121,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
-            System.out.println(e.getPoint());
             Point p = new Point((int) e.getPoint().getX()-10, (int) e.getPoint().getY()-32);
-
-            System.out.println(ballHitbox.contains(p));
 
             if (ballHitbox.contains(p)) {
                 drawBallHitbox = true;
@@ -169,6 +172,14 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
+            }
+
+            else if (undoHitbox.contains(p)) {
+                undo = true;
+            }
+
+            else if (redoHitbox.contains(p)) {
+                redo = true;
             }
         }
     }

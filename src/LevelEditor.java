@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
     public static int objType = 0;
 
     Palette palette = new Palette();
+
+    ArrayList<Entity> removedEntities = new ArrayList<>();
 
     Level level;
 
@@ -68,6 +71,16 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         if (palette.disposed) {
             frame.dispose();
             Frame.mode = Mode.PLAYING;
+        }
+
+        if (palette.undo) {
+            undo();
+            palette.undo = false;
+        }
+
+        if (palette.redo) {
+            redo();
+            palette.redo = false;
         }
 
         // g.drawRect(0, 0, 17, 17);
@@ -142,6 +155,18 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             level.save();
         }
 
+    }
+
+    public void undo() {
+        if (level.getEntities().size() > 0) {
+            removedEntities.add(level.getEntities().remove(level.getEntities().size()-1));
+        }
+    }
+
+    public void redo() {
+        if (removedEntities.size() > 0) {
+            level.getEntities().add(removedEntities.remove(removedEntities.size()-1));
+        }
     }
 
     public int[] snappedCoordinates(int x, int y) {

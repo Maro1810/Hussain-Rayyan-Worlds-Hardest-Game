@@ -14,13 +14,16 @@ public class Button extends Entity{
 	double scaleWidth = 5;		//change to scale image
 	double scaleHeight = 5; 		//change to scale image
 
-	public Button(String path, int x, int y) {
+	public Button(String path, int x, int y, double scale) {
 		super(EntityType.BUTTON, x, y);
 		width = 1000;
 		height = 1000;
 
 		this.x = x;
         this.y = y;
+
+        scaleWidth = scale;
+        scaleHeight = scale;
 
         button = getImage(path);
 		

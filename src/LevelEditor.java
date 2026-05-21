@@ -10,7 +10,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -24,8 +26,12 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
     Palette palette = new Palette();
 
     Level level;
+    String[] ballMovement = new String[]{"Free","Path","Loop"};
+    JComboBox<String> dropdown= new JComboBox<>(ballMovement);
+    boolean ball = false;
 
     public LevelEditor() throws InvalidBackgroundException {
+    		this.setLayout(null);
         JFrame frame = new JFrame("Level Editor");
 
         Frame.mode = Mode.EDITOR;
@@ -33,6 +39,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         level = new Level(Level.generateName());
 
         bg = new BackGround(1);
+        dropdown.setBounds(430, 570, 150, 40);
+    		dropdown.addActionListener(this);
+    		this.add(dropdown);
+    		dropdown.setVisible(false);
 
         frame.setSize(new Dimension(1040, 739));
         frame.setBackground(Color.white);
@@ -93,7 +103,21 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-				level.addEntity(new Ball(e.getX()-10, e.getY()-32, 5, 5, 15));
+				Ball b = null;
+				dropdown.setVisible(true);
+				String type = dropdown.getSelectedItem().toString();
+				ball = true;
+				if(type.equals("Free")) {
+					Prompt prompt = new Prompt();
+					int bvx = prompt.getXLength();
+	                int bvy = prompt.getYLength();
+	                b = (new Ball(e.getX()-10, e.getY()-32, bvx, bvy, 15, type));
+				}
+				if (e.getButton() == MouseEvent.BUTTON1 && type.equals("Path") && ball) {
+					Prompt prompt = new Prompt();
+					
+				}
+				level.addEntity(b);
 			}
 			if (objType == 1) {
 				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));

@@ -6,6 +6,17 @@
       "vx": 1,
       "vy": 0,
       "radius": 15,
+      "path": {
+        "points": [
+          {
+            "x": 300,
+            "y": 1
+          }
+        ],
+        "PathType": "Free"
+      },
+      "curr": 0,
+      "dir": 1,
       "scaleWidth": 3.3333333333333335,
       "scaleHeight": 3.3333333333333335,
       "hitbox": {
@@ -24,6 +35,17 @@
       "vx": 10,
       "vy": 0,
       "radius": 20,
+      "path": {
+        "points": [
+          {
+            "x": 20,
+            "y": 1
+          }
+        ],
+        "PathType": "Free"
+      },
+      "curr": 0,
+      "dir": 1,
       "scaleWidth": 4.444444444444445,
       "scaleHeight": 4.444444444444445,
       "hitbox": {

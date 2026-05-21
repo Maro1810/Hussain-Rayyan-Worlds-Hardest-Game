@@ -1,7 +1,9 @@
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -10,6 +12,9 @@ public class Ball extends Entity {
     
     private int x, y, vx, vy;
     private int radius;
+    private Path path;
+    private int curr;
+    private int dir;
 
     private double scaleWidth, scaleHeight;
 
@@ -19,13 +24,18 @@ public class Ball extends Entity {
 
     private Rectangle hitbox;
 
-    public Ball(int x, int y, int vx, int vy, int radius) {
+    public Ball(int x, int y, int vx, int vy, int radius, String type) {
         super(EntityType.BALL, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
         this.radius = radius;
+        path = new Path(type);
+        path.addPoints(x,y);
+        curr = 0;
+        dir = 1;
+        
 
         //since original image is 9x9, we scale to fit the radius
         scaleWidth = (2 * radius) / 9.0; 
@@ -44,9 +54,7 @@ public class Ball extends Entity {
 
         Graphics2D g2 = (Graphics2D) g;
 		
-        if (Frame.mode == Mode.PLAYING) {
-            this.move();
-        }
+        this.move();
 
         hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		
@@ -123,8 +131,64 @@ public class Ball extends Entity {
 
     @Override
     public void move() {
-        x += vx;
-        y += vy;
+    		if(path.getType().equals("Free")) {
+    			x+= vx;
+    			y+=vy;
+    		}
+    	   
+       if(path.getType().equals("Linear")) {
+    	   		if(dir == 1 && path.getPath().size() > 1) {
+    	   			while(x != path.getPoint(curr +1).getX()) {
+    	   				if( x <  path.getPoint(curr +1).getX()) {
+    	   					x += vx;
+    	   				}else {
+    	   					x -= vx;
+    	   				}
+    	   			}
+    	   			while(y != path.getPoint(curr +1).getY()) {
+    	   				if( y <  path.getPoint(curr +1).getY()) {
+    	   					y += vy;
+    	   				}else {
+    	   					y -= vy;
+    	   				}
+    	   			}
+    	   			if(x == path.getPoint(curr +1).getX() && y == path.getPoint(curr +1).getY() ) {
+    	   				curr++;
+    	   			}
+    	   			if(curr > path.getPath().size()) {
+    	   				dir = -1;
+    	   			}
+    	   		}
+    	   		if(dir == -1 && path.getPath().size() > 1) {
+    	   			while(x != path.getPoint(curr -1).getX()) {
+    	   				if( x <  path.getPoint(curr -1).getX()) {
+    	   					x += vx;
+    	   				}else {
+    	   					x -= vx;
+    	   				}
+    	   			}
+    	   			while(y != path.getPoint(curr -1).getY()) {
+    	   				if( y <  path.getPoint(curr -1).getY()) {
+    	   					y += vy;
+    	   				}else {
+    	   					y -= vy;
+    	   				}
+    	   			}
+    	   			if(x == path.getPoint(curr - 1).getX() && y == path.getPoint(curr - 1).getY()) {
+    	   				curr--;
+    	   			}
+    	   			if(curr < 0) {
+    	   				dir = 1;
+    	   			}
+    	   		}
+       }
+    }
+    
+    public Path getPath() {
+    		return path;
+    }
+    public void setType(String s) {
+    		path.setType(s);
     }
 
     @Override
@@ -164,3 +228,4 @@ public class Ball extends Entity {
     }
 
 }
+

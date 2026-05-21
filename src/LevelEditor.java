@@ -23,13 +23,12 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
     Palette palette = new Palette();
 
-    Barrier barrier = new Barrier(0, 0, 1, 1);
     Level level;
 
     public LevelEditor() throws InvalidBackgroundException {
         JFrame frame = new JFrame("Level Editor");
 
-        // JFrame palette = new JFrame("Palette");
+        Frame.mode = Mode.EDITOR;
 
         level = new Level(Level.generateName());
 
@@ -42,9 +41,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
  
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // palette.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-        // palette.setVisible(true);
 
         frame.setVisible(true);
 
@@ -62,7 +58,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         super.paintComponent(g);
         
         bg.paint(g);
-        barrier.paint(g);
         level.paint(g);
 
         g.setColor(Color.black);
@@ -98,10 +93,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-				level.addEntity(new Ball(e.getX()-20, e.getY()-20, 5, 5, 15));
+				level.addEntity(new Ball(e.getX()-10, e.getY()-32, 5, 5, 15));
 			}
 			if (objType == 1) {
-				level.addEntity(new Coin(e.getX()-20, e.getY()-20, 0, 0, 15));
+				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
 			}
 			if (objType == 2) {
                 int[] coords = snappedCoordinates(e.getX(), e.getY());

@@ -31,9 +31,15 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	Level level = Level.load("src/levels/Hi.json");
 
-	Button editor = new Button("/imgs/LvlBuilderButton.png", 400, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 500, 450);
+	Button play = new Button("/imgs/PlayButton.png", 350, 450);
 
-	Rectangle editor_hitbox = new Rectangle(400, 450, 90, 90);
+	Rectangle editor_hitbox = new Rectangle(500, 450, 90, 90);
+	Rectangle play_hitbox = new Rectangle(350, 450, 90, 90);
+
+	JFrame menu;
+
+	public static Mode mode = Mode.PLAYING;
 
 	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
 	// JButton play = new JButton("Play");
@@ -47,7 +53,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
-		JFrame menu = new JFrame("Main Menu");
+		menu = new JFrame("Main Menu");
 
 		menu.setSize(new Dimension(1040, 739));
 		menu.setBackground(Color.white);
@@ -61,13 +67,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		t.start();
 		
 		bg = new BackGround(0);
-		
-		// menu.add(play);
-		// play.setBounds(400, 450, 50, 50);
 
 		menu.setVisible(true);
 
-		System.out.println(menu.getContentPane().getSize());
 		load();
 	}
 	
@@ -79,9 +81,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 		bg.paint(g);
 
-		editor.paint(g);
-
-		// g.drawRect(400, 450, 90, 90);
+		if(bg.getScreen() == 0) {
+			editor.paint(g);
+			play.paint(g);
+		}
 
 		if (bg.getScreen() == 1) {
 			hasher.update();
@@ -166,24 +169,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVx(3);
 		}
 
-		if (e.getKeyCode() == 39) {
-			try {
-				bg.setBackground(1);
-			} catch (InvalidBackgroundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
-		if (e.getKeyCode() == 37) {
-			try {
-				bg.setBackground(0);
-			} catch (InvalidBackgroundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-
 		if (e.getKeyCode() == 82) {
 			for (Entity en : entities) {
 				en.reset();
@@ -233,8 +218,18 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			if (editor_hitbox.contains(p)) {
 				try {
 					LevelEditor lvlEditor = new LevelEditor();
+
+					menu.dispose();
 				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+			if (play_hitbox.contains(p)) {
+				try {
+					bg.setBackground(1);
+				} catch (InvalidBackgroundException e1) {
 					e1.printStackTrace();
 				}
 			}

@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Desktop.Action;
@@ -9,9 +10,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.function.BooleanSupplier;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class LevelEditor extends JPanel implements MouseListener, KeyListener, ActionListener{
@@ -19,7 +22,7 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     BackGround bg;
     int objType = 0;
 
-    SafeZone zone = new SafeZone(0, 0, 13.9, 13.9, false);
+    Barrier barrier = new Barrier(0, 0, 1, 1);
     Level level;
 
     public LevelEditor() throws InvalidBackgroundException {
@@ -42,10 +45,9 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
         frame.add(this);
         frame.addMouseListener(this);
         frame.addKeyListener(this);
-
  
         
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // palette.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         // palette.setVisible(true);
@@ -64,7 +66,7 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     @Override
     public void paint(Graphics g) {
         bg.paint(g);
-        zone.paint(g);
+        barrier.paint(g);
         level.paint(g);
 
         g.setColor(Color.black);
@@ -99,7 +101,7 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        		if(e.getKeyCode() == 49) {
+        if(e.getKeyCode() == 49) {
 			objType = 0; // Ball
 		}
 		if(e.getKeyCode() == 50) {
@@ -143,16 +145,28 @@ public class LevelEditor extends JPanel implements MouseListener, KeyListener, A
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-				    level.addEntity(new Barrier(coords[0], coords[1], 14, 14));
+                    Prompt prompt = new Prompt();
+
+                    double xLength = prompt.getXLength();
+                    double yLength = prompt.getYLength();
+
+				    level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
                 }
-                
+
 			}
 			if (objType == 3) {
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    level.addEntity(new SafeZone(coords[0], coords[1], 13.9,13.9, false));
+                    Prompt prompt = new Prompt();
+
+                    double xLength = prompt.getXLength();
+                    double yLength = prompt.getYLength();
+
+                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, false));
                     System.out.println("Placed");
+
+                    
                 }
 				
 			}

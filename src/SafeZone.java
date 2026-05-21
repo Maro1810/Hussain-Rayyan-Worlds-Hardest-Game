@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 public class SafeZone extends Entity {
     
     private int x, y;
-    private double xscale, yscale;
+    private double xLength, yLength;
     private boolean end;
 
     private double scaleWidth, scaleHeight;
@@ -20,19 +20,18 @@ public class SafeZone extends Entity {
 
     private Rectangle hitbox;
 
-    public SafeZone(int x, int y, double xscale, double yscale, boolean end) {
+    public SafeZone(int x, int y, double xLength, double yLength, boolean end) {
         super(EntityType.SAFE_ZONE, x, y);
         this.x = x;
         this.y = y;
-        this.xscale = xscale;
-        this.yscale = yscale;
+        this.xLength = xLength;
+        this.yLength = yLength;
         this.end = end;
 
-        //since original image is 9x9, we scale to fit the radius
-        scaleWidth = (2 * xscale) / 15; 
-        scaleHeight = (2 * yscale) / 15;
+        scaleWidth = 1.0*xLength; 
+        scaleHeight = 1.0*yLength;
 
-        hitbox = new Rectangle(x, y, (int)(scaleWidth*15), (int)(scaleHeight*15));
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*27), (int)(scaleHeight*27));
 
         safeZone = getImage("/imgs/" + "SafeZone.png");
         tx = AffineTransform.getTranslateInstance(0, 0);
@@ -47,7 +46,7 @@ public class SafeZone extends Entity {
 		
         this.move();
 
-        hitbox.setBounds(x, y, (int)(scaleWidth*15), (int)(scaleHeight*15));
+        hitbox.setBounds(x, y, (int)(scaleWidth*27), (int)(scaleHeight*27));
 		
 		init(x,y);
 

@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -26,9 +27,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
     Palette palette = new Palette();
 
     Level level;
-    String[] ballMovement = new String[]{"Free","Path","Loop"};
-    JComboBox<String> dropdown= new JComboBox<>(ballMovement);
-    boolean ball = false;
+    ArrayList<Path> paths = new ArrayList<Path>();
+    int currPath = 0;
 
     public LevelEditor() throws InvalidBackgroundException {
     		this.setLayout(null);
@@ -39,10 +39,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         level = new Level(Level.generateName());
 
         bg = new BackGround(1);
-        dropdown.setBounds(430, 570, 150, 40);
-    		dropdown.addActionListener(this);
-    		this.add(dropdown);
-    		dropdown.setVisible(false);
 
         frame.setSize(new Dimension(1040, 739));
         frame.setBackground(Color.white);
@@ -72,6 +68,9 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
         g.setColor(Color.black);
         drawGridLines(g);
+        
+        
+        
 
         // g.drawRect(0, 0, 17, 17);
     }
@@ -103,26 +102,18 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-				Ball b = null;
-				dropdown.setVisible(true);
-				String type = dropdown.getSelectedItem().toString();
-				ball = true;
-				if(type.equals("Free")) {
-					Prompt prompt = new Prompt();
-					int bvx = prompt.getXLength();
-	                int bvy = prompt.getYLength();
-	                b = (new Ball(e.getX()-10, e.getY()-32, bvx, bvy, 15, type));
-				}
-				if (e.getButton() == MouseEvent.BUTTON1 && type.equals("Path") && ball) {
-					Prompt prompt = new Prompt();
-					
-				}
+				Prompt prompt = new Prompt();
+				int bvx = prompt.getXLength();
+                int bvy = prompt.getYLength();
+	            Ball b = (new Ball(e.getX()-10, e.getY()-32, bvx, bvy, 15));
 				level.addEntity(b);
 			}
 			if (objType == 1) {
+				
 				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
 			}
 			if (objType == 2) {
+				
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
@@ -137,6 +128,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
 			}
 			if (objType == 3) {
+				
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
@@ -151,8 +143,35 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 			}
 
             if (objType == 4) {
+            	
                 level.addEntity(new Player(e.getX()-10, e.getY()-32));
             }
+            if (objType == 5) {
+            	Path pth = paths.get(currPath);
+            	if(pth != null) {
+            		pth.addPoints(0, new Point(e.getX()-10, e.getY()-32));
+    		        BallPath b = (new BallPath(e.getX()-10, e.getY()-32, 5, 5, 15, paths.get(currPath)));
+    		        level.addEntity(b);
+    				paths.set(currPath, pth);
+    				currPath++;
+            	}
+				
+			}
+            if (objType == 6) {
+				
+				Prompt prompt = new Prompt();
+				int v = prompt.getXLength();
+                int r = prompt.getYLength();
+	            BallRots b = (new BallRots(e.getX()-10, e.getY()-32, v, 15, r));
+				level.addEntity(b);
+			}
+            if (objType == 7) {
+               if(currPath >= paths.size()) {
+            	   paths.add(new Path(new Point(e.getX()-10, e.getY()-32)));
+               }else {
+            	   paths.get(currPath).addPoints(new Point(e.getX()-10, e.getY()-32));
+               }
+    		}
         }
 
         if (e.getButton() == MouseEvent.BUTTON3) {

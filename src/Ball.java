@@ -12,9 +12,6 @@ public class Ball extends Entity {
     
     private int x, y, vx, vy;
     private int radius;
-    private Path path;
-    private int curr;
-    private int dir;
 
     private double scaleWidth, scaleHeight;
 
@@ -24,17 +21,13 @@ public class Ball extends Entity {
 
     private Rectangle hitbox;
 
-    public Ball(int x, int y, int vx, int vy, int radius, String type) {
+    public Ball(int x, int y, int vx, int vy, int radius) {
         super(EntityType.BALL, x, y);
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
         this.radius = radius;
-        path = new Path(type);
-        path.addPoints(x,y);
-        curr = 0;
-        dir = 1;
         
 
         //since original image is 9x9, we scale to fit the radius
@@ -131,65 +124,11 @@ public class Ball extends Entity {
 
     @Override
     public void move() {
-    		if(path.getType().equals("Free")) {
-    			x+= vx;
-    			y+=vy;
-    		}
-    	   
-       if(path.getType().equals("Linear")) {
-    	   		if(dir == 1 && path.getPath().size() > 1) {
-    	   			while(x != path.getPoint(curr +1).getX()) {
-    	   				if( x <  path.getPoint(curr +1).getX()) {
-    	   					x += vx;
-    	   				}else {
-    	   					x -= vx;
-    	   				}
-    	   			}
-    	   			while(y != path.getPoint(curr +1).getY()) {
-    	   				if( y <  path.getPoint(curr +1).getY()) {
-    	   					y += vy;
-    	   				}else {
-    	   					y -= vy;
-    	   				}
-    	   			}
-    	   			if(x == path.getPoint(curr +1).getX() && y == path.getPoint(curr +1).getY() ) {
-    	   				curr++;
-    	   			}
-    	   			if(curr > path.getPath().size()) {
-    	   				dir = -1;
-    	   			}
-    	   		}
-    	   		if(dir == -1 && path.getPath().size() > 1) {
-    	   			while(x != path.getPoint(curr -1).getX()) {
-    	   				if( x <  path.getPoint(curr -1).getX()) {
-    	   					x += vx;
-    	   				}else {
-    	   					x -= vx;
-    	   				}
-    	   			}
-    	   			while(y != path.getPoint(curr -1).getY()) {
-    	   				if( y <  path.getPoint(curr -1).getY()) {
-    	   					y += vy;
-    	   				}else {
-    	   					y -= vy;
-    	   				}
-    	   			}
-    	   			if(x == path.getPoint(curr - 1).getX() && y == path.getPoint(curr - 1).getY()) {
-    	   				curr--;
-    	   			}
-    	   			if(curr < 0) {
-    	   				dir = 1;
-    	   			}
-    	   		}
-       }
+    	x += vx;
+    	y += vy;
+    	hitbox.setLocation(x, y);
     }
     
-    public Path getPath() {
-    		return path;
-    }
-    public void setType(String s) {
-    		path.setType(s);
-    }
 
     @Override
     public void setVx(int vx) {

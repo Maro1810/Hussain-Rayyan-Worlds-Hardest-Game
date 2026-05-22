@@ -60,8 +60,8 @@ public class Player extends Entity {
 		g2.drawImage(square, tx, null);
 
 		
-		g.setColor(Color.green);
-		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+		// g.setColor(Color.green);
+		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
 		winning = false;
 	}
 	

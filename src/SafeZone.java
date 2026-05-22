@@ -53,8 +53,8 @@ public class SafeZone extends Entity {
 		g2.drawImage(safeZone, tx, null);
 
         
-		g.setColor(Color.RED);
-		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+		// g.setColor(Color.RED);
+		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
     }
 
     @Override

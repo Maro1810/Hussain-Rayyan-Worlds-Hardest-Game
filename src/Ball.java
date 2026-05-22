@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.function.Function;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -59,9 +60,97 @@ public class Ball extends Entity {
 
 		g2.drawImage(ball, tx, null);
 
+        if (Frame.mode == Mode.EDITOR) {
+            drawArrow(g);
+        }
+
         
-		g.setColor(Color.RED);
-		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+		// g.setColor(Color.RED);
+		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+    }
+
+    
+    public void drawArrow(Graphics g) {
+        g.setColor(Color.BLACK);
+
+        if (vx == 0 && vy == 0) {
+            return;
+        }
+        
+        int x = this.x + radius;
+        int y = this.y + radius;
+        g.drawLine(x, y, x + vx*10, y + vy*10);
+
+        //drawing the arrowhead
+        if (vx != 0 && vy != 0) {
+            int x_1 = (x+vx*10)-5;
+            int x_2 = (x+vx*10)+5;
+
+            int x_3 = 0;
+            if (vx > 0) {
+                x_3 = (x+vx*10)+7;
+            }
+            else {
+                x_3 = (x+vx*10)-7;
+            }
+
+            Function<Integer, Integer> linearMap = (x_param) -> {
+                int y_param = (int) (((double) vy/vx)*(x_param-(x+vx*10))+(y+vy*10));
+
+                return y_param;
+            };
+
+            Function<Integer, Integer> linearMap2 = (x_param) -> {
+                int y_param = (int) (((double) -vx/vy)*(x_param-(x+vx*10))+(y+vy*10));
+
+                return y_param;
+            };
+
+            int y_1 = linearMap2.apply(x_1);
+            int y_2 = linearMap2.apply(x_2);
+            int y_3 = linearMap.apply(x_3);
+
+            int[] xPoints = {x_1, x_2, x_3};
+            int[] yPoints = {y_1, y_2, y_3};
+
+            g.fillPolygon(xPoints, yPoints, 3);
+
+            // g.drawLine(x_1, y_1, x_2, y_2);
+        }
+
+        else if (vx == 0 && vy != 0) {
+            int x_2 = x - 6;
+            int x_3 = x + 6;
+
+            int y_1 = y+vy*10;
+            int y_2 = 0;
+
+            if (vy > 0) {
+                y_2 = y+vy*10+15;
+            }
+            else {
+                y_2 = y+vy*10-15;
+            }
+
+            g.fillPolygon(new int[] {x, x_2, x_3}, new int[] {y_2, y_1, y_1}, 3);
+        }
+        else {
+            int y_2 = y - 6;
+            int y_3 = y + 6;
+
+            int x_1 = x+vx*10;
+            int x_2 = 0;
+
+            if (vx > 0) {
+                x_2 = x+vx*10+15;
+            }
+            else {
+                x_2 = x+vx*10-15;
+            }
+
+            g.fillPolygon(new int[] {x_2, x_1, x_1}, new int[] {y, y_2, y_3}, 3);
+        }
+        
     }
 
     @Override

@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class Prompt extends JDialog implements KeyListener, ActionListener{
     JTextField xField, yField;
 
-    private int xLength, yLength;
+    private int xParam, yParam;
 
     public Prompt() {
         setModal(true);
@@ -44,20 +44,19 @@ public class Prompt extends JDialog implements KeyListener, ActionListener{
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
         if (e.getKeyCode() == 10) {
-            this.xLength = (int) (Double.parseDouble(xField.getText()));
-            this.yLength = (int) (Double.parseDouble(yField.getText()));
+            this.xParam = (int) (Double.parseDouble(xField.getText()));
+            this.yParam = (int) (Double.parseDouble(yField.getText()));
 
             this.dispose();
         }
-        System.out.println("hi");
     }
 
-    public int getXLength() {
-        return xLength;
+    public int getXParam() {
+        return xParam;
     }
 
-    public int getYLength() {
-        return yLength;
+    public int getYParam() {
+        return yParam;
     }
     
     @Override

@@ -113,7 +113,12 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-				level.addEntity(new Ball(e.getX()-10, e.getY()-32, 5, 5, 15));
+                Prompt prompt = new Prompt();
+
+                int vx = prompt.getXParam();
+                int vy = prompt.getYParam();
+
+				level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
 			}
 			if (objType == 1) {
 				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
@@ -124,8 +129,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 if (!level.containsEntity(coords[0], coords[1])) {
                     Prompt prompt = new Prompt();
 
-                    double xLength = prompt.getXLength();
-                    double yLength = prompt.getYLength();
+                    int xLength = prompt.getXParam();
+                    int yLength = prompt.getYParam();
 
 				    level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
                     System.out.println("Placed");
@@ -138,8 +143,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 if (!level.containsEntity(coords[0], coords[1])) {
                     Prompt prompt = new Prompt();
 
-                    double xLength = prompt.getXLength();
-                    double yLength = prompt.getYLength();
+                    int xLength = prompt.getXParam();
+                    int yLength = prompt.getYParam();
 
                     level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, false));
                     System.out.println("Placed");          

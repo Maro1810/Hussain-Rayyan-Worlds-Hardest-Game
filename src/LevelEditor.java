@@ -113,7 +113,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-                Prompt prompt = new Prompt();
+                Prompt prompt = new Prompt(EntityType.BALL);
 
                 int vx = prompt.getXParam();
                 int vy = prompt.getYParam();
@@ -127,7 +127,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt();
+                    Prompt prompt = new Prompt(EntityType.BARRIER);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
@@ -141,7 +141,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt();
+                    Prompt prompt = new Prompt(EntityType.SAFE_ZONE);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();

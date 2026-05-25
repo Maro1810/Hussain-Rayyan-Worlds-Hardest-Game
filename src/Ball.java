@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 
 public class Ball extends Entity {
     
-    private int x, y, vx, vy;
+    private int x, y, vx, vy, xRadius, yRadius, velocity;
     private int radius;
 
     private double scaleWidth, scaleHeight;
@@ -19,6 +19,9 @@ public class Ball extends Entity {
 	private transient AffineTransform tx;
 
     private Rectangle hitbox;
+    BallType ballType;
+
+    private double angle = 0;
 
     public Ball(int x, int y, int vx, int vy, int radius) {
         super(EntityType.BALL, x, y);
@@ -28,6 +31,32 @@ public class Ball extends Entity {
         this.vy = vy;
         this.radius = radius;
 
+        //since original image is 9x9, we scale to fit the radius
+        scaleWidth = (2 * radius) / 9.0; 
+        scaleHeight = (2 * radius) / 9.0;
+
+        hitbox = new Rectangle(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
+
+        ball = getImage("/imgs/" + "Ball.png");
+        tx = AffineTransform.getTranslateInstance(0, 0);
+
+        ballType = BallType.FREE;
+
+        init(x, y);
+    }
+
+    public Ball(int x, int y, int xRadius, int yRadius, int velocity, int radius) {
+        super(EntityType.BALL, x, y);
+
+        this.x = x;
+        this.y = y;
+        this.xRadius = xRadius;
+        this.yRadius = yRadius;
+        this.velocity = velocity;
+
+        this.radius = radius;
+
+        ballType = BallType.LOOP;
         //since original image is 9x9, we scale to fit the radius
         scaleWidth = (2 * radius) / 9.0; 
         scaleHeight = (2 * radius) / 9.0;
@@ -47,6 +76,11 @@ public class Ball extends Entity {
 		
         if (Frame.mode == Mode.PLAYING) {
             this.move();
+        }
+
+        if (ballType == BallType.LOOP) {
+            g.setColor(Color.RED);
+            g.drawOval(startX+2*xRadius, startY+2*yRadius, 2*xRadius, 2*yRadius);
         }
 
         hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
@@ -212,8 +246,19 @@ public class Ball extends Entity {
 
     @Override
     public void move() {
-        x += vx;
-        y += vy;
+        if (ballType == BallType.FREE) {
+            x += vx;
+            y += vy;
+        }
+        else {
+
+            System.out.println(angle);
+
+            x = (int) (startX+xRadius+xRadius*Math.cos(angle));
+            y = (int) (startY+yRadius+yRadius*Math.sin(angle));
+
+            angle += 0.05*velocity;
+        }
     }
 
     @Override
@@ -252,4 +297,9 @@ public class Ball extends Entity {
         tx = AffineTransform.getTranslateInstance(0, 0);
     }
 
+}
+
+enum BallType {
+    FREE,
+    LOOP
 }

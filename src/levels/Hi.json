@@ -5,6 +5,9 @@
       "y": 1,
       "vx": 1,
       "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
       "radius": 15,
       "scaleWidth": 3.3333333333333335,
       "scaleHeight": 3.3333333333333335,
@@ -14,6 +17,8 @@
         "width": 30,
         "height": 30
       },
+      "ballType": "FREE",
+      "angle": 0.0,
       "type": "BALL",
       "startX": 300,
       "startY": 1
@@ -23,6 +28,9 @@
       "y": 1,
       "vx": 10,
       "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
       "radius": 20,
       "scaleWidth": 4.444444444444445,
       "scaleHeight": 4.444444444444445,
@@ -32,6 +40,8 @@
         "width": 40,
         "height": 40
       },
+      "ballType": "FREE",
+      "angle": 0.0,
       "type": "BALL",
       "startX": 20,
       "startY": 1
@@ -144,6 +154,29 @@
       "type": "PLAYER",
       "startX": 100,
       "startY": 100
+    },
+    {
+      "x": 100,
+      "y": 300,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 5,
+      "yRadius": 15,
+      "velocity": 1,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 100,
+        "y": 300,
+        "width": 30,
+        "height": 30
+      },
+      "ballType": "LOOP",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 100,
+      "startY": 300
     }
   ],
   "name": "Hi"

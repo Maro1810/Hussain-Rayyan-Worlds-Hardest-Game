@@ -57,6 +57,8 @@ public class Level {
         Barrier b = new Barrier(0,500,2, 5);
         Barrier b2 = new Barrier(500,500, 1, 5);
         SafeZone s = new SafeZone(700,0,5,3, true);
+        
+	    Ball ball = new Ball(100, 300, 5, 15, 1, 15);
         Player player = new Player(100, 100);
 
         entities.add(ball1);
@@ -68,6 +70,7 @@ public class Level {
         entities.add(b2);
         entities.add(s);
         entities.add(player);
+        entities.add(ball);
 
         Level level = new Level("Hi");
 

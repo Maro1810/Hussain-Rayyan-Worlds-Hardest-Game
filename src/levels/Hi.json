@@ -77,14 +77,14 @@
     {
       "x": 0,
       "y": 500,
-      "xLength": 5.0,
+      "xLength": 2.0,
       "yLength": 5.0,
-      "scaleWidth": 5.0,
+      "scaleWidth": 2.0,
       "scaleHeight": 5.0,
       "hitbox": {
         "x": 0,
         "y": 500,
-        "width": 135,
+        "width": 54,
         "height": 135
       },
       "type": "BARRIER",
@@ -94,15 +94,15 @@
     {
       "x": 500,
       "y": 500,
-      "xLength": 2.0,
-      "yLength": 6.0,
-      "scaleWidth": 2.0,
-      "scaleHeight": 6.0,
+      "xLength": 1.0,
+      "yLength": 5.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 5.0,
       "hitbox": {
         "x": 500,
         "y": 500,
-        "width": 54,
-        "height": 162
+        "width": 27,
+        "height": 135
       },
       "type": "BARRIER",
       "startX": 500,
@@ -111,15 +111,15 @@
     {
       "x": 700,
       "y": 0,
-      "xLength": 3.0,
+      "xLength": 5.0,
       "yLength": 3.0,
       "end": true,
-      "scaleWidth": 3.0,
+      "scaleWidth": 5.0,
       "scaleHeight": 3.0,
       "hitbox": {
         "x": 700,
         "y": 0,
-        "width": 81,
+        "width": 135,
         "height": 81
       },
       "type": "SAFE_ZONE",

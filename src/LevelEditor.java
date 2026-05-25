@@ -152,7 +152,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 			}
 
             if (objType == 4) {
-                level.addEntity(new Player(e.getX()-10, e.getY()-32));
+                if (!hasPlayer()) 
+                    level.addEntity(new Player(e.getX()-10, e.getY()-32));
             }
         }
 
@@ -167,6 +168,14 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             removedEntities.add(level.getEntities().remove(level.getEntities().size()-1));
         }
     }
+
+    public boolean hasPlayer() {
+		for (Entity e : level.getEntities()) {
+			if (e instanceof Player)
+				return true;
+		}
+		return false;
+	}
 
     public void redo() {
         if (removedEntities.size() > 0) {

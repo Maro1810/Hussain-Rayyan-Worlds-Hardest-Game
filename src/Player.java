@@ -21,13 +21,10 @@ public class Player extends Entity {
 
 	private Rectangle hitbox;
 
-	//change to scale image
-	public Player() {
-		super(EntityType.PLAYER, 100, 100);
+	
+	public Player(int x, int y) {
+		super(EntityType.PLAYER, x, y);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
-
-		x = 100;
-		y = 100;
 		vx = 0;
 		vy = 0;
 		dead = false;
@@ -35,13 +32,7 @@ public class Player extends Entity {
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		
 		hitbox = new Rectangle(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));
-		
-		init(x, y); 				//initialize the location of the image
-									//use your variables	
-	}
 	
-	public Player(int x, int y) {
-		this();
 		this.x = x;
 		this.y = y;
 		init(x,y);
@@ -58,6 +49,22 @@ public class Player extends Entity {
 		init(x,y);
 		
 		g2.drawImage(square, tx, null);
+
+		if (x <= 0) {
+			x = 0;
+		}
+
+		if (y <= 0) {
+			y = 0;
+		}
+
+		if (x >= 985) {
+			x = 985;
+		}
+
+		if (y >= 660) {
+			y = 660;
+		}
 
 		
 		// g.setColor(Color.green);
@@ -138,6 +145,11 @@ public class Player extends Entity {
 			}
 
 		hitbox.setLocation(x, y);
+	}
+
+	if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.SAFE_ZONE) {
+		this.startX = e.getX()+4;
+		this.startY = e.getY()+4;
 	}
 //		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
 //			SafeZone s = (SafeZone) e;

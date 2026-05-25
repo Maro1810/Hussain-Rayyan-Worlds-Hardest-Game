@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -16,15 +15,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener{
 	
-	Player p = new Player();
+	Player p = new Player(100, 100);
 	BackGround bg;
 
 	ArrayList<Entity> entities = new ArrayList<>();
@@ -192,16 +189,16 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {
-			p.setVy(-3);
+			p.setVy(-7);
 		}
 		if(e.getKeyCode() == 83) {
-			p.setVy(3);
+			p.setVy(7);
 		}
 		if(e.getKeyCode() == 65) {
-			p.setVx(-3);
+			p.setVx(-7);
 		}
 		if(e.getKeyCode() == 68) {
-			p.setVx(3);
+			p.setVx(7);
 		}
 
 		if (e.getKeyCode() == 82) {

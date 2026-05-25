@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -30,8 +33,49 @@ public class Level {
 
     public void paint(Graphics g) {
         for (Entity e : entities) {
+            if (e.type != EntityType.SAFE_ZONE) {
+                continue;
+            }
             e.paint(g);
         }
+        for (Entity e : entities) {
+            if (e.type == EntityType.SAFE_ZONE) {
+                continue;
+            }
+            e.paint(g);
+        }
+    }
+
+        public static void main(String[] args) throws IOException {
+        ArrayList<Entity> entities = new ArrayList<>();
+        
+        Ball ball1 = new Ball(300, 1, 1, 0, 15);
+        Ball ball2 = new Ball(20, 1, 10, 0, 20);
+        Ball ball3 = new Ball(100, 1, 0, 10, 20);
+        Coin c1 = new Coin(400, 400, 0, 0, 20);
+        Coin c2 = new Coin(50, 50, 0, 2, 20);
+        Barrier b = new Barrier(0,500,2, 5);
+        Barrier b2 = new Barrier(500,500, 1, 5);
+        SafeZone s = new SafeZone(700,0,5,3, true);
+        Player player = new Player(100, 100);
+
+        entities.add(ball1);
+        entities.add(ball2);
+        // entities.add(ball3);
+        entities.add(c1);
+        entities.add(c2);
+        entities.add(b);
+        entities.add(b2);
+        entities.add(s);
+        entities.add(player);
+
+        Level level = new Level("Hi");
+
+        for (Entity e : entities) {
+            level.addEntity(e);
+        }
+
+        level.save();
     }
 
     public void save() {
@@ -66,10 +110,6 @@ public class Level {
 
     public void addEntity(Entity e) {
         entities.add(e);
-    }
-
-    public void addEntities(List<Entity> e) {
-        entities.addAll(e);
     }
 
     public static String generateName() {

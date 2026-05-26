@@ -61,6 +61,30 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
             yDesc.setEditable(false);
             vDesc.setEditable(false);
         }
+
+        else if (num == 3) {
+            String[] options = {"Checkpoint", "End"};
+
+            dropdown = new JComboBox<>(options);
+
+            dropdown.setBounds(40, 100, 100, 50);
+
+            xDesc = new JTextArea("width");
+            yDesc = new JTextArea("height");
+
+            xDesc.setEditable(false);
+            yDesc.setEditable(false);
+
+            this.add(dropdown);
+
+            dropdown.setVisible(true);
+        }
+        else if (num == 4) {
+            xField = new JTextField(5);
+            xDesc = new JTextArea("Enter a name (or leave blank)");
+
+            xDesc.setEditable(true);
+        }
         else {
             xDesc = new JTextArea("width");
             yDesc = new JTextArea("height");
@@ -73,7 +97,7 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         this.setSize(new Dimension(200, 200));
 
 
-        if (num != 0 && num != 2) {
+        if (num != 0 && num != 2 && num != 4) {
             xDesc.setBounds(20, 50, 50, 50);
             yDesc.setBounds(80, 50, 50, 50);
 
@@ -98,6 +122,16 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
             this.add(xDesc);
 
+        }
+
+        if (num == 4) {
+            xDesc.setBounds(20, 50, 160, 20);
+            xField.setBounds(20, 20, 140, 20);
+
+            xField.addKeyListener(this);
+
+            this.add(xField);
+            this.add(xDesc);
         }
 
         if (num == 2) {
@@ -169,8 +203,8 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         }
     }
 
-    public String getBallType() {
-        if (num == 0) {
+    public String getDropdownString() {
+        if (num == 0 || num == 3) {
             return dropdown.getSelectedItem().toString();
         }
         return "";
@@ -178,6 +212,10 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
     public int getXParam() {
         return xParam;
+    }
+
+    public String getName() {
+        return xField.getText();
     }
 
     public int getYParam() {

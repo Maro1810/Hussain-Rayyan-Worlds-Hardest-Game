@@ -17,7 +17,6 @@ public class Player extends Entity {
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
 	private boolean dead, winning;
-	// private int prevX, prevY;
 
 	private Rectangle hitbox;
 
@@ -69,7 +68,6 @@ public class Player extends Entity {
 		
 		// g.setColor(Color.green);
 		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
-		winning = false;
 	}
 	
 	@Override
@@ -148,16 +146,19 @@ public class Player extends Entity {
 	}
 
 	if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.SAFE_ZONE) {
+		SafeZone s = (SafeZone) e;
+
 		this.startX = e.getX()+4;
 		this.startY = e.getY()+4;
+
+
+		if (s.isEnd()) {
+			winning = true;
+		}
 	}
-//		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
-//			SafeZone s = (SafeZone) e;
-//			if(s.isEnd()) {
-//				winning = true;
-//				System.out.println("win");
-//			}
-//		}
+	else {
+		winning = false;
+	}
 		
 	}
 

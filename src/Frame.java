@@ -41,9 +41,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	JComboBox<String> dropdown;
 
 	public static Mode mode = Mode.PLAYING;
-
-	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
-	// JButton play = new JButton("Play");
 	
 	int coins = 0;
 	int objType = 0;
@@ -115,24 +112,29 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			level.paint(g);
 			dropdown.setVisible(false);
 		}
-		coins = 0;
-		updateCoins();
 		win();
 		reset();
 			
 	}
 	public void reset() {
-		Player p = null;
+		if (p.isDead()) {
+			for (Entity e : entities) {
+				e.reset();
+			}
+		}
+	}
+
+	public boolean allCoinsCollected() {
 		for (Entity e : entities) {
-			if(e instanceof Player ) {
-				p = (Player) e;
-				if(p.isDead()) {
-					for (Entity g : entities) {
-						g.reset();
-					}
+			if (e instanceof Coin) {
+				Coin c = (Coin) e;
+
+				if (!c.isCollected()) {
+					return false;
 				}
 			}
 		}
+		return true;
 	}
 
 	public void addOptions(ArrayList<String> levels) {
@@ -146,17 +148,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 
 	public void win() {
-		Player p = null;
-		for (Entity e : entities) {
-			if(e instanceof Player ) {
-				p = (Player) e;
-				if(p.winning() && coins <= 0) {
-					for (Entity g : entities) {
-						g.reset();
-					}
-					System.out.println("You win :)");
-				}
-			}
+		if (p.winning() && allCoinsCollected()) {
+			System.out.println("you win!");
 		}
 	}
 
@@ -176,16 +169,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		hasher.setEntities(entities);
 	}
 
-	public void updateCoins() {
-		for (Entity e : entities) {
-			if(e instanceof Coin ) {
-				Coin c = (Coin) e;
-				if(!c.isCollected()) {
-					coins++;
-				}
-			}
-		}
-	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {

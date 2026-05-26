@@ -35,7 +35,17 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
         Frame.mode = Mode.EDITOR;
 
-        level = new Level(Level.generateName());
+        Prompt prompt = new Prompt(4);
+
+        if (prompt.getName().equals("")) {
+            level = new Level(Level.generateName());
+        }
+
+        else {
+            String name = prompt.getName();
+            
+            level = new Level(name);
+        }
 
         bg = new BackGround(1);
 
@@ -116,7 +126,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
                 Prompt prompt1 = new Prompt(0);
                 
-                String str = prompt1.getBallType();
+                String str = prompt1.getDropdownString();
 
                 if (str.equals("FREE")) {
                     Prompt prompt2 = new Prompt(1);
@@ -144,7 +154,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt(3);
+                    Prompt prompt = new Prompt(5);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
@@ -158,12 +168,14 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt(2);
+                    Prompt prompt = new Prompt(3);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
 
-                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, false));
+                    boolean end = (prompt.getDropdownString() == "end" ? true : false);
+
+                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
                     System.out.println("Placed");          
                 }
 			}

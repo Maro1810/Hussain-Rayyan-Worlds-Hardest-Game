@@ -115,6 +115,18 @@ public class Level {
         entities.add(e);
     }
 
+    public int numCoins() {
+        int count = 0;
+
+        for (Entity e : entities) {
+            if (e instanceof Coin) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+
     public static String generateName() {
         String name = "myLevel_";
 

@@ -72,6 +72,13 @@ public class Player extends Entity {
 		// g.setColor(Color.green);
 		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
 	}
+	public void hardReset() {
+		startX = spawnX;
+		startY = spawnY;
+		init(x,y);
+		dead = false;
+		winning = false;
+	}
 	
 	@Override
 	public void reset() {

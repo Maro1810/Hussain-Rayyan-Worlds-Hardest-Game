@@ -134,6 +134,16 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 	}
+	public void forceReset() {
+		for (Entity e : entities) {
+			if(e.type == EntityType.PLAYER) {
+				Player pl = (Player) e;
+				pl.hardReset();
+				e = pl;
+			}
+			e.reset();
+		}
+	}
 
 	public boolean allCoinsCollected() {
 		for (Entity e : entities) {
@@ -271,6 +281,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				try {
 					bg.setBackground(1);
 					load();
+					forceReset();
+					
 				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -279,6 +291,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			if (home_hitbox.contains(p) && bg.getScreen() == 2) {
 				try {
 					bg.setBackground(0);
+					forceReset();
 				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

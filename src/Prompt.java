@@ -10,10 +10,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Prompt extends JDialog implements KeyListener, ActionListener {
-    JTextField xField, yField, vField;
-    JTextArea xDesc, yDesc, vDesc;
+    JTextField xField, yField, vField, sizeField;
+    JTextArea xDesc, yDesc, vDesc, sizeDesc;
 
-    private int xParam, yParam, vParam;
+    private int xParam, yParam, vParam, sizeParam;
     private JComboBox<String> dropdown;
 
     int num;
@@ -24,6 +24,11 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         
         xField = new JTextField(5);
         yField = new JTextField(5);
+
+        sizeField = new JTextField(5);
+        sizeDesc = new JTextArea("size");
+
+        sizeDesc.setEditable(false);
 
         if (num == 0) {
             String[] options = {"FREE", "LOOP"};
@@ -46,6 +51,14 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
             xDesc.setEditable(false);
             yDesc.setEditable(false);
 
+            sizeField.addKeyListener(this);
+
+            sizeField.setBounds(50, 110, 50, 20);
+            sizeDesc.setBounds(50, 130, 50, 20);
+
+            this.add(sizeField);
+            this.add(sizeDesc);
+
         }
         else if (num == 2) {
             xDesc = new JTextArea("x-radius");
@@ -58,6 +71,15 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
             xDesc.setEditable(false);
             yDesc.setEditable(false);
             vDesc.setEditable(false);
+
+            sizeField.addKeyListener(this);
+
+            sizeField.setBounds(80, 100, 50, 20);
+            sizeDesc.setBounds(80, 120, 50, 20);
+
+
+            this.add(sizeField);
+            this.add(sizeDesc);
         }
 
         else if (num == 3) {
@@ -96,8 +118,8 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
 
         if (num != 0 && num != 2 && num != 4) {
-            xDesc.setBounds(20, 50, 50, 50);
-            yDesc.setBounds(80, 50, 50, 50);
+            xDesc.setBounds(20, 50, 50, 20);
+            yDesc.setBounds(80, 50, 50, 20);
 
             xField.setBounds(20, 20, 50, 20);
             yField.setBounds(80, 20, 50, 20);
@@ -116,7 +138,7 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         }
 
         if (num == 0) {
-            xDesc.setBounds(30, 80, 120, 50);
+            xDesc.setBounds(30, 80, 120, 20);
 
             this.add(xDesc);
 
@@ -135,12 +157,12 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         if (num == 2) {
             xField.setBounds(20, 20, 50, 20);
             yField.setBounds(80, 20, 50, 20);
-            vField.setBounds(50, 100, 50, 20);
+            vField.setBounds(20, 100, 50, 20);
 
             xDesc.setBounds(20, 50, 50, 50);
             yDesc.setBounds(80, 50, 50, 50);
 
-            vDesc.setBounds(50, 120, 50, 20);
+            vDesc.setBounds(20, 120, 50, 20);
 
             this.add(xDesc);
             this.add(yDesc);
@@ -197,6 +219,16 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
                 
             }
 
+            if (num == 1 || num == 2) {
+                if (isParsable(sizeField.getText())) {
+                    sizeParam = (int) (Double.parseDouble(sizeField.getText()));
+                }
+
+                else {
+                    sizeParam = 15;
+                }
+            }
+
             this.dispose();
         }
     }
@@ -210,6 +242,10 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
     public int getXParam() {
         return xParam;
+    }
+
+    public int getSizeParam() {
+        return sizeParam;
     }
 
     public String getName() {

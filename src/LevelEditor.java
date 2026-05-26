@@ -162,9 +162,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
                     int vx = prompt2.getXParam();
                     int vy = prompt2.getYParam();
+                    int size = prompt2.getSizeParam();
 
-                    if (canBePlaced(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15))) 
-                        level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));           
+                    if (canBePlaced(new Ball(e.getX()-10, e.getY()-32, vx, vy, size))) 
+                        level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, size));           
                 }
                 else {
                     Prompt prompt3 = new Prompt(2);
@@ -172,9 +173,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     int x_radius = prompt3.getXParam();
                     int y_radius = prompt3.getYParam();
                     int v = prompt3.getVParam();
+                    int size = prompt3.getSizeParam();
 
-                    if (canBePlaced(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15))) 
-                        level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15));
+                    if (canBePlaced(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, size))) 
+                        level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, size));
                     
                 }
 			}

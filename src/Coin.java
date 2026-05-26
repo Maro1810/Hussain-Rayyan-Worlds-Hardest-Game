@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Coin extends Entity {

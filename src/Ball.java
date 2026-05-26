@@ -268,6 +268,10 @@ public class Ball extends Entity {
         }
     }
 
+    public int getRadius() {
+        return radius;
+    }
+
     @Override
     public void setVx(int vx) {
         this.vx = vx;

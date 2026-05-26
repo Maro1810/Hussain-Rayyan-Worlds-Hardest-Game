@@ -99,8 +99,31 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             level.save();
             palette.save = false;
         }
+    }
 
-        // g.drawRect(0, 0, 17, 17);
+    public boolean canBePlaced(Entity e) {
+        for (Entity entity : level.getEntities()) {
+            if (e.getHitbox().intersects(entity.getHitbox())) {
+                return false;
+            }
+        }
+
+        if (e instanceof Player) {
+            Player p = (Player) e;
+
+            if (p.getX() <= 0 || p.getY() <= 0 || p.getX()+40.5 >= 1030 || p.getY() >= 730) {
+                return false;
+            }
+        }
+
+        if (e instanceof Ball) {
+            Ball b = (Ball) e;
+
+            if (b.getX() <= 0 || b.getY() <= 0 || b.getX() + b.getHitbox().getWidth() >= 1030 || b.getY() + b.getHitbox().getWidth() >= 710) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void drawGridLines(Graphics g) {
@@ -140,22 +163,25 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     int vx = prompt2.getXParam();
                     int vy = prompt2.getYParam();
 
-                    level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
+                    if (canBePlaced(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15))) 
+                        level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));           
                 }
                 else {
-                    Prompt prompt3 = new Prompt(3);
+                    Prompt prompt3 = new Prompt(2);
 
                     int x_radius = prompt3.getXParam();
                     int y_radius = prompt3.getYParam();
                     int v = prompt3.getVParam();
 
-                    level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15));
+                    if (canBePlaced(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15))) 
+                        level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15));
+                    
                 }
-				
 			}
 			if (objType == 1) {
 				
-				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
+                if (canBePlaced(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15)))
+				    level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
 			}
 			if (objType == 2) {
 				
@@ -166,8 +192,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
+                    
+                    if (canBePlaced(new Barrier(coords[0], coords[1], xLength, yLength)))
+				        level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
 
-				    level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
                     System.out.println("Placed");
                 }
 
@@ -184,14 +212,17 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
                     boolean end = (prompt.getDropdownString() == "End" ? true : false);
 
-                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
+                    if (canBePlaced(new SafeZone(coords[0], coords[1], xLength, yLength, end))) 
+                        level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
+
                     System.out.println("Placed");          
                 }
 			}
 
             if (objType == 4) {
                 if (!hasPlayer()) 
-                    level.addEntity(new Player(e.getX()-10, e.getY()-32));
+                    if (canBePlaced(new Player(e.getX()-10, e.getY()-32)))
+                        level.addEntity(new Player(e.getX()-10, e.getY()-32));
 
 			}
         }

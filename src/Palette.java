@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import org.w3c.dom.css.Rect;
-
 public class Palette extends JPanel implements MouseListener, ActionListener{
 
     JFrame palette;

@@ -133,7 +133,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     int y_radius = prompt3.getYParam();
                     int v = prompt3.getVParam();
 
-                    level.addEntity(new Ball(e.getX()-10, e.getY()-32, x_radius, y_radius, v, 15));
+                    level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15));
                 }
 				
 			}

@@ -44,11 +44,16 @@ public class Ball extends Entity {
         init(x, y);
     }
 
+    /**TODO need to rework the logic for the loop ballbecause right now i'm just applying an offset so that the
+         * ball spawns where the path is; without this, when you click in the editor, the ball spawns
+         * in one place, but the path shows up in an other place, so this entire thing needs to be
+         * debugged in the future. for now this offset works decently well
+    **/
     public Ball(int x, int y, int xRadius, int yRadius, int velocity, int radius) {
         super(EntityType.BALL, x, y);
 
-        this.x = x;
-        this.y = y;
+        this.x = x+50;
+        this.y = y+50;
         this.xRadius = xRadius;
         this.yRadius = yRadius;
         this.velocity = velocity;
@@ -76,15 +81,6 @@ public class Ball extends Entity {
         if (Frame.mode == Mode.PLAYING) {
             this.move();
         }
-        
-        if (ballType == BallType.LOOP) {
-            g.setColor(Color.RED);
-            g.drawOval((int)((startX + radius * scaleWidth)+radius),
-                (int)((startY + radius * scaleWidth) - yRadius * scaleWidth+radius),
-                (int)(2 * xRadius * scaleWidth),
-                (int)(2 * yRadius * scaleWidth)
-            );
-       }
 
         hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		
@@ -99,6 +95,15 @@ public class Ball extends Entity {
 
         if (Frame.mode == Mode.EDITOR) {
             drawArrow(g);
+
+            if (ballType == BallType.LOOP) {
+                g.setColor(Color.RED);
+                g.drawOval((int)((startX + radius * scaleWidth)+radius),
+                    (int)((startY + radius * scaleWidth) - yRadius * scaleWidth+radius),
+                    (int)(2 * xRadius * scaleWidth),
+                    (int)(2 * yRadius * scaleWidth)
+                );
+            }
         }
 
         

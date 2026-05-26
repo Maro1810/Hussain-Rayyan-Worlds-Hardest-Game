@@ -41,9 +41,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	JComboBox<String> dropdown;
 
 	public static Mode mode = Mode.PLAYING;
-
-	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
-	// JButton play = new JButton("Play");
 	
 	int coins = 0;
 	int objType = 0;

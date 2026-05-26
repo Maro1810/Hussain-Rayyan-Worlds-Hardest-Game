@@ -63,7 +63,12 @@ public class BackGround{
 
 			scaleWidth = Constants.ScaleConstants.BG_SCALE[0];
 			scaleHeight = Constants.ScaleConstants.BG_SCALE[1];
-		} 
+		} else if(screen == 2) {
+			bg 	= getImage("/imgs/"+"WinScreen.png");
+
+			scaleWidth = Constants.ScaleConstants.WIN_SCREEN_SCALE[0];
+			scaleHeight = Constants.ScaleConstants.WIN_SCREEN_SCALE[1];
+		}
 		else {
 			throw new InvalidBackgroundException("Screen number is invalid!");
 		}

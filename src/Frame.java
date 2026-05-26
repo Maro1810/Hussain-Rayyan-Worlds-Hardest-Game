@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -16,15 +15,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener{
 	
-	Player p = new Player();
+	Player p = new Player(100, 100);
 	BackGround bg;
 
 	ArrayList<Entity> entities = new ArrayList<>();
@@ -33,20 +30,21 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	Level level = Level.load("Hi.json");
 
-	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450);
-	Button play = new Button("/imgs/PlayButton.png", 380, 450);
+	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450, 5);
+	Button play = new Button("/imgs/PlayButton.png", 380, 450, 5);
+	Button play2 = new Button("/imgs/PlayButton.png", 380, 550, 5);
+	Button home = new Button("/imgs/HomeButton.png", 530, 550, 5);
 
 	Rectangle editor_hitbox = new Rectangle(530, 450, 90, 90);
 	Rectangle play_hitbox = new Rectangle(380, 450, 90, 90);
+	Rectangle home_hitbox = new Rectangle(530, 550, 90, 90);
+	Rectangle play2_hitbox = new Rectangle(380, 550, 90, 90);
 
 	JFrame menu;
 
 	JComboBox<String> dropdown;
 
 	public static Mode mode = Mode.PLAYING;
-
-	// JButton play = new JButton(new ImageIcon(getClass().getResource("/imgs/PlayButton.png")));
-	// JButton play = new JButton("Play");
 	
 	int coins = 0;
 	int objType = 0;
@@ -118,24 +116,34 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			level.paint(g);
 			dropdown.setVisible(false);
 		}
-		coins = 0;
-		updateCoins();
+		if(bg.getScreen() == 2) {
+			home.paint(g);
+			play2.paint(g);
+		}
+
 		win();
 		reset();
 			
 	}
 	public void reset() {
-		Player p = null;
+		if (p.isDead()) {
+			for (Entity e : entities) {
+				e.reset();
+			}
+		}
+	}
+
+	public boolean allCoinsCollected() {
 		for (Entity e : entities) {
-			if(e instanceof Player ) {
-				p = (Player) e;
-				if(p.isDead()) {
-					for (Entity g : entities) {
-						g.reset();
-					}
+			if (e instanceof Coin) {
+				Coin c = (Coin) e;
+
+				if (!c.isCollected()) {
+					return false;
 				}
 			}
 		}
+		return true;
 	}
 
 	public void addOptions(ArrayList<String> levels) {
@@ -149,20 +157,22 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 
 	public void win() {
-		Player p = null;
-		for (Entity e : entities) {
-			if(e instanceof Player ) {
-				p = (Player) e;
-				if(p.winning() && coins <= 0) {
-					for (Entity g : entities) {
-						g.reset();
-					}
-					System.out.println("You win :)");
-				}
+		if (p.winning() && allCoinsCollected()) {
+			System.out.println("you win!");
+			try {
+				bg.setBackground(2);
+			} catch (InvalidBackgroundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
-
+	public void forceReset() {
+		for(Entity e : entities) {
+			e.reset();
+		}
+		
+	}
 	public void load() {
 		entities = (ArrayList<Entity>) level.getEntities();
 
@@ -179,29 +189,19 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		hasher.setEntities(entities);
 	}
 
-	public void updateCoins() {
-		for (Entity e : entities) {
-			if(e instanceof Coin ) {
-				Coin c = (Coin) e;
-				if(!c.isCollected()) {
-					coins++;
-				}
-			}
-		}
-	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == 87) {
-			p.setVy(-3);
+			p.setVy(-7);
 		}
 		if(e.getKeyCode() == 83) {
-			p.setVy(3);
+			p.setVy(7);
 		}
 		if(e.getKeyCode() == 65) {
-			p.setVx(-3);
+			p.setVx(-7);
 		}
 		if(e.getKeyCode() == 68) {
-			p.setVx(3);
+			p.setVx(7);
 		}
 
 		if (e.getKeyCode() == 82) {
@@ -267,6 +267,26 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					e1.printStackTrace();
 				}
 				catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			if (play2_hitbox.contains(p) && bg.getScreen() == 2) {
+				try {
+					load();
+					bg.setBackground(1);
+					forceReset();
+				} catch (InvalidBackgroundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			if (home_hitbox.contains(p) && bg.getScreen() == 2) {
+				try {
+					
+					bg.setBackground(0);
+					forceReset();
+				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

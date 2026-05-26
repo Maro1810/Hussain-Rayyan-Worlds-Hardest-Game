@@ -17,31 +17,24 @@ public class Player extends Entity {
 	private double scaleWidth = 4.5;		//change to scale image
 	private double scaleHeight = 4.5; 
 	private boolean dead, winning;
-	// private int prevX, prevY;
+	private int spawnX, spawnY;
 
 	private Rectangle hitbox;
 
-	//change to scale image
-	public Player() {
-		super(EntityType.PLAYER, 100, 100);
+	
+	public Player(int x, int y) {
+		super(EntityType.PLAYER, x, y);
 		square = getImage("/imgs/"+"Player.png"); //load the image for Tree
-
-		x = 100;
-		y = 100;
 		vx = 0;
 		vy = 0;
 		dead = false;
 		winning = false;
 		tx = AffineTransform.getTranslateInstance(0, 0);
+		spawnX = x;
+		spawnY = y;
 		
 		hitbox = new Rectangle(x, y, (int) (9 * scaleWidth), (int) (9 * scaleHeight));
-		
-		init(x, y); 				//initialize the location of the image
-									//use your variables	
-	}
 	
-	public Player(int x, int y) {
-		this();
 		this.x = x;
 		this.y = y;
 		init(x,y);
@@ -59,9 +52,32 @@ public class Player extends Entity {
 		
 		g2.drawImage(square, tx, null);
 
+		if (x <= 0) {
+			x = 0;
+		}
+
+		if (y <= 0) {
+			y = 0;
+		}
+
+		if (x >= 985) {
+			x = 985;
+		}
+
+		if (y >= 660) {
+			y = 660;
+		}
+
 		
-		g.setColor(Color.green);
-		g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+		// g.setColor(Color.green);
+		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
+	}
+	public void fullReset() {
+		setPosition(spawnX, spawnY);
+		startX = spawnX;
+		startY = spawnY;
+		init(x,y);
+		dead = false;
 		winning = false;
 	}
 	
@@ -139,13 +155,21 @@ public class Player extends Entity {
 
 		hitbox.setLocation(x, y);
 	}
-//		if(hitbox.intersects(e.getHitbox()) && !e.wall && !e.kills && !e.collectable) {
-//			SafeZone s = (SafeZone) e;
-//			if(s.isEnd()) {
-//				winning = true;
-//				System.out.println("win");
-//			}
-//		}
+
+	if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.SAFE_ZONE) {
+		SafeZone s = (SafeZone) e;
+
+		this.startX = e.getX()+4;
+		this.startY = e.getY()+4;
+
+
+		if (s.isEnd()) {
+			winning = true;
+		}
+	}
+	else {
+		winning = false;
+	}
 		
 	}
 
@@ -212,6 +236,7 @@ public class Player extends Entity {
     public void setAffineTransform() {
         tx = AffineTransform.getTranslateInstance(0, 0);
     }
+
 
 
 }

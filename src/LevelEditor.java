@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -20,23 +19,36 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class LevelEditor extends JPanel implements MouseListener, ActionListener{
-    
+
+    JFrame frame;
+
     BackGround bg;
     public static int objType = 0;
 
     Palette palette = new Palette();
+
+    ArrayList<Entity> removedEntities = new ArrayList<>();
 
     Level level;
     ArrayList<Path> paths = new ArrayList<Path>();
     int currPath = 0;
 
     public LevelEditor() throws InvalidBackgroundException {
-    		this.setLayout(null);
-        JFrame frame = new JFrame("Level Editor");
 
+        frame = new JFrame("Level Editor");
         Frame.mode = Mode.EDITOR;
 
-        level = new Level(Level.generateName());
+        Prompt prompt = new Prompt(4);
+
+        if (prompt.getName().equals("")) {
+            level = new Level(Level.generateName());
+        }
+
+        else {
+            String name = prompt.getName();
+            
+            level = new Level(name);
+        }
 
         bg = new BackGround(1);
 
@@ -72,6 +84,21 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         
         
 
+        if (palette.disposed) {
+            frame.dispose();
+            Frame.mode = Mode.PLAYING;
+        }
+
+        if (palette.undo) {
+            undo();
+            palette.undo = false;
+        }
+
+        if (palette.redo) {
+            redo();
+            palette.redo = false;
+        }
+
         // g.drawRect(0, 0, 17, 17);
     }
 
@@ -102,11 +129,28 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-				Prompt prompt = new Prompt();
-				int bvx = prompt.getXLength();
-                int bvy = prompt.getYLength();
-	            Ball b = (new Ball(e.getX()-10, e.getY()-32, bvx, bvy, 15));
-				level.addEntity(b);
+                Prompt prompt1 = new Prompt(0);
+                
+                String str = prompt1.getDropdownString();
+
+                if (str.equals("FREE")) {
+                    Prompt prompt2 = new Prompt(1);
+
+                    int vx = prompt2.getXParam();
+                    int vy = prompt2.getYParam();
+
+                    level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
+                }
+                else {
+                    Prompt prompt3 = new Prompt(3);
+
+                    int x_radius = prompt3.getXParam();
+                    int y_radius = prompt3.getYParam();
+                    int v = prompt3.getVParam();
+
+                    level.addEntity(new Ball(e.getX()-60, e.getY()-80, x_radius, y_radius, v, 15));
+                }
+				
 			}
 			if (objType == 1) {
 				
@@ -117,10 +161,10 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt();
+                    Prompt prompt = new Prompt(5);
 
-                    double xLength = prompt.getXLength();
-                    double yLength = prompt.getYLength();
+                    int xLength = prompt.getXParam();
+                    int yLength = prompt.getYParam();
 
 				    level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
                     System.out.println("Placed");
@@ -132,38 +176,22 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt();
+                    Prompt prompt = new Prompt(3);
 
-                    double xLength = prompt.getXLength();
-                    double yLength = prompt.getYLength();
+                    int xLength = prompt.getXParam();
+                    int yLength = prompt.getYParam();
 
-                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, false));
+                    boolean end = (prompt.getDropdownString() == "end" ? true : false);
+
+                    level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
                     System.out.println("Placed");          
                 }
 			}
 
             if (objType == 4) {
-            	
-                level.addEntity(new Player(e.getX()-10, e.getY()-32));
-            }
-            if (objType == 5) {
-            	Path pth = paths.get(currPath);
-            	if(pth != null) {
-            		pth.addPoints(0, new Point(e.getX()-10, e.getY()-32));
-    		        BallPath b = (new BallPath(e.getX()-10, e.getY()-32, 5, 5, 15, paths.get(currPath)));
-    		        level.addEntity(b);
-    				paths.set(currPath, pth);
-    				currPath++;
-            	}
-				
-			}
-            if (objType == 6) {
-				
-				Prompt prompt = new Prompt();
-				int v = prompt.getXLength();
-                int r = prompt.getYLength();
-	            BallRots b = (new BallRots(e.getX()-10, e.getY()-32, v, 15, r));
-				level.addEntity(b);
+                if (!hasPlayer()) 
+                    level.addEntity(new Player(e.getX()-10, e.getY()-32));
+
 			}
             if (objType == 7) {
                if(currPath >= paths.size()) {
@@ -178,6 +206,26 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             level.save();
         }
 
+    }
+
+    public void undo() {
+        if (level.getEntities().size() > 0) {
+            removedEntities.add(level.getEntities().remove(level.getEntities().size()-1));
+        }
+    }
+
+    public boolean hasPlayer() {
+		for (Entity e : level.getEntities()) {
+			if (e instanceof Player)
+				return true;
+		}
+		return false;
+	}
+
+    public void redo() {
+        if (removedEntities.size() > 0) {
+            level.getEntities().add(removedEntities.remove(removedEntities.size()-1));
+        }
     }
 
     public int[] snappedCoordinates(int x, int y) {

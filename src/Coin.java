@@ -73,9 +73,6 @@ public class Coin extends Entity {
         if (hitbox.intersects(e.getHitbox()) && (e.type == EntityType.BARRIER || e.type == EntityType.SAFE_ZONE)) {
             vx = -vx;
             vy = -vy;
-
-            // e.setVx(-e.getVx());
-            // e.setVy(-e.getVy());
         }
 
         if (hitbox.intersects(e.getHitbox()) && e.type == EntityType.PLAYER) {
@@ -85,7 +82,7 @@ public class Coin extends Entity {
     }
     @Override
 	public void reset() {
-    		collected = false;
+    	collected = false;
 		this.x = startX;
 		this.y = startY;
 		init(x,y);

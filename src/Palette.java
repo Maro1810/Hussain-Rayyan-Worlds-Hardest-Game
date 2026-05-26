@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,23 +17,26 @@ import org.w3c.dom.css.Rect;
 
 public class Palette extends JPanel implements MouseListener, ActionListener{
 
-    Button ball = new Button("/imgs/Ball.png", 20, 20);
-    Button ballPath = new Button("/imgs/BallPathIcon.png", 100, 20);
-    Button ballRots = new Button("/imgs/BallRotsIcon.png", 20, 100);
-    Button player = new Button("/imgs/Player.png", 100, 100);
-    Button safeZone = new Button("/imgs/SafeZone.png", 20, 180);
-    Button barrier = new Button("/imgs/Barrier.png", 20, 330);
-    Button coin = new Button("/imgs/Coin.png", 70, 490);
-    Button point = new Button("/imgs/PathPoint.png", 70, 570);
+    JFrame palette;
+    boolean disposed, undo, redo = false;
 
-    Rectangle ballHitbox = new Rectangle(20, 20, 45, 45);
-    Rectangle ballPathHitbox = new Rectangle(100, 20, 50, 45);
-    Rectangle ballRotsHitbox = new Rectangle(20, 100, 60, 50);
-    Rectangle playerHitbox = new Rectangle(100, 60, 45, 45);
-    Rectangle safeZoneHitbox = new Rectangle(20, 180, 137, 137);
-    Rectangle barrierHitbox = new Rectangle(20, 330, 137, 137);
-    Rectangle coinHitbox = new Rectangle(70, 490, 35, 45);
-    Rectangle pointHitbox = new Rectangle(70, 570, 35, 35);
+    Button ball = new Button("/imgs/Ball.png", 140, 20, 4);
+    Button player = new Button("/imgs/Player.png", 20, 20, 4);
+    Button safeZone = new Button("/imgs/SafeZone.png", 50, 100, 3);
+    Button barrier = new Button("/imgs/Barrier.png", 50, 210, 3);
+    Button coin = new Button("/imgs/Coin.png", 85, 20, 4);
+    Button home = new Button("/imgs/HomeButton.png", 50, 600, 5);
+    Button undoButton = new Button("/imgs/UndoButton.png", 20, 340, 3);
+    Button redoButton = new Button("/imgs/RedoButton.png", 120, 340, 3);
+
+    Rectangle ballHitbox = new Rectangle(140, 20, 36, 36);
+    Rectangle playerHitbox = new Rectangle(20, 20, 36, 36);
+    Rectangle safeZoneHitbox = new Rectangle(50, 100, 81, 81);
+    Rectangle barrierHitbox = new Rectangle(50, 210, 81, 81);
+    Rectangle coinHitbox = new Rectangle(85, 20, 28, 36);
+    Rectangle homeHitbox = new Rectangle(50, 600, 90, 90);
+    Rectangle undoHitbox = new Rectangle(20, 340, 54, 54);
+    Rectangle redoHitbox = new Rectangle(120, 340, 54, 54);
 
     Point currPoint = new Point(0, 0);
 
@@ -46,7 +50,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     				drawPointHitbox;
 
     public Palette() {
-        JFrame palette = new JFrame("Palette");
+        palette = new JFrame("Palette");
 
         palette.setSize(new Dimension(200, 739));
         palette.add(this);
@@ -70,25 +74,18 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         this.setBackground(Color.gray);
 
         ball.paint(g);
-        ballPath.paint(g);
-        ballRots.paint(g);
         player.paint(g);
         safeZone.paint(g);
         barrier.paint(g);
         coin.paint(g);
-        point.paint(g);
-      
 
+        home.paint(g);
+        undoButton.paint(g);
+        redoButton.paint(g);
         g.setColor(Color.blue);
 
         if (drawBallHitbox) {
             g.drawRect(ballHitbox.x, ballHitbox.y, ballHitbox.width, ballHitbox.height);
-        }
-        if (drawBallPathHitbox) {
-            g.drawRect(ballPathHitbox.x, ballPathHitbox.y, ballPathHitbox.width, ballPathHitbox.height);
-        }
-        if (drawBallRotsHitbox) {
-            g.drawRect(ballRotsHitbox.x, ballRotsHitbox.y, ballRotsHitbox.width, ballRotsHitbox.height);
         }
 
         if (drawPlayerHitbox) {
@@ -106,9 +103,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         if (drawCoinHitbox) {
             g.drawRect(coinHitbox.x, coinHitbox.y, coinHitbox.width, coinHitbox.height);
         }
-        if (drawPointHitbox) {
-            g.drawRect(pointHitbox.x, pointHitbox.y, pointHitbox.width, pointHitbox.height);
-        }
+        
 
         g.drawOval((int) currPoint.getX()-10, (int) currPoint.getY()-32, 5, 5);
 
@@ -129,10 +124,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
-            System.out.println(e.getPoint());
             Point p = new Point((int) e.getPoint().getX()-10, (int) e.getPoint().getY()-32);
-
-            System.out.println(ballHitbox.contains(p));
 
             if (ballHitbox.contains(p)) {
                 drawBallHitbox = true;
@@ -140,21 +132,6 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
                 drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
 
                 LevelEditor.objType = 0;
-
-            }
-            else if (ballPathHitbox.contains(p)) {
-                drawBallPathHitbox = true;
-
-                drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallHitbox = drawPointHitbox = false;
-
-                LevelEditor.objType = 5;
-
-            }else if (ballRotsHitbox.contains(p)) {
-                drawBallRotsHitbox = true;
-
-                drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallPathHitbox = drawBallHitbox = drawPointHitbox = false;
-
-                LevelEditor.objType = 6;
 
             }
             
@@ -190,12 +167,23 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
 
                 LevelEditor.objType = 1;
             }
-            else if (pointHitbox.contains(p)) {
-                drawPointHitbox = true;
+            else if (homeHitbox.contains(p)) {
+                disposed = true;
+                palette.dispose();
+                try {
+                    Frame frame = new Frame();
+                } catch (ClassNotFoundException | IOException | InvalidBackgroundException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
 
-                drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawCoinHitbox = false;
+            else if (undoHitbox.contains(p)) {
+                undo = true;
+            }
 
-                LevelEditor.objType = 7;
+            else if (redoHitbox.contains(p)) {
+                redo = true;
             }
         }
     }

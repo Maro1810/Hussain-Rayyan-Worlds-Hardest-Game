@@ -160,7 +160,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	public void win() {
 		if (p.winning() && allCoinsCollected()) {
-			System.out.println("you win!");
 			try {
 				bg.setBackground(2);
 			} catch (InvalidBackgroundException e) {
@@ -169,12 +168,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 	}
-	public void forceReset() {
-		for(Entity e : entities) {
-			e.reset();
-		}
-		
-	}
+
 	public void load() {
 		entities = (ArrayList<Entity>) level.getEntities();
 
@@ -275,9 +269,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 			if (play2_hitbox.contains(p) && bg.getScreen() == 2) {
 				try {
-					load();
 					bg.setBackground(1);
-					forceReset();
+					load();
 				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -285,9 +278,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 			if (home_hitbox.contains(p) && bg.getScreen() == 2) {
 				try {
-					
 					bg.setBackground(0);
-					forceReset();
 				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

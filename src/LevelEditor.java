@@ -127,7 +127,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
                 }
                 else {
-                    Prompt prompt3 = new Prompt(2);
+                    Prompt prompt3 = new Prompt(3);
 
                     int x_radius = prompt3.getXParam();
                     int y_radius = prompt3.getYParam();
@@ -144,7 +144,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt(2);
+                    Prompt prompt = new Prompt(3);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();

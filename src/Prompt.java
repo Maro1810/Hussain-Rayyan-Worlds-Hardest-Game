@@ -36,12 +36,17 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
             xDesc = new JTextArea("(click x to continue)");
 
+            xDesc.setEditable(false);
+
             this.add(dropdown);
             dropdown.setVisible(true);
         }
         else if (num == 1) {
             xDesc = new JTextArea("vx");
             yDesc = new JTextArea("vy");
+
+            xDesc.setEditable(false);
+            yDesc.setEditable(false);
 
         }
         else if (num == 2) {
@@ -51,10 +56,17 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
             vDesc = new JTextArea("velocity");
 
             vField = new JTextField(5);
+
+            xDesc.setEditable(false);
+            yDesc.setEditable(false);
+            vDesc.setEditable(false);
         }
         else {
             xDesc = new JTextArea("width");
             yDesc = new JTextArea("height");
+
+            xDesc.setEditable(false);
+            yDesc.setEditable(false);
         }
 
         this.setLayout(null);
@@ -127,11 +139,30 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
         if (e.getKeyCode() == 10) {
 
             if (num != 0) {
-                this.xParam = (int) (Double.parseDouble(xField.getText()));
-                this.yParam = (int) (Double.parseDouble(yField.getText()));
+                if (isParsable(xField.getText())) {
+                    this.xParam = (int) (Double.parseDouble(xField.getText()));
+                }
+                else {
+                    this.xParam = 0;
+                }
+                
+                if (isParsable(yField.getText())) {
+                    this.yParam = (int) (Double.parseDouble(yField.getText()));
+                }
+                else {
+                    this.yParam = 0;
+                }
             }
             if (num == 2) {
-                this.vParam = (int) (Double.parseDouble(vField.getText()));
+
+                if (isParsable(vField.getText())) {
+                    this.vParam = (int) (Double.parseDouble(vField.getText()));
+                }
+
+                else {
+                    this.vParam = 0;
+                }
+                
             }
 
             this.dispose();
@@ -155,6 +186,15 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
     public int getVParam() {
         return vParam;
+    }
+
+    public boolean isParsable(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
     
     @Override

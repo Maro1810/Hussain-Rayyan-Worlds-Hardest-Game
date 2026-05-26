@@ -80,9 +80,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         g.setColor(Color.black);
         drawGridLines(g);
         
-        
-        
-
         if (palette.disposed) {
             frame.dispose();
             Frame.mode = Mode.PLAYING;
@@ -180,7 +177,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
 
-                    boolean end = (prompt.getDropdownString() == "end" ? true : false);
+                    boolean end = (prompt.getDropdownString() == "End" ? true : false);
 
                     level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
                     System.out.println("Placed");          

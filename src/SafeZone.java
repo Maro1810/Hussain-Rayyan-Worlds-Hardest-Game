@@ -103,7 +103,7 @@ public class SafeZone extends Entity {
 		
 	}
 	public boolean isEnd() {
-		return true;
+		return end;
 	}
 
     @Override

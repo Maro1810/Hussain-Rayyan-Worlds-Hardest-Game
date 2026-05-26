@@ -32,13 +32,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450, 5);
 	Button play = new Button("/imgs/PlayButton.png", 380, 450, 5);
-	Button play2 = new Button("/imgs/PlayButton.png", 380, 550, 5);
-	Button home = new Button("/imgs/HomeButton.png", 530, 550, 5);
+	Button home = new Button("/imgs/HomeButton.png", 440, 550, 5);
 
 	Rectangle editor_hitbox = new Rectangle(530, 450, 90, 90);
 	Rectangle play_hitbox = new Rectangle(380, 450, 90, 90);
-	Rectangle home_hitbox = new Rectangle(530, 550, 90, 90);
-	Rectangle play2_hitbox = new Rectangle(380, 550, 90, 90);
+	Rectangle home_hitbox = new Rectangle(440, 550, 90, 90);
 
 	JFrame menu;
 
@@ -120,7 +118,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 		if(bg.getScreen() == 2) {
 			home.paint(g);
-			play2.paint(g);
 		}
 
 		win();
@@ -273,17 +270,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					e1.printStackTrace();
 				}
 				catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			if (play2_hitbox.contains(p) && bg.getScreen() == 2) {
-				try {
-					bg.setBackground(1);
-					load();
-					forceReset();
-					
-				} catch (InvalidBackgroundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

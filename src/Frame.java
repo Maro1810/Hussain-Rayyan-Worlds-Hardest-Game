@@ -108,6 +108,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		if(bg.getScreen() == 0) {
 			editor.paint(g);
 			play.paint(g);
+
+			dropdown.setVisible(true);
 		}
 
 		if (bg.getScreen() == 1) {

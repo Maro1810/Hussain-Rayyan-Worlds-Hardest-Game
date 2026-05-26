@@ -30,7 +30,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
     ArrayList<Entity> removedEntities = new ArrayList<>();
 
     Level level;
-    ArrayList<Path> paths = new ArrayList<Path>();
     int currPath = 0;
 
     public LevelEditor() throws InvalidBackgroundException {
@@ -193,13 +192,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     level.addEntity(new Player(e.getX()-10, e.getY()-32));
 
 			}
-            if (objType == 7) {
-               if(currPath >= paths.size()) {
-            	   paths.add(new Path(new Point(e.getX()-10, e.getY()-32)));
-               }else {
-            	   paths.get(currPath).addPoints(new Point(e.getX()-10, e.getY()-32));
-               }
-    		}
         }
 
         if (e.getButton() == MouseEvent.BUTTON3) {

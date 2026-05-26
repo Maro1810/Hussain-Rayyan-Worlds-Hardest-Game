@@ -98,7 +98,6 @@ public class SafeZone extends Entity {
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
 		x = startX;
 		y = startY;
 		

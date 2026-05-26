@@ -96,6 +96,7 @@ public class Ball extends Entity {
         if (Frame.mode == Mode.EDITOR) {
             drawArrow(g);
 
+            //draw path of a ball in elliptical motion
             if (ballType == BallType.LOOP) {
                 g.setColor(Color.RED);
                 g.drawOval((int)((startX + radius * scaleWidth)+radius),

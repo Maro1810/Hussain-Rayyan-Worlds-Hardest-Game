@@ -113,12 +113,29 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         // TODO Auto-generated method stub
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
-                Prompt prompt = new Prompt(EntityType.BALL);
 
-                int vx = prompt.getXParam();
-                int vy = prompt.getYParam();
+                Prompt prompt1 = new Prompt(0);
+                
+                String str = prompt1.getBallType();
 
-				level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
+                if (str.equals("FREE")) {
+                    Prompt prompt2 = new Prompt(1);
+
+                    int vx = prompt2.getXParam();
+                    int vy = prompt2.getYParam();
+
+                    level.addEntity(new Ball(e.getX()-10, e.getY()-32, vx, vy, 15));
+                }
+                else {
+                    Prompt prompt3 = new Prompt(2);
+
+                    int x_radius = prompt3.getXParam();
+                    int y_radius = prompt3.getYParam();
+                    int v = prompt3.getVParam();
+
+                    level.addEntity(new Ball(e.getX()-10, e.getY()-32, x_radius, y_radius, v, 15));
+                }
+				
 			}
 			if (objType == 1) {
 				level.addEntity(new Coin(e.getX()-10, e.getY()-32, 0, 0, 15));
@@ -127,7 +144,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt(EntityType.BARRIER);
+                    Prompt prompt = new Prompt(2);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();
@@ -141,7 +158,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                 int[] coords = snappedCoordinates(e.getX(), e.getY());
 
                 if (!level.containsEntity(coords[0], coords[1])) {
-                    Prompt prompt = new Prompt(EntityType.SAFE_ZONE);
+                    Prompt prompt = new Prompt(2);
 
                     int xLength = prompt.getXParam();
                     int yLength = prompt.getYParam();

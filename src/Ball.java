@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.function.Function;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Ball extends Entity {
@@ -77,11 +76,15 @@ public class Ball extends Entity {
         if (Frame.mode == Mode.PLAYING) {
             this.move();
         }
-
+        
         if (ballType == BallType.LOOP) {
             g.setColor(Color.RED);
-            g.drawOval(startX+2*xRadius, startY+2*yRadius, 2*xRadius, 2*yRadius);
-        }
+            g.drawOval((int)((startX + radius * scaleWidth)+radius),
+                (int)((startY + radius * scaleWidth) - yRadius * scaleWidth+radius),
+                (int)(2 * xRadius * scaleWidth),
+                (int)(2 * yRadius * scaleWidth)
+            );
+       }
 
         hitbox.setBounds(x, y, (int)(scaleWidth*9), (int)(scaleHeight*9));
 		
@@ -251,11 +254,8 @@ public class Ball extends Entity {
             y += vy;
         }
         else {
-
-            System.out.println(angle);
-
-            x = (int) (startX+xRadius+xRadius*Math.cos(angle));
-            y = (int) (startY+yRadius+yRadius*Math.sin(angle));
+            x = (int) ((startX+radius*scaleWidth)+(xRadius*scaleWidth)+(xRadius*scaleWidth)*Math.cos(angle));
+            y = (int) ((startY+radius*scaleWidth)+(yRadius*scaleWidth)*Math.sin(angle));
 
             angle += 0.05*velocity;
         }

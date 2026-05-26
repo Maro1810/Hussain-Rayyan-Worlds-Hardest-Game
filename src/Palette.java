@@ -18,7 +18,7 @@ import org.w3c.dom.css.Rect;
 public class Palette extends JPanel implements MouseListener, ActionListener{
 
     JFrame palette;
-    boolean disposed, undo, redo = false;
+    boolean disposed, undo, redo, save = false;
 
     Button ball = new Button("/imgs/Ball.png", 140, 20, 4);
     Button player = new Button("/imgs/Player.png", 20, 20, 4);
@@ -28,6 +28,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     Button home = new Button("/imgs/HomeButton.png", 50, 600, 5);
     Button undoButton = new Button("/imgs/UndoButton.png", 20, 340, 3);
     Button redoButton = new Button("/imgs/RedoButton.png", 120, 340, 3);
+    Button saveButton = new Button("imgs/SaveButton.png", 50, 450, 5);
 
     Rectangle ballHitbox = new Rectangle(140, 20, 36, 36);
     Rectangle playerHitbox = new Rectangle(20, 20, 36, 36);
@@ -37,17 +38,15 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     Rectangle homeHitbox = new Rectangle(50, 600, 90, 90);
     Rectangle undoHitbox = new Rectangle(20, 340, 54, 54);
     Rectangle redoHitbox = new Rectangle(120, 340, 54, 54);
+    Rectangle saveHitbox = new Rectangle(50, 450, 90, 90);
 
     Point currPoint = new Point(0, 0);
 
     private boolean drawBallHitbox, 
-    				drawBallPathHitbox,
-    				drawBallRotsHitbox,
                     drawSafeZoneHitbox, 
                     drawPlayerHitbox, 
                     drawBarrierHitbox, 
-                    drawCoinHitbox,
-    				drawPointHitbox;
+                    drawCoinHitbox;
 
     public Palette() {
         palette = new JFrame("Palette");
@@ -82,6 +81,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         home.paint(g);
         undoButton.paint(g);
         redoButton.paint(g);
+        saveButton.paint(g);
         g.setColor(Color.blue);
 
         if (drawBallHitbox) {
@@ -129,7 +129,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
             if (ballHitbox.contains(p)) {
                 drawBallHitbox = true;
 
-                drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
+                drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = false;
 
                 LevelEditor.objType = 0;
 
@@ -139,7 +139,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
             else if (playerHitbox.contains(p)) {
                 drawPlayerHitbox = true;
 
-                drawBallHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
+                drawBallHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBarrierHitbox = false;
 
                 LevelEditor.objType = 4;
             }
@@ -147,7 +147,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
             else if (safeZoneHitbox.contains(p)) {
                 drawSafeZoneHitbox = true;
 
-                drawBallHitbox = drawPlayerHitbox = drawCoinHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
+                drawBallHitbox = drawPlayerHitbox = drawCoinHitbox = drawBarrierHitbox = false;
 
                 LevelEditor.objType = 3;
             }
@@ -155,7 +155,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
             else if (barrierHitbox.contains(p)) {
                 drawBarrierHitbox = true;
 
-                drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
+                drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawCoinHitbox = false;
 
                 LevelEditor.objType = 2;
             }
@@ -163,7 +163,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
             else if (coinHitbox.contains(p)) {
                 drawCoinHitbox = true;
 
-                drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawBarrierHitbox = drawBallRotsHitbox = drawBallPathHitbox = drawPointHitbox = false;
+                drawBallHitbox = drawPlayerHitbox = drawSafeZoneHitbox = drawBarrierHitbox = false;
 
                 LevelEditor.objType = 1;
             }
@@ -184,6 +184,10 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
 
             else if (redoHitbox.contains(p)) {
                 redo = true;
+            }
+
+            else if (saveHitbox.contains(p)) {
+                save = true;
             }
         }
     }

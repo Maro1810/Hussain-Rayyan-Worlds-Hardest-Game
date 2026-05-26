@@ -95,6 +95,11 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             palette.redo = false;
         }
 
+        if (palette.save) {
+            level.save();
+            palette.save = false;
+        }
+
         // g.drawRect(0, 0, 17, 17);
     }
 
@@ -189,10 +194,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     level.addEntity(new Player(e.getX()-10, e.getY()-32));
 
 			}
-        }
-
-        if (e.getButton() == MouseEvent.BUTTON3) {
-            level.save();
         }
 
     }

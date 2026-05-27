@@ -212,6 +212,15 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				en.reset();
 			}
 		}
+		if(e.getKeyCode() == 27) {
+			try {
+				bg.setBackground(0);
+				forceReset();
+			} catch (InvalidBackgroundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {

@@ -161,7 +161,6 @@ public class Player extends Entity {
 
 
 		if (s.isEnd()) {
-			System.out.println("hi");
 			winning = true;
 		}
 	}

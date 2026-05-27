@@ -33,9 +33,6 @@ public class SpatialHasher {
 
             int minCellY = (int) Math.floor(e.getHitbox().getY() / cellSize);
             int maxCellY = (int) Math.floor((e.getHitbox().getY() + e.getHitbox().getHeight()) / cellSize);
-
-
-            // System.out.println(e);
             
             for (int i = minCellX; i <= maxCellX; i++) {
                 for (int j = minCellY; j <= maxCellY; j++) {

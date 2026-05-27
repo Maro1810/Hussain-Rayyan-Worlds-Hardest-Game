@@ -206,34 +206,12 @@
       "startX": 438,
       "startY": 454
     },
-    {
-      "x": 557,
-      "y": 659,
-      "vx": 0,
-      "vy": -15,
-      "xRadius": 0,
-      "yRadius": 0,
-      "velocity": 0,
-      "radius": 20,
-      "scaleWidth": 4.444444444444445,
-      "scaleHeight": 4.444444444444445,
-      "hitbox": {
-        "x": 557,
-        "y": 659,
-        "width": 40,
-        "height": 40
-      },
-      "ballType": "FREE",
-      "angle": 0.0,
-      "type": "BALL",
-      "startX": 557,
-      "startY": 659
-    },
+
     {
       "x": 505,
       "y": 453,
       "vx": 0,
-      "vy": 4,
+      "vy": 17,
       "xRadius": 0,
       "yRadius": 0,
       "velocity": 0,

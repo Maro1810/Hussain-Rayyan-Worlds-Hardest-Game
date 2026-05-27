@@ -197,8 +197,6 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     
                     if (canBePlaced(new Barrier(coords[0], coords[1], xLength, yLength)))
 				        level.addEntity(new Barrier(coords[0], coords[1], xLength, yLength));
-
-                    System.out.println("Placed");
                 }
 
 			}
@@ -215,9 +213,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
                     boolean end = (prompt.getDropdownString() == "End" ? true : false);
 
                     if (canBePlaced(new SafeZone(coords[0], coords[1], xLength, yLength, end))) 
-                        level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));
-
-                    System.out.println("Placed");          
+                        level.addEntity(new SafeZone(coords[0], coords[1], xLength, yLength, end));       
                 }
 			}
 

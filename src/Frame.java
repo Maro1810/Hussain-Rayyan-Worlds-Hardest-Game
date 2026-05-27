@@ -53,7 +53,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	public Frame() throws FileNotFoundException, IOException, ClassNotFoundException, InvalidBackgroundException {
-		menu = new JFrame("Main Menu");
+		menu = new JFrame("The World's Hardest Game");
 
 		ArrayList<String> levelList = new ArrayList<>();
 

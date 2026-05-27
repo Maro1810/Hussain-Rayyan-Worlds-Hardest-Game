@@ -28,7 +28,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	SpatialHasher hasher = new SpatialHasher(entities, 1000);
 
-	Level level = Level.load("Hi.json");
+	Level level = Level.load("example.json");
 
 	Button editor = new Button("/imgs/LvlBuilderButton.png", 530, 450, 5);
 	Button play = new Button("/imgs/PlayButton.png", 380, 450, 5);
@@ -258,7 +258,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			if (play_hitbox.contains(p) && bg.getScreen() == 0) {
 				try {
 					if (dropdown.getSelectedItem().toString().equals("Select a level")) {
-						level = Level.load("Hi.json");
+						level = Level.load("example.json");
 					}
 					else {
 						level = Level.load(dropdown.getSelectedItem().toString());

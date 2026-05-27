@@ -1,0 +1,686 @@
+{
+  "entities": [
+    {
+      "x": 162,
+      "y": 33,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 162,
+        "y": 33,
+        "width": 0,
+        "height": 0
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 162,
+      "startY": 33
+    },
+    {
+      "x": 189,
+      "y": 0,
+      "xLength": 1.0,
+      "yLength": 15.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 15.0,
+      "hitbox": {
+        "x": 189,
+        "y": 0,
+        "width": 27,
+        "height": 405
+      },
+      "type": "BARRIER",
+      "startX": 189,
+      "startY": 0
+    },
+    {
+      "x": 189,
+      "y": 405,
+      "xLength": 15.0,
+      "yLength": 1.0,
+      "scaleWidth": 15.0,
+      "scaleHeight": 1.0,
+      "hitbox": {
+        "x": 189,
+        "y": 405,
+        "width": 405,
+        "height": 27
+      },
+      "type": "BARRIER",
+      "startX": 189,
+      "startY": 405
+    },
+    {
+      "x": 594,
+      "y": 405,
+      "xLength": 0.0,
+      "yLength": 0.0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 594,
+        "y": 405,
+        "width": 0,
+        "height": 0
+      },
+      "type": "BARRIER",
+      "startX": 594,
+      "startY": 405
+    },
+    {
+      "x": 594,
+      "y": 243,
+      "xLength": 1.0,
+      "yLength": 7.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 7.0,
+      "hitbox": {
+        "x": 594,
+        "y": 243,
+        "width": 27,
+        "height": 189
+      },
+      "type": "BARRIER",
+      "startX": 594,
+      "startY": 243
+    },
+    {
+      "x": 302,
+      "y": 659,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 302,
+        "y": 659,
+        "width": 0,
+        "height": 0
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 302,
+      "startY": 659
+    },
+    {
+      "x": 225,
+      "y": 659,
+      "vx": 0,
+      "vy": -8,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 225,
+        "y": 659,
+        "width": 30,
+        "height": 30
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 225,
+      "startY": 659
+    },
+    {
+      "x": 355,
+      "y": 463,
+      "vx": 0,
+      "vy": 7,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 3,
+      "scaleWidth": 0.6666666666666666,
+      "scaleHeight": 0.6666666666666666,
+      "hitbox": {
+        "x": 355,
+        "y": 463,
+        "width": 6,
+        "height": 6
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 355,
+      "startY": 463
+    },
+    {
+      "x": 304,
+      "y": 671,
+      "vx": 0,
+      "vy": -5,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 304,
+        "y": 671,
+        "width": 30,
+        "height": 30
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 304,
+      "startY": 671
+    },
+    {
+      "x": 438,
+      "y": 454,
+      "vx": 0,
+      "vy": 15,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 10,
+      "scaleWidth": 2.2222222222222223,
+      "scaleHeight": 2.2222222222222223,
+      "hitbox": {
+        "x": 438,
+        "y": 454,
+        "width": 20,
+        "height": 20
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 438,
+      "startY": 454
+    },
+    {
+      "x": 557,
+      "y": 659,
+      "vx": 0,
+      "vy": -15,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 20,
+      "scaleWidth": 4.444444444444445,
+      "scaleHeight": 4.444444444444445,
+      "hitbox": {
+        "x": 557,
+        "y": 659,
+        "width": 40,
+        "height": 40
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 557,
+      "startY": 659
+    },
+    {
+      "x": 505,
+      "y": 453,
+      "vx": 0,
+      "vy": 4,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 17,
+      "scaleWidth": 3.7777777777777777,
+      "scaleHeight": 3.7777777777777777,
+      "hitbox": {
+        "x": 505,
+        "y": 453,
+        "width": 34,
+        "height": 34
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 505,
+      "startY": 453
+    },
+    {
+      "x": 56,
+      "y": 55,
+      "vx": 0,
+      "vy": 0,
+      "scaleWidth": 4.5,
+      "scaleHeight": 4.5,
+      "dead": false,
+      "winning": false,
+      "spawnX": 56,
+      "spawnY": 55,
+      "hitbox": {
+        "x": 56,
+        "y": 55,
+        "width": 40,
+        "height": 40
+      },
+      "type": "PLAYER",
+      "startX": 56,
+      "startY": 55
+    },
+    {
+      "x": 33,
+      "y": 251,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 33,
+        "y": 251,
+        "width": 0,
+        "height": 0
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 33,
+      "startY": 251
+    },
+    {
+      "x": 38,
+      "y": 279,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 38,
+        "y": 279,
+        "width": 0,
+        "height": 0
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 38,
+      "startY": 279
+    },
+    {
+      "x": 30,
+      "y": 256,
+      "vx": 5,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 30,
+      "scaleWidth": 6.666666666666667,
+      "scaleHeight": 6.666666666666667,
+      "hitbox": {
+        "x": 30,
+        "y": 256,
+        "width": 60,
+        "height": 60
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 30,
+      "startY": 256
+    },
+    {
+      "x": 837,
+      "y": 0,
+      "xLength": 1.0,
+      "yLength": 27.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 27.0,
+      "hitbox": {
+        "x": 837,
+        "y": 0,
+        "width": 27,
+        "height": 729
+      },
+      "type": "BARRIER",
+      "startX": 837,
+      "startY": 0
+    },
+    {
+      "x": 687,
+      "y": 308,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 20,
+      "yRadius": 10,
+      "velocity": 4,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 687,
+        "y": 308,
+        "width": 30,
+        "height": 30
+      },
+      "ballType": "LOOP",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 637,
+      "startY": 258
+    },
+    {
+      "x": 702,
+      "y": 567,
+      "xLength": 5.0,
+      "yLength": 1.0,
+      "scaleWidth": 5.0,
+      "scaleHeight": 1.0,
+      "hitbox": {
+        "x": 702,
+        "y": 567,
+        "width": 135,
+        "height": 27
+      },
+      "type": "BARRIER",
+      "startX": 702,
+      "startY": 567
+    },
+    {
+      "x": 702,
+      "y": 594,
+      "xLength": 5.0,
+      "yLength": 4.0,
+      "end": false,
+      "scaleWidth": 5.0,
+      "scaleHeight": 4.0,
+      "hitbox": {
+        "x": 702,
+        "y": 594,
+        "width": 135,
+        "height": 108
+      },
+      "type": "SAFE_ZONE",
+      "startX": 702,
+      "startY": 594
+    },
+    {
+      "x": 628,
+      "y": 117,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 0,
+      "scaleWidth": 0.0,
+      "scaleHeight": 0.0,
+      "hitbox": {
+        "x": 628,
+        "y": 117,
+        "width": 0,
+        "height": 0
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 628,
+      "startY": 117
+    },
+    {
+      "x": 572,
+      "y": 117,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 15,
+      "yRadius": 15,
+      "velocity": 2,
+      "radius": 20,
+      "scaleWidth": 4.444444444444445,
+      "scaleHeight": 4.444444444444445,
+      "hitbox": {
+        "x": 572,
+        "y": 117,
+        "width": 40,
+        "height": 40
+      },
+      "ballType": "LOOP",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 522,
+      "startY": 67
+    },
+    {
+      "x": 414,
+      "y": 659,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 414,
+        "y": 659,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 414,
+      "startY": 659
+    },
+    {
+      "x": 587,
+      "y": 449,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 587,
+        "y": 449,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 587,
+      "startY": 449
+    },
+    {
+      "x": 765,
+      "y": 317,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 765,
+        "y": 317,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 765,
+      "startY": 317
+    },
+    {
+      "x": 699,
+      "y": 177,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 699,
+        "y": 177,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 699,
+      "startY": 177
+    },
+    {
+      "x": 686,
+      "y": 141,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 686,
+        "y": 141,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 686,
+      "startY": 141
+    },
+    {
+      "x": 666,
+      "y": 188,
+      "vx": 0,
+      "vy": 0,
+      "radius": 15,
+      "collected": false,
+      "scaleWidth": 3.2857142857142856,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 666,
+        "y": 188,
+        "width": 23,
+        "height": 30
+      },
+      "type": "COIN",
+      "startX": 666,
+      "startY": 188
+    },
+    {
+      "x": 432,
+      "y": 0,
+      "xLength": 1.0,
+      "yLength": 10.0,
+      "scaleWidth": 1.0,
+      "scaleHeight": 10.0,
+      "hitbox": {
+        "x": 432,
+        "y": 0,
+        "width": 27,
+        "height": 270
+      },
+      "type": "BARRIER",
+      "startX": 432,
+      "startY": 0
+    },
+    {
+      "x": 216,
+      "y": 0,
+      "xLength": 8.0,
+      "yLength": 3.0,
+      "end": true,
+      "scaleWidth": 8.0,
+      "scaleHeight": 3.0,
+      "hitbox": {
+        "x": 216,
+        "y": 0,
+        "width": 216,
+        "height": 81
+      },
+      "type": "SAFE_ZONE",
+      "startX": 216,
+      "startY": 0
+    },
+    {
+      "x": 283,
+      "y": 253,
+      "vx": 0,
+      "vy": 0,
+      "xRadius": 10,
+      "yRadius": 20,
+      "velocity": 7,
+      "radius": 15,
+      "scaleWidth": 3.3333333333333335,
+      "scaleHeight": 3.3333333333333335,
+      "hitbox": {
+        "x": 283,
+        "y": 253,
+        "width": 30,
+        "height": 30
+      },
+      "ballType": "LOOP",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 233,
+      "startY": 203
+    },
+    {
+      "x": 237,
+      "y": 133,
+      "vx": 7,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 23,
+      "scaleWidth": 5.111111111111111,
+      "scaleHeight": 5.111111111111111,
+      "hitbox": {
+        "x": 237,
+        "y": 133,
+        "width": 46,
+        "height": 46
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 237,
+      "startY": 133
+    },
+    {
+      "x": 483,
+      "y": 249,
+      "vx": 9,
+      "vy": 0,
+      "xRadius": 0,
+      "yRadius": 0,
+      "velocity": 0,
+      "radius": 7,
+      "scaleWidth": 1.5555555555555556,
+      "scaleHeight": 1.5555555555555556,
+      "hitbox": {
+        "x": 483,
+        "y": 249,
+        "width": 14,
+        "height": 14
+      },
+      "ballType": "FREE",
+      "angle": 0.0,
+      "type": "BALL",
+      "startX": 483,
+      "startY": 249
+    }
+  ],
+  "name": "example"
+}

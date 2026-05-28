@@ -87,6 +87,7 @@ public class Ball extends Entity {
 		
 		init(x,y);
 
+        //Border collision handling
         if (x + (scaleWidth*9) >= 1000 || x <= 0 || y + (scaleHeight*9) >= 710 || y <= 0) {
             vx = -vx;
             vy = -vy;
@@ -113,7 +114,7 @@ public class Ball extends Entity {
 		// g.drawRect((int) hitbox.getX(), (int) hitbox.getY(), (int) hitbox.getWidth(), (int) hitbox.getHeight());
     }
 
-    
+    //Draw vector for velocity
     public void drawArrow(Graphics g) {
         g.setColor(Color.BLACK);
 
@@ -123,6 +124,8 @@ public class Ball extends Entity {
         
         int x = this.x + radius;
         int y = this.y + radius;
+
+        //draw the base of the arrow, with the length being dependent on the magnitude of the velocity
         g.drawLine(x, y, x + vx*10, y + vy*10);
 
         //drawing the arrowhead
@@ -138,6 +141,7 @@ public class Ball extends Entity {
                 x_3 = (x+vx*10)-7;
             }
 
+            //these two functions are used for calculating the points for the triangle that represents the arrowhead
             Function<Integer, Integer> linearMap = (x_param) -> {
                 int y_param = (int) (((double) vy/vx)*(x_param-(x+vx*10))+(y+vy*10));
 
@@ -201,6 +205,7 @@ public class Ball extends Entity {
     public void collision(Entity e) {
         if (hitbox.intersects(e.getHitbox()) && e.type != EntityType.PLAYER && e.type != EntityType.COIN) {
 
+            //Handle collisions with other balls, barriers, and safezones
             if (Math.signum(vx) != Math.signum(e.getVx()) || Math.signum(vy) != Math.signum(e.getVy())) {
                 vx = -vx;
                 vy = -vy;
@@ -260,6 +265,8 @@ public class Ball extends Entity {
             x += vx;
             y += vy;
         }
+
+        //use parametric equations for balls in elliptical motion
         else {
             x = (int) ((startX+radius*scaleWidth)+(xRadius*scaleWidth)+(xRadius*scaleWidth)*Math.cos(angle));
             y = (int) ((startY+radius*scaleWidth)+(yRadius*scaleWidth)*Math.sin(angle));

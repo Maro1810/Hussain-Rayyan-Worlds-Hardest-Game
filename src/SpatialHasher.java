@@ -22,6 +22,7 @@ public class SpatialHasher {
         }
     }
 
+    //Calculate the max and min coordinates for every entity and place them into the hash table
     public void update() {
         for (int i = 0; i < numCells; i++) {
             hashTable[i].clear();
@@ -47,6 +48,7 @@ public class SpatialHasher {
         handleCollisions();
     }
 
+    //Handles collisions when they occur by calling the entity collision functions
     private void handleCollisions() {
         for (int i = 0; i < numCells; i++) {
             List<Entity> cellEntities = hashTable[i];

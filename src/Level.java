@@ -43,6 +43,7 @@ public class Level {
         }
     }
 
+    //Save a level using gson and writing to a file using FileWriter
     public void save() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         
@@ -89,6 +90,7 @@ public class Level {
         return count;
     }
 
+    //Generates a name by generating "myLevel_" and then appending the next free integer to the end
     public static String generateName() {
         String name = "myLevel_";
 
@@ -111,6 +113,7 @@ public class Level {
         return name+num;
     }
 
+    //Load a level using gson and filereader
     public static Level load(String path) throws FileNotFoundException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                     .registerTypeAdapter(Entity.class, new EntityDeserializer()).create();

@@ -18,6 +18,8 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     JFrame palette;
     boolean disposed, undo, redo, save = false;
 
+
+    //Create all the buttons for the palette
     Button ball = new Button("/imgs/Ball.png", 140, 20, 4);
     Button player = new Button("/imgs/Player.png", 20, 20, 4);
     Button safeZone = new Button("/imgs/SafeZone.png", 50, 100, 3);
@@ -70,6 +72,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
 
         this.setBackground(Color.gray);
 
+        //Draw all the buttons for the palette
         ball.paint(g);
         player.paint(g);
         safeZone.paint(g);
@@ -121,6 +124,8 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
+
+        //This is the logic for handling what object type to switch to based on where the user clicks
         if (e.getButton() == MouseEvent.BUTTON1) {
             Point p = new Point((int) e.getPoint().getX()-10, (int) e.getPoint().getY()-32);
 
@@ -205,4 +210,7 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
         // TODO Auto-generated method stub
     }
     
+}
+
+class InvalidBackgroundException extends Exception {
 }

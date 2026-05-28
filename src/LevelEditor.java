@@ -85,6 +85,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
             Frame.mode = Mode.PLAYING;
         }
 
+        //Logic for undoing, redoing etc.
         if (palette.undo) {
             undo();
             palette.undo = false;
@@ -101,6 +102,8 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         }
     }
 
+
+    //Function for determining whether an entity can be placed based on position
     public boolean canBePlaced(Entity e) {
         for (Entity entity : level.getEntities()) {
             if (e.getHitbox().intersects(entity.getHitbox())) {
@@ -126,6 +129,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         return true;
     }
 
+    //Draw the grid lines on the editor screen
     public void drawGridLines(Graphics g) {
         for (int i = 0; i < 37; i++) {
             g.drawLine(27+i*27, 0, 27+i*27, 800);
@@ -150,7 +154,9 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
+        
+        //This is all of the logic for when a player clicks, handling what to do when a certain
+        //object is selected, and creating the corresponding prompt.
         if (e.getButton() == MouseEvent.BUTTON1) {
 			if (objType == 0) {
                 Prompt prompt1 = new Prompt(0);
@@ -247,6 +253,7 @@ public class LevelEditor extends JPanel implements MouseListener, ActionListener
         }
     }
 
+    //Snapped coordinates so that barriers and safezones "snap" to the grid
     public int[] snappedCoordinates(int x, int y) {
         int[] coords = new int[2];
 

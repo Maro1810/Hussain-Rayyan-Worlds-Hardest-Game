@@ -18,6 +18,12 @@ public class Prompt extends JDialog implements KeyListener, ActionListener {
 
     int num;
 
+    //Create a prompt with num corresponding to the object type
+    //num = 0 is for the ball prompt screen
+    //num = 1 is for the free ball prompt screen
+    //num = 2 is for the loop ball prompt screen
+    //num = 3 is for the safe zone prompt screen
+    //every other num corresponds to the barrier prompt screen
     public Prompt(int num) {
         setModal(true);
         this.num = num;

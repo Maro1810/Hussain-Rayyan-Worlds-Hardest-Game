@@ -124,6 +124,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		reset();
 			
 	}
+
+	//Used for resetting the level after the player dies
 	public void reset() {
 		if (p.isDead()) {
 			for (Entity e : entities) {
@@ -131,6 +133,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			}
 		}
 	}
+
+	//Function that needs to be called when the player wins so that the user isn't stuck at the end of the level
 	public void forceReset() {
 		for (Entity e : entities) {
 			if(e.type == EntityType.PLAYER) {
@@ -155,6 +159,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		return true;
 	}
 
+	//Function for adding options to dropdown
 	public void addOptions(ArrayList<String> levels) {
 		File file = new File("src/levels");
 
@@ -165,6 +170,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 	}
 
+	//Win function, which displays the win screen when the player meets the conditions for winning
 	public void win() {
 		if (p.winning() && allCoinsCollected()) {
 			try {
@@ -176,6 +182,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
 	}
 
+	//Function that must be called when loading a level so that entities are loaded properly
 	public void load() {
 		entities = (ArrayList<Entity>) level.getEntities();
 
@@ -194,6 +201,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+
+		//Movement keybinds
 		if(e.getKeyCode() == 87) {
 			p.setVy(-7);
 		}
@@ -207,11 +216,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			p.setVx(7);
 		}
 
-		if (e.getKeyCode() == 82) {
-			for (Entity en : entities) {
-				en.reset();
-			}
-		}
 		if(e.getKeyCode() == 27) {
 			try {
 				bg.setBackground(0);
@@ -253,6 +257,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			Point p = e.getPoint();
 
+
+			//Button binding for going to the editor
 			if (editor_hitbox.contains(p) && bg.getScreen() == 0) {
 				try {
 					LevelEditor lvlEditor = new LevelEditor();
@@ -264,6 +270,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 				}
 			}
 
+
+			//Button binding for playing a loaded level
 			if (play_hitbox.contains(p) && bg.getScreen() == 0) {
 				try {
 					if (dropdown.getSelectedItem().toString().equals("Select a level")) {
@@ -283,6 +291,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 					e1.printStackTrace();
 				}
 			}
+
+			//Button binding for going back to home
 			if (home_hitbox.contains(p) && bg.getScreen() == 2) {
 				try {
 					bg.setBackground(0);

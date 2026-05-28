@@ -211,6 +211,3 @@ public class Palette extends JPanel implements MouseListener, ActionListener{
     }
     
 }
-
-class InvalidBackgroundException extends Exception {
-}
